@@ -9,3 +9,8 @@
 - **Task**: Set up files needed for milestone 2 submission
 - **Details**: Set up all the md files needed for submission and remind team member to add their own md file in `team/reports`
 - **Link to Commit**: [Skeleton for md files](https://github.com/nhan0504/CS326/commit/f0fba5c5f01f31d7d1a381903f108ea7b10d6cb5)
+
+### October 14, 2024
+- **Task**: Create the first draft of `features.md` 
+- **Details**: Create the first draft of `features.md` with descriptons for 4 features 
+- **Link to Commit**: [Draft first few features description](https://github.com/nhan0504/CS326/commit/0bc6ac7e84f529f562016dbac994372a284b801e)
