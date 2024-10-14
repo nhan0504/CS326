@@ -10,7 +10,8 @@
 - **Role**: Manages the timing of all team activities. Abby ensures that meetings start and end on time, keeps track of deadlines, and reminds the team of upcoming due dates.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/nhan0504/CS326/commit/8be2b6b72886a65f484eb2fefaa3ae65c38be65f): Created the initial GitHub repository and set up the project structure, including the `team/m2` folder for milestone submissions to ensure the team is on track.
-  2. [Commit 2](https://github.com/repo/commit2): Created a timeline for milestone deliverables on Slack, making sure the team stays on track.
+  2. Commit 2: Created a timeline for milestone deliverables on Slack, making sure the team stays on track.
+     ![image](https://github.com/user-attachments/assets/7a15752a-efdc-41b9-89cb-d7490069a78a)
   3. [Commit 3](https://github.com/repo/commit3): Added meeting reminders and deadline notifications to the team's Slack channel to keep everyone on schedule.
 
 ## <Name> - Note-Taker
