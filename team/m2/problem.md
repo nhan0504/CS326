@@ -18,4 +18,4 @@ By combining ease of use with advanced features, ClosetIQ empowers users to beco
 
 ## Why This Matters
 
-In an age of fast fashion, people often accumulate more clothing than they need, leading to clutter, wasted money, and environmental harm. **ClosetIQ** encourages users to be more mindful of their wardrobe habits, promoting conscious consumption, organization, and sustainability. This tool is ideal for anyone looking to simplify their wardrobe, reduce waste, and save money.
+In an age of fast fashion, people often accumulate more clothing than they need, leading to clutter, wasted money, and environmental harm. ClosetIQ encourages users to be more mindful of their wardrobe habits, promoting conscious consumption, organization, and sustainability. This tool is ideal for anyone looking to simplify their wardrobe, reduce waste, and save money.
