@@ -21,8 +21,18 @@ Users can also set personal goals, such as reducing the cost-per-wear of certain
 
 **Assigned to**: Name
 
+## Clothes search and filter 
+This feature will allow users to search by name and filter by size, color, type, brand, material, purchase date, and price in both the clothes inventory and logged outfits. The search makes it easier for users to find specific pieces in their wardrobe and see what outfits they have worn with that piece. The filtering makes it easy for users to find items based on a common category. The ability to quickly locate specific items helps the user stay more organized and gives the user a better idea of their wearing patterns.
+
+**Assigned to**: Name
+
 ## Outfit recommendation 
 This feature uses data from the user’s past outfit logs and wardrobe inventory to suggest new outfits. It will take into account the user's favorite combinations and the clothing items that have not been worn recently. The system could also use filters like weather, season, or occasion to refine outfit suggestions. 
+
+**Assigned to**: Name
+
+## Log in
+Users will be able to log in to the web application. This will allow the user to access the web application from multiple devices or browsers and keep all of their data. The ability to login makes the web app more flexible and easily accessible from anywhere.
 
 **Assigned to**: Name
 
