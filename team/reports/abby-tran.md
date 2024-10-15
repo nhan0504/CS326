@@ -14,3 +14,8 @@
 - **Task**: Create the first draft of `features.md` 
 - **Details**: Create the first draft of `features.md` with descriptions for 4 features 
 - **Link to Commit**: [Draft first few features description](https://github.com/nhan0504/CS326/commit/0bc6ac7e84f529f562016dbac994372a284b801e)
+
+### October 15, 2024
+- **Task**: Add outfit planning feature into `features.md` 
+- **Details**: Brainstorm and wrote up the description for outfit planning feature in `features.md`
+- **Link to Commit**: [Add outfit planning feature](https://github.com/nhan0504/CS326/commit/702a8063482435c8c6a20064984a065ced2f21f7)
