@@ -31,10 +31,10 @@
 ## Sophia Hubscher - Communication Lead
 - **Role**: Facilitates communication within the team. Sophia is responsible for maintaining and managing the team’s Slack workspace and ensuring that all members stay informed and engaged.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): Set up the team’s Slack channel, organized communication threads, and established guidelines for communication.
-  2. [Commit 2](https://github.com/repo/commit2): Coordinated communication between team members during the second milestone and relayed critical information about deadlines.
-  3. [Commit 3](https://github.com/repo/commit3): Managed Slack updates by setting up automatic reminders for tasks and meetings.
-  4. [Commit 3](https://github.com/repo/commit3): Drafted the initial version of the `problem.md` file and facilitated team feedback to finalize it.
+  1. [Commit 1](https://github.com/nhan0504/CS326/commit/3c0b25f93e22033bc5a6a4d1d36e56e9fa3abd03): Set up the team’s Slack workspace, organized communication channels, and sent out an introductory email to everyone.
+     <img width="600" alt="Intro email screenshot" src="https://github.com/user-attachments/assets/3ad52e6b-c4ff-4d9b-af00-c774f2e4a7c1">
+  2. [Commit 2](https://github.com/repo/commit2): TODO Coordinated communication between team members during the second milestone and relayed critical information about deadlines.
+  3. [Commit 3](https://github.com/repo/commit3): TODO Managed Slack updates by setting up automatic reminders for tasks and meetings.
 
 ## Ashley McNamara - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Ashley is responsible for proofreading and ensuring the accuracy of all documents before submission.
