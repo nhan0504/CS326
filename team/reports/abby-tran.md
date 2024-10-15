@@ -12,5 +12,5 @@
 
 ### October 14, 2024
 - **Task**: Create the first draft of `features.md` 
-- **Details**: Create the first draft of `features.md` with descriptons for 4 features 
+- **Details**: Create the first draft of `features.md` with descriptions for 4 features 
 - **Link to Commit**: [Draft first few features description](https://github.com/nhan0504/CS326/commit/0bc6ac7e84f529f562016dbac994372a284b801e)

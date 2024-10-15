@@ -16,13 +16,14 @@ The statistics dashboard will provide users with visual insights into their ward
 - Least-worn or never-worn items
 - Cost-per-wear for each item (calculated by dividing the price by the number of times it has been worn)
 - Wear frequency by category (e.g., tops, bottoms, shoes)
-- 
+- Share option to share the stat with others
+  
 Users can also set personal goals, such as reducing the cost-per-wear of certain items or redistributing the use of their wardrobe more evenly. The dashboard can suggest decluttering or donating rarely worn items to encourage more mindful consumption.
 
 **Assigned to**: Name
 
 ## Clothes search and filter 
-This feature will allow users to search by name and filter by size, color, type, brand, material, purchase date, and price in both the clothes inventory and logged outfits. The search makes it easier for users to find specific pieces in their wardrobe and see what outfits they have worn with that piece. The filtering makes it easy for users to find items based on a common category. The ability to quickly locate specific items helps the user stay more organized and gives the user a better idea of their wearing patterns.
+This feature will allow users to search by name and filter by size, color, type, brand, material, purchase date, weather, and price in both the clothes inventory and logged outfits. The search makes it easier for users to find specific pieces in their wardrobe and see what outfits they have worn with that piece. The filtering makes it easy for users to find items based on a common category. The ability to quickly locate specific items helps the user stay more organized and gives the user a better idea of their wearing patterns.
 
 **Assigned to**: Name
 
@@ -31,12 +32,13 @@ This feature uses data from the user’s past outfit logs and wardrobe inventory
 
 **Assigned to**: Name
 
-## Log in
-Users will be able to log in to the web application. This will allow the user to access the web application from multiple devices or browsers and keep all of their data. The ability to login makes the web app more flexible and easily accessible from anywhere.
+## User profile
+This feature allows users to securely sign up and log in to the application, enabling access to their personalized wardrobe and outfit data across multiple devices. Users can manage their profiles page, including updating personal information, preferences, adding profile pictures, and changing the setting. It will supports social logins (Google, Facebook), sign up with email and password recovery.
 
 **Assigned to**: Name
 
-## Feature 
+## Outfit planning
+This feature allows users to plan their outfits ahead of time by using a calendar view. Users can select outfits from their wardrobe inventory or from the outfit recommendation and assign them to specific dates for future events. The calendar can sync with other apps (such as Google Calendar) to set reminder.
 
 **Assigned to**: Name
   
