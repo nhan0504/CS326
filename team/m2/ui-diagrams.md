@@ -4,9 +4,9 @@
 Description:
 This is the main screen where users can see and log their outfit of the day, and see some highlighted content. It displays a snapshot of their current outfit.
 
-Pic of diagram
+![Home](https://github.com/user-attachments/assets/58c2773f-776a-47fd-bd0a-579dbadd4f22)
 
-On this screen, users can interact with what elements?
+Elements:
 - "Outfit of the day" display
 - Daily stats
 - Navigation to other sections like Log, Wardrobe, Stats, and Suggestions
@@ -18,9 +18,9 @@ Users start their daily interaction with the app, reviewing or adding their curr
 Description:
 The log screen shows a history of outfits worn by the user, with the option to filter and search previous outfits. It also enables users to log their outfit of the day.
 
-Pic of diagram
+![Log](https://github.com/user-attachments/assets/8c7ff9c0-a9c4-4fe0-a8f2-9fc7597fe1e3)
 
-On this screen, users can interact with what elements?
+Elements:
 - Outfit logs by date
 - Search options
 - Favorites toggle
@@ -32,9 +32,9 @@ Users review past outfits, search for specific looks, and log their current outf
 Description:
 This screen showcases the user’s entire wardrobe, divided by categories like tops, bottoms, shoes, etc. Users can also filter, sort, and add items.
 
-Pic of diagram
+![Wardrobe](https://github.com/user-attachments/assets/7327ab72-7bc7-43b3-be33-7de029cd985f)
 
-On this screen, users can interact with what elements?
+Elements:
 - Categories of clothing (Tops, Bottoms, Shoes, Accessories, etc.)
 - Filters (Favorites, Recently added)
 - Add Item button
@@ -46,9 +46,9 @@ Users browse their wardrobe, organize it, or add new items.
 Description:
 Here, users can input new items into their wardrobe by filling out details like name, category, cost, season, and occasion.
 
-Pic of diagram
+![Add item](https://github.com/user-attachments/assets/ed4d42ac-b117-4be2-94d8-2cdda1a275f0)
 
-On this screen, users can interact with what elements?
+Elements:
 - Form fields for item details (Name, Category, Season, Occasion, etc.)
 - Save/Cancel buttons
 
@@ -59,9 +59,9 @@ Users add new clothing items to their wardrobe, specifying details.
 Description:
 The stats screen provides an overview of wardrobe usage, including frequently worn categories and items.
 
-Pic of diagram
+![Stats](https://github.com/user-attachments/assets/353194c7-7958-407b-a941-12ba8afcc914)
 
-On this screen, users can interact with what elements?
+Elements:
 - Display of wardrobe statistics (Most frequently worn categories, Most worn items, etc.)
 
 **Use Case**: 
@@ -71,9 +71,9 @@ Users analyze their wardrobe usage to make informed decisions about future purch
 Description:
 Based on the user's wardrobe and preferences, this screen provides outfit suggestions, taking into account underutilized pieces or specific occasions.
 
-Pic of diagram
+![Suggestions](https://github.com/user-attachments/assets/9d9bb2b4-07ad-4ed9-ae95-8e2d1b52f36c)
 
-On this screen, users can interact with what elements?
+Elements:
 - Filters for season and occasion
 - Toggle for underutilized pieces
 
@@ -84,9 +84,9 @@ Users get outfit recommendations based on their wardrobe and selected criteria (
 Description:
 The log-in screen allows users to access their account by entering their username and password.
 
-Pic of diagram
+![Log-in](https://github.com/user-attachments/assets/ed1b7656-5ef7-4634-aa9c-2287fb64f846)
 
-On this screen, users can interact with what elements?
+Elements:
 - Username and Password input fields
 - Log-in button
 - Link to create an account
@@ -98,9 +98,9 @@ Users log in to access their personalized wardrobe data.
 Description:
 New users can create an account by providing a username, password, and confirming their password.
 
-Pic of diagram
+![Create Account](https://github.com/user-attachments/assets/0d59c14c-74e1-4de2-9d18-45a9d065a4db)
 
-On this screen, users can interact with what elements?
+Elements:
 - Username and Password input fields
 - Create Account button
 
