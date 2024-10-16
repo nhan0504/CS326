@@ -43,7 +43,7 @@
   2. [Commit 2](https://github.com/repo/commit2): Proofread and revised the `features.md` file, ensuring that descriptions were clear and complete.
   3. [Commit 3](https://github.com/repo/commit3): Conducted a final quality check of all milestone documents before submission to ensure accuracy and completeness.
 
-## <Name> - Documentation Lead
+## Liam Gates - Documentation Lead
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. <Name> ensures that all documents are up to date, well-organized, and accessible to team members.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/repo/commit1): Organized the project repository and created a clear folder structure for all milestone documents.
