@@ -14,7 +14,7 @@
      ![image](https://github.com/user-attachments/assets/7a15752a-efdc-41b9-89cb-d7490069a78a)
   3. [Commit 3](https://github.com/repo/commit3): Added meeting reminders and deadline notifications to the team's Slack channel to keep everyone on schedule.
 
-## <Name> - Note-Taker
+## Hung Nguyen - Note-Taker
 - **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. <Name> is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/repo/commit1): Recorded and distributed notes from the first brainstorming meeting, documenting the team’s initial ideas for the project.
