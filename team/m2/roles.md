@@ -3,7 +3,9 @@
 ## Anisha Prathi - Project Manager
 - **Role**: Oversees the overall project timeline, ensures that milestones are met, and coordinates the team’s efforts. Anisha is responsible for setting meeting agendas and ensuring that the team stays focused on project goals.
 - **Top 3 Commits**:
-  1. [Commit 2](https://github.com/repo/commit2): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
+  1. [Commit 1](https://docs.google.com/document/d/1K1DXzFCZuhf6Vd_p5dW52NF7W1mOVx7mjVKIlJdaC_A/edit): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
+  2. [Commit 2](https://github.com/nhan0504/CS326/commit/b01d98bcc9de7093b8f20c2323903c2539b5c3ea): Drafted users.md
+  3. [Commit 3](hhttps://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956): Reviewed data.md
   
 
 ## Abby Tran - Timekeeper
