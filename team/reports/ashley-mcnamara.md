@@ -9,3 +9,8 @@
 - **Task**: Added features
 - **Details**: Added two new features to features.md
 - **Link to Commit**: [Updated features.md](https://github.com/nhan0504/CS326/commit/40f17e71fd9af1e581eec09fe8f057289f5a126b)
+
+### October 16, 2024
+- **Task**: Drafted data.md
+- **Details**: Wrote the overview for six different data types, the data relationships, and the data sources 
+- **Link to Commit**: [Drafted data.md](https://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956)
