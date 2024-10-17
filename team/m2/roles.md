@@ -35,8 +35,8 @@
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/nhan0504/CS326/commit/3c0b25f93e22033bc5a6a4d1d36e56e9fa3abd03): Set up the team’s Slack workspace, organized communication channels, and sent out an introductory email to everyone.
      <img width="600" alt="Intro email screenshot" src="https://github.com/user-attachments/assets/3ad52e6b-c4ff-4d9b-af00-c774f2e4a7c1">
-  2. [Commit 2](https://github.com/repo/commit2): TODO Coordinated communication between team members during the second milestone and relayed critical information about deadlines.
-  3. [Commit 3](https://github.com/repo/commit3): TODO Managed Slack updates by setting up automatic reminders for tasks and meetings.
+  2. [Commit 2](https://github.com/nhan0504/CS326/commit/d154f7491d8b4026fd1e22698833970d91f6eeaa): Wrote a first draft of the problem statement for ClosetIQ, highlighting what the application is and why it is necessary.
+  3. [Commit 3 (part 1: text)](https://github.com/nhan0504/CS326/commit/aa7b6abb93fdf237de39fb75ad1e6e83692bb92b) [Commit 3 (part 2: wireframes)](https://github.com/nhan0504/CS326/commit/4ec2d74cf83cd750f1c9819d84d1ea8f1bbaf88e): Drafted the UI Diagrams document, including wireframes for all key ClosetIQ screens and describing key features and use cases for each.
 
 ## Ashley McNamara - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Ashley is responsible for proofreading and ensuring the accuracy of all documents before submission.
