@@ -13,7 +13,7 @@
   * `size` (string): The size of the item.
   * `category` (string): The category of the item (e.g. shirt, pants).
   * `occasion` (string): The occasion of the item (e.g. formal, casual).
-  * `season` (string): The season the item is worn (e.g. summer, fall).
+  * `seasons` (string[]): Array of the seasons the item is worn in (e.g. summer, fall).
   * `brand` (string): The brand of the item.
   * `created_at` (timestamp): The last time the item was updated.
   * `updated_at` (timestamp): The date and time when the item was created.
