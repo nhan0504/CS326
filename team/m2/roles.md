@@ -39,9 +39,9 @@
 ## Ashley McNamara - Quality Control
 - **Role**: Reviews team submissions and ensures that all deliverables meet the necessary quality standards. Ashley is responsible for proofreading and ensuring the accuracy of all documents before submission.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/repo/commit1): Reviewed and edited the `problem.md` file to ensure clarity and alignment with the project requirements.
-  2. [Commit 2](https://github.com/repo/commit2): Proofread and revised the `features.md` file, ensuring that descriptions were clear and complete.
-  3. [Commit 3](https://github.com/repo/commit3): Conducted a final quality check of all milestone documents before submission to ensure accuracy and completeness.
+  1. [Commit 1](https://github.com/nhan0504/CS326/commit/85534ba1dc992358ae6ff457300a44ac80cfbb02): Reviewed and edited the `problem.md` file to ensure clarity and alignment with the project requirements.
+  2. [Commit 2](https://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956): Drafted data.md by adding six data types, writing the data relationships, and data sources.
+  3. [Commit 3](https://github.com/nhan0504/CS326/commit/40f17e71fd9af1e581eec09fe8f057289f5a126b): Added two new features to features.md.
 
 ## Liam Gates - Documentation Lead
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. <Name> ensures that all documents are up to date, well-organized, and accessible to team members.
