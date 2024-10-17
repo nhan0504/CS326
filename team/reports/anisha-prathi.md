@@ -18,4 +18,4 @@
 ### October 17, 2024
 - **Task**: Reviewed and revised data.md
 - **Details**: Went over data.md document and suggested changes
-- **Link to Commit**: [Reviewed data.md](https://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956)
+- **Link to Commit**: [Reviewed data.md](https://github.com/nhan0504/CS326/commit/a2f3334d67c75d8c51bce8234e6f30f0a543f572)
