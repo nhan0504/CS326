@@ -19,7 +19,7 @@
 
 ## Hung Nguyen - Note-Taker
 
-- **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. <Name> is responsible for distributing meeting minutes to the team after each session.
+- **Role**: Records detailed notes during meetings and ensures that action items are clearly communicated. Hung is responsible for distributing meeting minutes to the team after each session.
 - **Top 3 Commits**:
   1. [Commit 1](https://docs.google.com/document/d/1K1DXzFCZuhf6Vd_p5dW52NF7W1mOVx7mjVKIlJdaC_A/edit): Recorded and distributed notes from the first brainstorming meeting, documenting the team’s initial ideas for the project.
   2. [Commit 2](https://github.com/nhan0504/CS326/blob/main/team/m2/Rules.md): Writing Suggested code practice in Rules.md
@@ -27,7 +27,7 @@
 
 ## Bruce Le - Task Manager
 
-- **Role**: Responsible for organizing and tracking team tasks. <Name> manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
+- **Role**: Responsible for organizing and tracking team tasks. Bruce manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/repo/commit1): Set up the team’s Trello board with tasks for Milestone #1, including task descriptions and deadlines.
   2. [Commit 2](https://github.com/repo/commit2): Assigned tasks to team members based on discussions during the team’s planning meetings and updated Trello with new assignments.
