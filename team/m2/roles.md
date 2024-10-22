@@ -54,6 +54,6 @@
 
 - **Role**: Responsible for overseeing the organization and maintenance of all project documentation. Liam ensures that all documents are up to date, well-organized, and accessible to team members.
 - **Top 3 Commits**:
-  1. [Commit 1](https://github.com/nhan0504/CS326/commit/b3ec0d2c64a8558f401e3c49d76328e92435516e): Reviewed the contents of `users.md` file to ensure that the requirements of Milestone 2 were satisfied.
-  2. [Commit 2](https://github.com/nhan0504/CS326/commit/67c980ebf2753e6ecc074f069dbdde1046689559): Reviewed the contents of `ui-diagrams.md` file to ensure that the requirements of Milestone 2 were satisfied.
-  3. [Commit 3](https://github.com/nhan0504/CS326/commit/d83b8a2d4299a6ea8e942f446d31479494ec02f1): Reviewed the contents of `features.md` file to ensure that the requirements of Milestone 2 were satisfied.
+  1. [Commit 1](https://github.com/nhan0504/CS326/commit/1254893a73528c9605c68df5d648e4c8194401aa): Reviewed the contents of `users.md` file to ensure that the requirements of Milestone 2 were satisfied.
+  2. [Commit 2](https://github.com/nhan0504/CS326/commit/a5e5f5af4b65d4275d4f42fe1a89edf3b582b55b): Reviewed the contents of `ui-diagrams.md` file to ensure that the requirements of Milestone 2 were satisfied.
+  3. [Commit 3](https://github.com/nhan0504/CS326/commit/1abc39fa1969e43ba857c71bccef948e5dd1e70b): Reviewed the contents of `features.md` file to ensure that the requirements of Milestone 2 were satisfied.

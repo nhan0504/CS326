@@ -18,4 +18,4 @@
 
 - **Task**: Review features.md.
 - **Details**: Reviewed the contents of the features.md file to ensure that the requirements of Milestone 2 were satisfied.
-- **Link to Commit**: [Review users.md.](https://github.com)
+- **Link to Commit**: [Review users.md.](https://github.com/nhan0504/CS326/commit/1abc39fa1969e43ba857c71bccef948e5dd1e70b)
