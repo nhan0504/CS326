@@ -14,3 +14,8 @@
 - **Task**: Drafted data.md
 - **Details**: Wrote the overview for six different data types, the data relationships, and the data sources 
 - **Link to Commit**: [Drafted data.md](https://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956)
+
+### October 24, 2024
+- **Task**: Broke up large Clothes Inventory feature into smaller features
+- **Details**: Replaced Clothes Inventory feature with 3 new features: Display, Add, Delete 
+- **Link to Commit**: [Updated features.md](https://github.com/nhan0504/CS326/commit/877223ced608e7f2be58245c86b359e5d7289b72)
