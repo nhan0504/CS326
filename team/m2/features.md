@@ -1,9 +1,25 @@
 # Application Features
 
-## Clothes inventory
-This feature allows users to create a detailed inventory of their wardrobe. Users can input information such as size, color, type, brand, material, purchase date, and price for each piece of clothing they own. This helps users manage and categorize their wardrobe efficiently, making it easy to search, sort, and filter items by different criteria. It will also include image uploads for each item if the user want to have a visual wardrobe experience. 
+## Feature Name: Clothes Inventory Display
+**Description:** A grid display on the Wardrobe page of all Wardrobe item elements that are stored in IndexedDB. Should display a filtered set of the items based on the search and filter. For each item, we should display the uploaded image and the attributes of the item.
 
-**Assigned to**: Ashley McNamara
+**Point Value:** 3
+
+**Team Member:** Ashley McNamara
+
+## Feature Name: Clothes Inventory Add Form
+**Description:** A form that allows users to enter a new item into their wardrobe. In the form, the user uploads an image and enters details such as name, cost, size, category, etc. This creates a new wardrobe entry that is saved in IndexedDB, and the form resets for the next entry.
+
+**Point Value:** 2
+
+**Team Member:** Ashley McNamara
+
+## Feature Name: Clothes Inventory Delete Item
+**Description:** A button that the user can press on a wardrobe item to delete that item from their wardrobe. When the button is pressed, the item should be deleted from IndexedDB and the wardrobe display should update and no longer include that item.
+
+**Point Value:** 1
+
+**Team Member:** Ashley McNamara
 
 ## Log outfit each day
 Users can log their daily outfits by selecting the clothing items they wore each day from their wardrobe inventory. Users can also add custom notes about the occasion, weather, or mood to provide context for the outfit. This feature will allow users to track their style choices over time, save favorite outfits for future reference, and analyze their outfit patterns. In the future, this data can be used for outfit recommendations, enabling the app to suggest combinations based on past trends and underutilized items.
