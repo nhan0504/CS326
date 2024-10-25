@@ -29,3 +29,18 @@
 - **Links to Commits**:
   - [Add text to ui-diagrams.md](https://github.com/nhan0504/CS326/commit/aa7b6abb93fdf237de39fb75ad1e6e83692bb92b)
   - [Add wireframes to ui-diagrams.md](https://github.com/nhan0504/CS326/commit/4ec2d74cf83cd750f1c9819d84d1ea8f1bbaf88e)
+
+### October 23, 2024
+- **Task**: Created a skeleton website.
+- **Details**: Created a new project with a title, logo, and working navigation bar that adjusts depending on screen size.
+- **Links to Commit**: [Create skeleton website with nav bar](https://github.com/nhan0504/CS326/pull/1/commits/0295ac114a2777c89377a2ff4708353edb79c6e6)
+
+### October 24, 2024
+- **Task**: Created data models.
+- **Details**: Created two new classes (`OutfitEntry` and `WardrobeItem`) that can be used to keep code organized moving forward.
+- **Links to Commit**: [Create outfit entry and wardrobe item data models](https://github.com/nhan0504/CS326/pull/3/commits/6a406fdd527d4da02605a0b384b1116bdcbf309c)
+
+### October 25, 2024
+- **Task**: Rearchitected the project.
+- **Details**: Used the code provided in lecture on Thursday to transition our code into a component structure where all HTML is written in JavaScript files.
+- **Links to Commit**: [Use components for rendering](https://github.com/nhan0504/CS326/pull/6/commits/55e7093bb87e7caf791348b14ec2857d9b151ef5)
