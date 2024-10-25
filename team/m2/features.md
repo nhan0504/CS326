@@ -19,15 +19,31 @@
 
 **Point Value:** 1
 
-**Team Member:** Ashley McNamara
+**Team Member:** Liam Gates
 
-## Log outfit each day
-Users can log their daily outfits by selecting the clothing items they wore each day from their wardrobe inventory. Users can also add custom notes about the occasion, weather, or mood to provide context for the outfit. This feature will allow users to track their style choices over time, save favorite outfits for future reference, and analyze their outfit patterns. In the future, this data can be used for outfit recommendations, enabling the app to suggest combinations based on past trends and underutilized items.
+## Feature Name: Log Outfit Display
+**Description:** A grid display in the "Log" page of the user's past outfits based on the outfits stored in IndexedDB. Should display a filtered set of outfits based on the search and filter. For each outfit, we should display the date it was worn, the wardrobe items that are a part of it, a heart to favorite the item, and the note the user might have written for the outfit.
 
-**Assigned to**: Hung Nguyen
+**Point Value:** 3
 
-## Statistic on clothing worn
-The statistics dashboard will provide users with visual insights into their wardrobe usage. It will display metrics such as:
+**Team Member:** Hung Nguyen
+
+## Feature Name: Log Outfit Add Item
+**Description:** A section at the top of the "Log" page with the title "Today I'm wearing..." with a display of the current items that are a part of this outfit and a "+" button to add an item. When pushing the "+" button, a window should open to select a wardrobe item to add. The outfit should be saved in IndexedDB.
+
+**Point Value:** 2
+
+**Team Member:** Bruce Le
+
+## Feature Name: Log Outfit Delete Item
+**Description:** An 'x' button on each item that is a part of the user's current logged outfit that the user can press to remove that item from their current logged outfit. The item should be deleted from that outfit in IndexedDB and the display should update and no longer include that item.
+
+**Point Value:** 1
+
+**Team Member:** Bruce Le
+
+## Feature Name: Statistics On Clothing Worn
+**Description:** The statistics dashboard will provide users with visual insights into their wardrobe usage. It will display metrics such as:
 - Most-worn clothing items
 - Least-worn or never-worn items
 - Cost-per-wear for each item (calculated by dividing the price by the number of times it has been worn)
@@ -36,25 +52,28 @@ The statistics dashboard will provide users with visual insights into their ward
   
 Users can also set personal goals, such as reducing the cost-per-wear of certain items or redistributing the use of their wardrobe more evenly. The dashboard can suggest decluttering or donating rarely worn items to encourage more mindful consumption.
 
-**Assigned to**: Abby Tran
+**Point Value:** 4
 
-## Clothes search and filter 
-This feature will allow users to search by name and filter by size, color, type, brand, material, purchase date, weather, and price in both the clothes inventory and logged outfits. The search makes it easier for users to find specific pieces in their wardrobe and see what outfits they have worn with that piece. The filtering makes it easy for users to find items based on a common category. The ability to quickly locate specific items helps the user stay more organized and gives the user a better idea of their wearing patterns.
+**Team Member:** Abby Tran
 
-**Assigned to**: Anisha Prathi
+## Feature Name: Logged Outfit Search and Filter
+**Description:** A search bar and filtering bar on the "Log" page where a user can search by a keyword found in any attribute and filter based on conditions such as date, note, color, type, category, etc. This should get the logged outfits stored in IndexedDB and filter them in order to be displayed.
 
-## Outfit recommendation 
-This feature uses data from the user’s past outfit logs and wardrobe inventory to suggest new outfits. It will take into account the user's favorite combinations and the clothing items that have not been worn recently. The system could also use filters like weather, season, or occasion to refine outfit suggestions. 
+**Point Value:** 3
 
-**Assigned to**: Sophia Hubscher
+**Team Member:** Anisha Prathi
 
-## User profile
-This feature allows users to securely sign up and log in to the application, enabling access to their personalized wardrobe and outfit data across multiple devices. Users can manage their profiles page, including updating personal information, preferences, adding profile pictures, and changing the setting. It will supports social logins (Google, Facebook), sign up with email and password recovery.
+## Feature Name: Wardobe Search and Filter
+**Description:** A search bar and filtering bar on the "Wardrobe" page where a user can search by a keyword found in any attribute and filter based on conditions such as size, color, type, category, etc. This should get the wardrobe items stored in IndexedDB and filter them in order to be displayed.
 
-**Assigned to**: Liam Gates
+**Point Value:** 3
 
-## Outfit planning
-This feature allows users to plan their outfits ahead of time by using a calendar view. Users can select outfits from their wardrobe inventory or from the outfit recommendation and assign them to specific dates for future events. The calendar can sync with other apps (such as Google Calendar) to set reminder.
+**Team Member:** Liam Gates
 
-**Assigned to**: Bruce Le
+## Feature Name: Outfit Recommendation
+**Description:** This feature uses data from the user’s past outfit logs and wardrobe inventory to suggest new outfits. It will take into account the user's favorite combinations and the clothing items that have not been worn recently. The system could also use filters like weather, season, or occasion to refine outfit suggestions. 
+
+**Point Value:** 4
+
+**Team Member:** Sophia Hubscher
   
