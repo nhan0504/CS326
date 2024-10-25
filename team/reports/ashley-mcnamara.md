@@ -19,3 +19,8 @@
 - **Task**: Broke up large Clothes Inventory feature into smaller features
 - **Details**: Replaced Clothes Inventory feature with 3 new features: Display, Add, Delete 
 - **Link to Commit**: [Updated features.md](https://github.com/nhan0504/CS326/commit/877223ced608e7f2be58245c86b359e5d7289b72)
+
+### October 25, 2024
+- **Task**: Broke up all features into smaller features
+- **Details**: Replaced the rest of the features with smaller point valued features and added team members for each. 
+- **Link to Commit**: [Broke down features.md](https://github.com/nhan0504/CS326/pull/4/commits/b190234f69ee45c60caa8d6357937dd0046243eb)
