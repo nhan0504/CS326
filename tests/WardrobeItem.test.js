@@ -11,8 +11,8 @@ describe('WardrobeItem', () => {
             'Blue T-shirt',
             20.00,
             'M',
-            'Tops',
-            'Casual',
+            'tops',
+            'casual',
             ['Spring', 'Summer'],
             'BrandA'
         );
@@ -25,10 +25,11 @@ describe('WardrobeItem', () => {
         expect(wardrobeItem.name).toBe('Blue T-shirt');
         expect(wardrobeItem.cost).toBe(20.00);
         expect(wardrobeItem.size).toBe('M');
-        expect(wardrobeItem.category).toBe('Tops');
-        expect(wardrobeItem.occasion).toBe('Casual');
+        expect(wardrobeItem.category).toBe('tops');
+        expect(wardrobeItem.occasion).toBe('casual');
         expect(wardrobeItem.seasons).toEqual(['Spring', 'Summer']);
         expect(wardrobeItem.brand).toBe('BrandA');
+        expect(wardrobeItem.is_favorite).toBe(false);
         expect(wardrobeItem.times_worn).toBe(0);
         expect(wardrobeItem.created_at).toBeInstanceOf(Date);
         expect(wardrobeItem.updated_at).toBeInstanceOf(Date);
@@ -55,10 +56,11 @@ describe('WardrobeItem', () => {
         expect(json.name).toBe('Blue T-shirt');
         expect(json.cost).toBe(20.00);
         expect(json.size).toBe('M');
-        expect(json.category).toBe('Tops');
-        expect(json.occasion).toBe('Casual');
+        expect(json.category).toBe('tops');
+        expect(json.occasion).toBe('casual');
         expect(json.seasons).toEqual(['Spring', 'Summer']);
         expect(json.brand).toBe('BrandA');
+        expect(json.is_favorite).toBe(false);
         expect(json.times_worn).toBe(0);
         expect(typeof json.created_at).toBe('string');
         expect(typeof json.updated_at).toBe('string');
