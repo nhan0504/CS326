@@ -44,3 +44,8 @@
 - **Task**: Rearchitected the project.
 - **Details**: Used the code provided in lecture on Thursday to transition our code into a component structure where all HTML is written in JavaScript files.
 - **Links to Commit**: [Use components for rendering](https://github.com/nhan0504/CS326/pull/6/commits/55e7093bb87e7caf791348b14ec2857d9b151ef5)
+
+### October 26, 2024
+- **Task**: Created the suggestions view.
+- **Details**: Created the suggestions view with filtering. The feature uses test data and will need to be migrated to using IndexedDB once setup for that is complete.
+- **Links to Commit**: [Create suggestions view](https://github.com/nhan0504/CS326/pull/8/commits/ba203cc900d4d7dc2a4b075fbfd1decafbbf3102)
