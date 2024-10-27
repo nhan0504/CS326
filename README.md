@@ -16,6 +16,7 @@ And for testing:
 
 ```
 npm install --save-dev jest
+npm install --save-dev jest-environment-jsdom
 ```
 
 ### Running the Application
