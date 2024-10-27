@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(viewId).style.display = "block";
   };
 
-  const buttons = ["logo", "home", "log", "wardrobe", "stats", "suggestions", "login"];
+  document.getElementById("logo").addEventListener("click", () => navigate(`homeView`));
+
+  const buttons = ["home", "log", "wardrobe", "stats", "suggestions", "login"];
   buttons.forEach(id => {
     document.getElementById(id).addEventListener("click", () => navigate(`${id}View`));
   });
