@@ -43,7 +43,6 @@ export function getTestWardrobeItems() {
       "S",
       "bottoms",
       "casual",
-      ["Summer"],
       ["Summer", "Spring", "Fall", "Winter"],
       "BrandB"
     )
