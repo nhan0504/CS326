@@ -30,7 +30,7 @@
 
 .expand-btn {
     background-color: #f1f6fc;
-    color: 3f648a;
+    color: #3f648a;
     border: none;
     padding: 0.5em 1em;
     border-radius: 5px;
@@ -87,7 +87,7 @@
 
 .apply-filters-button {
     background-color: white;
-    color: 3f648a;
+    color: black;
     border: none;
     margin-top: 1em;
     padding: 0.5em 1em;
