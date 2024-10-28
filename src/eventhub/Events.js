@@ -1,5 +1,5 @@
 /**
- * An object containing various message types for Outfit management.
+ * An object containing various message types for Outfit and WardrobeItem management.
  */
 export const Events = {
   NewOutfit: 'NewOutfit',
@@ -15,4 +15,18 @@ export const Events = {
   UnStoreOutfit: 'UnStoreOutfit',
   UnStoreOutfitSuccess: 'UnStoreOutfitSuccess',
   UnStoreOutfitFailure: 'UnStoreOutfitFailure',
+
+  NewWardrobeItem: 'NewWardrobeItem',
+
+  LoadWardrobeItem: 'LoadWardrobeItem',
+  LoadWardrobeItemSuccess: 'LoadWardrobeItemSuccess',
+  LoadWardrobeItemFailure: 'LoadWardrobeItemFailure',
+
+  StoreWardrobeItem: 'StoreWardrobeItem',
+  StoreWardrobeItemSuccess: 'StoreWardrobeItemSuccess',
+  StoreWardrobeItemFailure: 'StoreWardrobeItemFailure',
+
+  UnStoreWardrobeItem: 'UnStoreWardrobeItem',
+  UnStoreWardrobeItemSuccess: 'UnStoreWardrobeItemSuccess',
+  UnStoreWardrobeItemFailure: 'UnStoreWardrobeItemFailure',
 }
