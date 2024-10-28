@@ -5,13 +5,13 @@ export class OutfitRepositoryService extends Service {
   constructor() {
     super();
     this.dbName = 'outfitDB';
-    this.storeName = 'outfits';
+    this.storeName = 'outfit';
     this.db = null;
 
     // Initialize the database
     this.initDB()
       .then(() => {
-        this.loadOutfitsFromDB(); // Load outfits on initialization
+        this.loadOutfitFromDB(); // Load outfit on initialization
       })
       .catch(error => {
         console.error(error);
@@ -59,39 +59,39 @@ export class OutfitRepositoryService extends Service {
     });
   }
 
-  async loadOutfitsFromDB() {
+  async loadOutfitFromDB() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readonly');
       const store = transaction.objectStore(this.storeName);
       const request = store.getAll();
 
       request.onsuccess = event => {
-        const outfits = event.target.result;
-        outfits.forEach(outfit => this.publish('NewOutfit', outfit));
-        resolve(outfits);
+        const outfit = event.target.result;
+        outfit.forEach(outfit => this.publish('NewOutfit', outfit));
+        resolve(outfit);
       };
 
       request.onerror = () => {
-        this.publish(Events.LoadOutfitsFailure);
-        reject('Error retrieving outfits');
+        this.publish(Events.LoadOutfitFailure);
+        reject('Error retrieving outfit');
       };
     });
   }
 
-  async clearOutfits() {
+  async clearOutfit() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readwrite');
       const store = transaction.objectStore(this.storeName);
       const request = store.clear();
 
       request.onsuccess = () => {
-        this.publish(Events.UnStoreOutfitsSuccess);
-        resolve('All outfits cleared');
+        this.publish(Events.UnStoreOutfitSuccess);
+        resolve('All outfit cleared');
       };
 
       request.onerror = () => {
-        this.publish(Events.UnStoreOutfitsFailure);
-        reject('Error clearing outfits');
+        this.publish(Events.UnStoreOutfitFailure);
+        reject('Error clearing outfit');
       };
     });
   }
@@ -101,8 +101,8 @@ export class OutfitRepositoryService extends Service {
       this.storeOutfit(data);
     });
 
-    this.subscribe(Events.UnStoreOutfits, () => {
-      this.clearOutfits();
+    this.subscribe(Events.UnStoreOutfit, () => {
+      this.clearOutfit();
     });
   }
 }

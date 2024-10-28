@@ -4,15 +4,15 @@
 export const Events = {
   NewOutfit: 'NewOutfit',
 
-  LoadOutfits: 'LoadOutfits',
-  LoadOutfitsSuccess: 'LoadOutfitsSuccess',
-  LoadOutfitsFailure: 'LoadOutfitsFailure',
+  LoadOutfit: 'LoadOutfit',
+  LoadOutfitSuccess: 'LoadOutfitSuccess',
+  LoadOutfitFailure: 'LoadOutfitFailure',
 
   StoreOutfit: 'StoreOutfit',
-  StoreOutfitSuccess: 'StoreOutfitsSuccess',
-  StoreOutfitFailure: 'StoreOutfitsFailure',
+  StoreOutfitSuccess: 'StoreOutfitSuccess',
+  StoreOutfitFailure: 'StoreOutfitFailure',
 
-  UnStoreOutfits: 'UnStoreOutfits',
-  UnStoreOutfitsSuccess: 'UnStoreOutfitsSuccess',
-  UnStoreOutfitsFailure: 'UnStoreOutfitsFailure',
+  UnStoreOutfit: 'UnStoreOutfit',
+  UnStoreOutfitSuccess: 'UnStoreOutfitSuccess',
+  UnStoreOutfitFailure: 'UnStoreOutfitFailure',
 }
