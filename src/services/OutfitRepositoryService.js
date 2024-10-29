@@ -67,7 +67,7 @@ export class OutfitRepositoryService extends Service {
 
       request.onsuccess = event => {
         const outfit = event.target.result;
-        outfit.forEach(outfit => this.publish('NewOutfit', outfit));
+        outfit.forEach(outfit => this.publish(Events.NewOutfit, outfit));
         resolve(outfit);
       };
 
