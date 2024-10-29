@@ -45,6 +45,17 @@ export class StatsViewComponent extends BaseComponent {
     return categoryMap;
   }
 
+  getItemCountByCategory(wardrobeItems) {
+    const categoryCount = {};
+    wardrobeItems.forEach(item => {
+      if (!categoryCount[item.category]) {
+        categoryCount[item.category] = 0;
+      }
+      categoryCount[item.category] += 1;
+    });
+    return categoryCount;
+  }
+
   renderChart(containerId, labels, data, label) {
     const ctx = document.getElementById(containerId).getContext('2d');
     new Chart(ctx, {
@@ -114,6 +125,49 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
+  renderPieChart(containerId, labels, data) {
+    const ctx = document.getElementById(containerId).getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Items per Category'
+          }
+        }
+      },
+    });
+  }
+
   render() {
     if (!this.wardrobeItems.length) {
       const loadingMessage = document.createElement('p');
@@ -144,7 +198,7 @@ export class StatsViewComponent extends BaseComponent {
     mostWornTitle.textContent = 'Top 5 most-worn Items';
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
-    mostWornCanvas.width = 700;
+    mostWornCanvas.width = 600;
     const mostWornItems = this.getMostWornItems(this.wardrobeItems);
 
     const mostWornLabels = mostWornItems.map(item => item.name);
@@ -163,7 +217,7 @@ export class StatsViewComponent extends BaseComponent {
 
     const leastWornCanvas = document.createElement('canvas');
     leastWornCanvas.id = 'leastWornChart';
-    leastWornCanvas.width = 700;
+    leastWornCanvas.width = 600;
     const leastWornItems = this.getLeastWornItems(this.wardrobeItems);
 
     const leastWornLabels = leastWornItems.map(item => item.name);
@@ -191,7 +245,7 @@ export class StatsViewComponent extends BaseComponent {
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
     const wearByCategoryCanvas = document.createElement('canvas');
     wearByCategoryCanvas.id = 'wearByCategoryChart';  
-    wearByCategoryCanvas.width = 400;
+    wearByCategoryCanvas.width = 350;
     const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
     const categoryLabels = Object.keys(wearFrequency);
     const categoryValues = Object.values(wearFrequency);
@@ -203,6 +257,16 @@ export class StatsViewComponent extends BaseComponent {
       listItem.textContent = `${category}: Worn ${wearFrequency[category]} times in total`;
       wearFrequencyList.appendChild(listItem);
     }
+
+    // Items per category 
+    const itemsPerCategoryTitle = document.createElement('h2');
+    itemsPerCategoryTitle.textContent = 'Items per Category';
+    const itemsPerCategoryCanvas = document.createElement('canvas');
+    itemsPerCategoryCanvas.id = 'itemsPerCategoryChart';
+    itemsPerCategoryCanvas.width = 350;
+    const categoryCount = this.getItemCountByCategory(this.wardrobeItems);
+    const itemCategoryLabels = Object.keys(categoryCount);
+    const itemCategoryValues = Object.values(categoryCount);
 
     leftColumn.appendChild(mostWornTitle);
     leftColumn.appendChild(mostWornList);
@@ -216,6 +280,8 @@ export class StatsViewComponent extends BaseComponent {
     rightColumn.appendChild(wearFrequencyTitle);
     rightColumn.appendChild(wearFrequencyList);
     rightColumn.appendChild(wearByCategoryCanvas);
+    rightColumn.appendChild(itemsPerCategoryTitle);
+    rightColumn.appendChild(itemsPerCategoryCanvas);
 
     const columnsContainer = document.createElement('div');
     columnsContainer.classList.add('columns-container');
@@ -229,6 +295,7 @@ export class StatsViewComponent extends BaseComponent {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
       this.renderDoughnutChart('wearByCategoryChart', categoryLabels, categoryValues);
+      this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues);
     }, 0);
 
     return this.#container;
