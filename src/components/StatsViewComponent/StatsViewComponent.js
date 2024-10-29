@@ -9,6 +9,7 @@ export class StatsViewComponent extends BaseComponent {
     this.StatsViewData = StatsViewData;
     this.wardrobeItems = [];
     this.loadWardrobeItems();
+    this.loadCSS("StatsViewComponent");
   }
 
   async loadWardrobeItems() {
@@ -132,12 +133,18 @@ export class StatsViewComponent extends BaseComponent {
     const title = document.createElement('h1');
     title.textContent = 'Stats';
 
+    const leftColumn = document.createElement('div');
+    leftColumn.classList.add('column', 'left-column');
+
+    const rightColumn = document.createElement('div');
+    rightColumn.classList.add('column', 'right-column');
+
     // Most-worn items
     const mostWornTitle = document.createElement('h2');
     mostWornTitle.textContent = 'Top 5 most-worn Items';
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
-    mostWornCanvas.width = 800;
+    mostWornCanvas.width = 700;
     const mostWornItems = this.getMostWornItems(this.wardrobeItems);
 
     const mostWornLabels = mostWornItems.map(item => item.name);
@@ -156,7 +163,7 @@ export class StatsViewComponent extends BaseComponent {
 
     const leastWornCanvas = document.createElement('canvas');
     leastWornCanvas.id = 'leastWornChart';
-    leastWornCanvas.width = 800;
+    leastWornCanvas.width = 700;
     const leastWornItems = this.getLeastWornItems(this.wardrobeItems);
 
     const leastWornLabels = leastWornItems.map(item => item.name);
@@ -197,19 +204,26 @@ export class StatsViewComponent extends BaseComponent {
       wearFrequencyList.appendChild(listItem);
     }
 
+    leftColumn.appendChild(mostWornTitle);
+    leftColumn.appendChild(mostWornList);
+    leftColumn.appendChild(mostWornCanvas);
+    leftColumn.appendChild(leastWornTitle);
+    leftColumn.appendChild(leastWornList);
+    leftColumn.appendChild(leastWornCanvas);
+
+    rightColumn.appendChild(costPerWearTitle);
+    rightColumn.appendChild(costPerWearList);
+    rightColumn.appendChild(wearFrequencyTitle);
+    rightColumn.appendChild(wearFrequencyList);
+    rightColumn.appendChild(wearByCategoryCanvas);
+
+    const columnsContainer = document.createElement('div');
+    columnsContainer.classList.add('columns-container');
+    columnsContainer.appendChild(leftColumn);
+    columnsContainer.appendChild(rightColumn);
 
     this.#container.appendChild(title);
-    this.#container.appendChild(mostWornTitle);
-    this.#container.appendChild(mostWornList);
-    this.#container.appendChild(mostWornCanvas);
-    this.#container.appendChild(leastWornTitle);
-    this.#container.appendChild(leastWornList);
-    this.#container.appendChild(leastWornCanvas);
-    this.#container.appendChild(costPerWearTitle);
-    this.#container.appendChild(costPerWearList);
-    this.#container.appendChild(wearFrequencyTitle);
-    this.#container.appendChild(wearFrequencyList);
-    this.#container.appendChild(wearByCategoryCanvas);
+    this.#container.appendChild(columnsContainer);
 
     setTimeout(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
