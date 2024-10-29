@@ -25,6 +25,10 @@ export class StatsViewComponent extends BaseComponent {
     return wardrobeItems.sort((a, b) => b.times_worn - a.times_worn).slice(0, 5); 
   }
 
+  getLeastWornItems(outfits) {
+    return outfits.filter(item => item.times_worn === 0 || item.times_worn <= 2); 
+  }
+
   renderChart(containerId, labels, data, label) {
     const ctx = document.getElementById(containerId).getContext('2d');
     new Chart(ctx, {
@@ -75,7 +79,7 @@ export class StatsViewComponent extends BaseComponent {
     mostWornTitle.textContent = 'Top 5 most-worn Items';
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
-    mostWornCanvas.width = 500;
+    mostWornCanvas.width = 800;
     const mostWornItems = this.getMostWornItems(this.wardrobeItems);
 
     const mostWornLabels = mostWornItems.map(item => item.name);
@@ -88,6 +92,25 @@ export class StatsViewComponent extends BaseComponent {
       mostWornList.appendChild(listItem);
     });
 
+    // Least-worn items
+    const leastWornTitle = document.createElement('h2');
+    leastWornTitle.textContent = 'Least-worn or Never-worn Items';
+
+    const leastWornCanvas = document.createElement('canvas');
+    leastWornCanvas.id = 'leastWornChart';
+    leastWornCanvas.width = 800;
+    const leastWornItems = this.getLeastWornItems(this.wardrobeItems);
+
+    const leastWornLabels = leastWornItems.map(item => item.name);
+    const leastWornData = leastWornItems.map(item => item.times_worn);
+
+    const leastWornList = document.createElement('ul');
+    leastWornItems.forEach(item => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item.name} (Worn ${item.times_worn} times) - Suggest to wear`;
+      leastWornList.appendChild(listItem);
+    });
+
     const text = document.createElement('p');
     text.textContent = 'Text here!';
 
@@ -96,9 +119,13 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(mostWornTitle);
     this.#container.appendChild(mostWornList);
     this.#container.appendChild(mostWornCanvas);
+    this.#container.appendChild(leastWornTitle);
+    this.#container.appendChild(leastWornList);
+    this.#container.appendChild(leastWornCanvas);
 
     setTimeout(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
+      this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
     }, 0);
 
     return this.#container;
