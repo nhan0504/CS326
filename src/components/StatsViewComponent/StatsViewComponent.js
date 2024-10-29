@@ -25,12 +25,23 @@ export class StatsViewComponent extends BaseComponent {
     return wardrobeItems.sort((a, b) => b.times_worn - a.times_worn).slice(0, 5); 
   }
 
-  getLeastWornItems(outfits) {
-    return outfits.filter(item => item.times_worn === 0 || item.times_worn <= 2); 
+  getLeastWornItems(wardrobeItems) {
+    return wardrobeItems.filter(item => item.times_worn === 0 || item.times_worn <= 2); 
   }
 
   getCostPerWear(item) {
     return item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : item.cost; 
+  }
+
+  getWearFrequencyByCategory(outfits) {
+    const categoryMap = {};
+    outfits.forEach(item => {
+      if (!categoryMap[item.category]) {
+        categoryMap[item.category] = 0;
+      }
+      categoryMap[item.category] += item.times_worn;
+    });
+    return categoryMap;
   }
 
   renderChart(containerId, labels, data, label) {
@@ -125,11 +136,18 @@ export class StatsViewComponent extends BaseComponent {
       costPerWearList.appendChild(listItem);
     });
 
-    const text = document.createElement('p');
-    text.textContent = 'Text here!';
+    // Wear frequency by category
+    const wearFrequencyTitle = document.createElement('h2');
+    wearFrequencyTitle.textContent = 'Wear Frequency by Category';
+    const wearFrequencyList = document.createElement('ul');
+    const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
+    for (const category in wearFrequency) {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${category}: Worn ${wearFrequency[category]} times in total`;
+      wearFrequencyList.appendChild(listItem);
+    }
 
     this.#container.appendChild(title);
-    this.#container.appendChild(text);
     this.#container.appendChild(mostWornTitle);
     this.#container.appendChild(mostWornList);
     this.#container.appendChild(mostWornCanvas);
@@ -138,6 +156,8 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(leastWornCanvas);
     this.#container.appendChild(costPerWearTitle);
     this.#container.appendChild(costPerWearList);
+    this.#container.appendChild(wearFrequencyTitle);
+    this.#container.appendChild(wearFrequencyList);
 
     setTimeout(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
