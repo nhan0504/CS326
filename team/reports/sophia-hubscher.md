@@ -49,3 +49,8 @@
 - **Task**: Created the suggestions view.
 - **Details**: Created the suggestions view with filtering. The feature uses test data and will need to be migrated to using IndexedDB once setup for that is complete.
 - **Links to Commit**: [Create suggestions view](https://github.com/nhan0504/CS326/pull/8/commits/ba203cc900d4d7dc2a4b075fbfd1decafbbf3102)
+
+### October 28, 2024
+- **Task**: Create WardrobeRepositoryService.
+- **Details**: Create WardrobeRepositoryService based on Anisha's service file. Included example use code in the PR for team members.
+- **Links to Commit**: [Create WardrobeRepositoryService](https://github.com/nhan0504/CS326/pull/13/commits/6fca636ccc63ca2ea498095fa736b1027f904760)
