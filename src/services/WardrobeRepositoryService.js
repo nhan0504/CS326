@@ -67,7 +67,7 @@ export class WardrobeRepositoryService extends Service {
 
       request.onsuccess = event => {
         const wardrobeItems = event.target.result;
-        wardrobeItems.forEach(item => this.publish('NewWardrobeItem', item));
+        wardrobeItems.forEach(item => this.publish(Events.NewWardrobeItem, item));
         resolve(wardrobeItems);
       };
 
