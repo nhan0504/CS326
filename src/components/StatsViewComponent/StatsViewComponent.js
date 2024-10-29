@@ -29,6 +29,10 @@ export class StatsViewComponent extends BaseComponent {
     return outfits.filter(item => item.times_worn === 0 || item.times_worn <= 2); 
   }
 
+  getCostPerWear(item) {
+    return item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : item.cost; 
+  }
+
   renderChart(containerId, labels, data, label) {
     const ctx = document.getElementById(containerId).getContext('2d');
     new Chart(ctx, {
@@ -111,6 +115,16 @@ export class StatsViewComponent extends BaseComponent {
       leastWornList.appendChild(listItem);
     });
 
+    // Cost-per-wear
+    const costPerWearTitle = document.createElement('h2');
+    costPerWearTitle.textContent = 'Cost-per-wear for Each Item';
+    const costPerWearList = document.createElement('ul');
+    this.wardrobeItems.forEach(item => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${item.name}: $${this.getCostPerWear(item)} per wear`;
+      costPerWearList.appendChild(listItem);
+    });
+
     const text = document.createElement('p');
     text.textContent = 'Text here!';
 
@@ -122,6 +136,8 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(leastWornTitle);
     this.#container.appendChild(leastWornList);
     this.#container.appendChild(leastWornCanvas);
+    this.#container.appendChild(costPerWearTitle);
+    this.#container.appendChild(costPerWearList);
 
     setTimeout(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
