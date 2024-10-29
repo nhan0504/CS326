@@ -70,6 +70,49 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
+  renderDoughnutChart(containerId, labels, data) {
+    const ctx = document.getElementById(containerId).getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Items Worn by Category'
+          }
+        }
+      },
+    });
+  }
+
   render() {
     if (!this.wardrobeItems.length) {
       const loadingMessage = document.createElement('p');
@@ -139,13 +182,21 @@ export class StatsViewComponent extends BaseComponent {
     // Wear frequency by category
     const wearFrequencyTitle = document.createElement('h2');
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
-    const wearFrequencyList = document.createElement('ul');
+    const wearByCategoryCanvas = document.createElement('canvas');
+    wearByCategoryCanvas.id = 'wearByCategoryChart';  
+    wearByCategoryCanvas.width = 400;
     const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
+    const categoryLabels = Object.keys(wearFrequency);
+    const categoryValues = Object.values(wearFrequency);
+
+    const wearFrequencyList = document.createElement('ul');
+    
     for (const category in wearFrequency) {
       const listItem = document.createElement('li');
       listItem.textContent = `${category}: Worn ${wearFrequency[category]} times in total`;
       wearFrequencyList.appendChild(listItem);
     }
+
 
     this.#container.appendChild(title);
     this.#container.appendChild(mostWornTitle);
@@ -158,10 +209,12 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(costPerWearList);
     this.#container.appendChild(wearFrequencyTitle);
     this.#container.appendChild(wearFrequencyList);
+    this.#container.appendChild(wearByCategoryCanvas);
 
     setTimeout(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
+      this.renderDoughnutChart('wearByCategoryChart', categoryLabels, categoryValues);
     }, 0);
 
     return this.#container;
