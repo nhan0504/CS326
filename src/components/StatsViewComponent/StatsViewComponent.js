@@ -57,7 +57,7 @@ export class StatsViewComponent extends BaseComponent {
   }
 
   renderChart(containerId, labels, data, label) {
-    const ctx = document.getElementById(containerId).getContext('2d');
+    const ctx = document.getElementById(containerId);
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -72,7 +72,7 @@ export class StatsViewComponent extends BaseComponent {
       },
       options: {
         maintainAspectRatio: true,
-        responsive: false,
+        responsive: true,
         scales: {
           y: {
             beginAtZero: true,
@@ -83,7 +83,7 @@ export class StatsViewComponent extends BaseComponent {
   }
 
   renderDoughnutChart(containerId, labels, data) {
-    const ctx = document.getElementById(containerId).getContext('2d');
+    const ctx = document.getElementById(containerId);
     new Chart(ctx, {
       type: 'doughnut',
       data: {
@@ -110,15 +110,11 @@ export class StatsViewComponent extends BaseComponent {
         }]
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Items Worn by Category'
           }
         }
       },
@@ -126,7 +122,7 @@ export class StatsViewComponent extends BaseComponent {
   }
 
   renderPieChart(containerId, labels, data) {
-    const ctx = document.getElementById(containerId).getContext('2d');
+    const ctx = document.getElementById(containerId);
     new Chart(ctx, {
       type: 'pie',
       data: {
@@ -153,15 +149,11 @@ export class StatsViewComponent extends BaseComponent {
         }]
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Items per Category'
           }
         }
       },
@@ -193,12 +185,17 @@ export class StatsViewComponent extends BaseComponent {
     const rightColumn = document.createElement('div');
     rightColumn.classList.add('column', 'right-column');
 
+    const wearFrequencyContainer = document.createElement('div');
+    wearFrequencyContainer.classList.add('chart-container');
+
+    const itemsPerCategoryContainer = document.createElement('div');
+    itemsPerCategoryContainer.classList.add('chart-container');
+
     // Most-worn items
     const mostWornTitle = document.createElement('h2');
     mostWornTitle.textContent = 'Top 5 most-worn Items';
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
-    mostWornCanvas.width = 600;
     const mostWornItems = this.getMostWornItems(this.wardrobeItems);
 
     const mostWornLabels = mostWornItems.map(item => item.name);
@@ -217,7 +214,6 @@ export class StatsViewComponent extends BaseComponent {
 
     const leastWornCanvas = document.createElement('canvas');
     leastWornCanvas.id = 'leastWornChart';
-    leastWornCanvas.width = 600;
     const leastWornItems = this.getLeastWornItems(this.wardrobeItems);
 
     const leastWornLabels = leastWornItems.map(item => item.name);
@@ -243,9 +239,8 @@ export class StatsViewComponent extends BaseComponent {
     // Wear frequency by category
     const wearFrequencyTitle = document.createElement('h2');
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
-    const wearByCategoryCanvas = document.createElement('canvas');
-    wearByCategoryCanvas.id = 'wearByCategoryChart';  
-    wearByCategoryCanvas.width = 350;
+    const wearFrequencyCanvas = document.createElement('canvas');
+    wearFrequencyCanvas.id = 'wearByCategoryChart';  
     const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
     const categoryLabels = Object.keys(wearFrequency);
     const categoryValues = Object.values(wearFrequency);
@@ -279,9 +274,11 @@ export class StatsViewComponent extends BaseComponent {
     rightColumn.appendChild(costPerWearList);
     rightColumn.appendChild(wearFrequencyTitle);
     rightColumn.appendChild(wearFrequencyList);
-    rightColumn.appendChild(wearByCategoryCanvas);
+    wearFrequencyContainer.appendChild(wearFrequencyCanvas);
+    rightColumn.appendChild(wearFrequencyContainer);
     rightColumn.appendChild(itemsPerCategoryTitle);
-    rightColumn.appendChild(itemsPerCategoryCanvas);
+    itemsPerCategoryContainer.appendChild(itemsPerCategoryCanvas);
+    rightColumn.appendChild(itemsPerCategoryContainer);
 
     const columnsContainer = document.createElement('div');
     columnsContainer.classList.add('columns-container');
@@ -295,7 +292,7 @@ export class StatsViewComponent extends BaseComponent {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
       this.renderDoughnutChart('wearByCategoryChart', categoryLabels, categoryValues);
-      this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues);
+      this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues).resize(0.5);
     }, 0);
 
     return this.#container;
