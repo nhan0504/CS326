@@ -296,12 +296,12 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(title);
     this.#container.appendChild(columnsContainer);
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
       this.renderDoughnutChart('wearByCategoryChart', categoryLabels, categoryValues);
-      this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues).resize(0.5);
-    }, 0);
+      this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues);
+    });
 
     return this.#container;
   }
