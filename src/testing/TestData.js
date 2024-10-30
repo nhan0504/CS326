@@ -14,7 +14,9 @@ export function getTestWardrobeItems() {
       "tops",
       "casual",
       ["Spring", "Summer"],
-      "BrandA"
+      "BrandA",
+      false,
+      2
     )
   );
 
@@ -29,7 +31,9 @@ export function getTestWardrobeItems() {
       "bottoms",
       "party",
       ["Fall", "Summer"],
-      "BrandA"
+      "BrandA",
+      false,
+      3
     )
   );
 
@@ -44,7 +48,9 @@ export function getTestWardrobeItems() {
       "bottoms",
       "casual",
       ["Summer", "Spring", "Fall", "Winter"],
-      "BrandB"
+      "BrandB",
+      false,
+      5
     )
   );
 
@@ -60,7 +66,8 @@ export function getTestWardrobeItems() {
       "casual",
       ["Summer", "Spring"],
       "BrandC",
-      true
+      true,
+      2
     )
   );
 
@@ -76,7 +83,8 @@ export function getTestWardrobeItems() {
       "formal",
       ["Summer", "Fall", "Winter", "Spring"],
       "BrandC",
-      true
+      true,
+      0
     )
   );
 
