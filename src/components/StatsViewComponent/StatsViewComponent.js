@@ -71,8 +71,8 @@ export class StatsViewComponent extends BaseComponent {
         }],
       },
       options: {
-        maintainAspectRatio: true,
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             beginAtZero: true,
@@ -182,6 +182,12 @@ export class StatsViewComponent extends BaseComponent {
     const leftColumn = document.createElement('div');
     leftColumn.classList.add('column', 'left-column');
 
+    const mostWornContainer = document.createElement('div');
+    mostWornContainer.classList.add('chart-container');
+
+    const leastWornContainer = document.createElement('div');
+    leastWornContainer.classList.add('chart-container');
+
     const rightColumn = document.createElement('div');
     rightColumn.classList.add('column', 'right-column');
 
@@ -265,10 +271,12 @@ export class StatsViewComponent extends BaseComponent {
 
     leftColumn.appendChild(mostWornTitle);
     leftColumn.appendChild(mostWornList);
-    leftColumn.appendChild(mostWornCanvas);
+    mostWornContainer.appendChild(mostWornCanvas);
+    leftColumn.appendChild(mostWornContainer);
     leftColumn.appendChild(leastWornTitle);
     leftColumn.appendChild(leastWornList);
-    leftColumn.appendChild(leastWornCanvas);
+    leastWornContainer.appendChild(leastWornCanvas);
+    leftColumn.appendChild(leastWornContainer);
 
     rightColumn.appendChild(costPerWearTitle);
     rightColumn.appendChild(costPerWearList);
