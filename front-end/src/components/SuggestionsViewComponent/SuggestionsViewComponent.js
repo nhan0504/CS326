@@ -1,18 +1,35 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-import { getTestWardrobeItems } from "../../testing/TestData.js";
+import { loadTestWardrobeItems } from "../../testing/TestData.js";
+import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 
 export class SuggestionsViewComponent extends BaseComponent {
   #container = null;
+  #wardrobeItems = [];
 
   constructor(SuggestionsViewData = {}) {
     super();
     this.SuggestionsViewData = SuggestionsViewData;
     this.loadCSS("SuggestionsViewComponent");
+
+    // UNCOMMENT TO LOAD TEST WARDROBE ITEMS
+    // loadTestWardrobeItems();
+
+    this.wardrobeService = new WardrobeRepositoryService();
+    this.loadWardrobe();
+  }
+
+  async loadWardrobe() {
+    try {
+      await this.wardrobeService.initDB();
+
+      this.#wardrobeItems = await this.wardrobeService.loadWardrobeItemsFromDB();
+      this.applyFilters();
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 
   render() {
-    let wardrobeItems = getTestWardrobeItems();
-
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
@@ -24,7 +41,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     suggestionsContainer.classList.add("suggestions-container");
 
     // Create the filter bar
-    const filterBar = this.createFilterBar(wardrobeItems);
+    const filterBar = this.createFilterBar();
     suggestionsContainer.appendChild(filterBar);
 
     // Create the outfit list
@@ -37,7 +54,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     return this.#container;
   }
 
-  createFilterBar(wardrobeItems) {
+  createFilterBar() {
     const filterBar = document.createElement("div");
     filterBar.classList.add("filter-bar");
 
@@ -139,7 +156,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     applyFiltersButton.textContent = "Apply Filters";
     applyFiltersButton.classList.add("apply-filters-button");
     applyFiltersButton.addEventListener("click", () => {
-      this.applyFilters(wardrobeItems);
+      this.applyFilters(this.#wardrobeItems);
     });
 
     // Wrap the button in a div
@@ -172,7 +189,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     return outfitListDiv;
   }
 
-  applyFilters(wardrobeItems) {
+  applyFilters() {
     const applyFiltersMessage = document.querySelector(".apply-filters-message");
     if (applyFiltersMessage) {
       applyFiltersMessage.style.display = "none";
@@ -187,7 +204,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     ).map((cb) => cb.value);
     const selectedOccasion = document.getElementById("occasion").value;
 
-    let filteredItems = wardrobeItems;
+    let filteredItems = this.#wardrobeItems;
 
     if (favoritesOnly) {
       filteredItems = filteredItems.filter((item) => item.is_favorite);
