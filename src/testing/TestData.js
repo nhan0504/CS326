@@ -1,4 +1,5 @@
 import { WardrobeItem } from "../models/WardrobeItem.js";
+import { OutfitEntry } from "../models/OutfitEntry.js";
 
 export function getTestWardrobeItems() {
   const wardrobeItems = [];
@@ -90,3 +91,58 @@ export function getTestWardrobeItems() {
 
   return wardrobeItems;
 }
+
+
+export function getTestOutfits() {
+  const outfits = [];
+
+  constructor(outfit_id, user_id, wardrobe_item_ids, note, date = new Date(), created_at = new Date(), updated_at = new Date()) {
+    this.outfit_id = outfit_id;
+    this.user_id = user_id;
+    this.wardrobe_item_ids = wardrobe_item_ids;
+    this.note = note;
+    this.date = date;
+    this.created_at = created_at;
+    this.updated_at = updated_at;
+}
+
+  outfits.push(
+    new OutfitEntry(
+      "1",
+      "user1",
+      ["item1", "item2"],
+      "First outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "01/11/2024"
+    )
+  )
+
+  outfits.push(
+    new OutfitEntry(
+      "2",
+      "user1",
+      ["item4", "item5"],
+      "Second outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "01/11/2024"
+    )
+  )
+
+  outfits.push(
+    new OutfitEntry(
+      "3",
+      "user1",
+      ["item1", "item3"],
+      "Third outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "01/11/2024"
+    )
+  )
+    
+  return outfits;
+    
+  ;}
+    
