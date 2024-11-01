@@ -1,0 +1,49 @@
+.wardrobe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.wardrobe-item {
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+}
+
+.wardrobe-item-image {
+  width: 75%;
+  height: auto;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+.wardrobe-item p,
+.wardrobe-item strong {
+  margin: 0;
+  padding: 0;
+}
+
+.wardrobe-favorite-btn {
+  position: absolute;
+  top: 15px;
+  left: 13px;
+  background: none;
+  border: none;
+}
+
+.wardrobe-favorite-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.wardrobe-delete-btn {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #444;
+}
