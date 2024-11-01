@@ -24,3 +24,8 @@
 - **Task**: Broke up all features into smaller features
 - **Details**: Replaced the rest of the features with smaller point valued features and added team members for each. 
 - **Link to Commit**: [Broke down features.md](https://github.com/nhan0504/CS326/pull/4/commits/b190234f69ee45c60caa8d6357937dd0046243eb)
+
+### November 1, 2024
+- **Task**: Wardrobe Display
+- **Details**: Implemented the grid display for the wardrobe items using test data 
+- **Link to Commit**: [Implemented Wardrobe Display](https://github.com/nhan0504/CS326/pull/18/commits/fef740cdedd25b41165e0e4cc9ad45148ef29e03)
