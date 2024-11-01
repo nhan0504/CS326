@@ -96,16 +96,6 @@ export function getTestWardrobeItems() {
 export function getTestOutfits() {
   const outfits = [];
 
-  constructor(outfit_id, user_id, wardrobe_item_ids, note, date = new Date(), created_at = new Date(), updated_at = new Date()) {
-    this.outfit_id = outfit_id;
-    this.user_id = user_id;
-    this.wardrobe_item_ids = wardrobe_item_ids;
-    this.note = note;
-    this.date = date;
-    this.created_at = created_at;
-    this.updated_at = updated_at;
-}
-
   outfits.push(
     new OutfitEntry(
       "1",
