@@ -1,5 +1,21 @@
 ## Contribution Log for Anisha Prathi
 
+### November 1, 2024
+ - **Task** Led stand-up
+ - **Details** Filled out stand-up meeting form, facilitating discussion and getting input from other team members
+
+ ### November 1, 2024
+ - **Task** Reviewed PR for Recommendations page
+ - **Details** Went over code changes document; Approved and merged PR
+
+ ### October 28, 2024
+ - **Task** Set up indexDB
+ - **Details** Set up services and indexDB for the application
+
+ ### October 25, 2024
+ - **Task** Led stand-up
+ - **Details** Filled out stand-up meeting form, facilitating discussion and getting input from other team members
+
 ### October 15, 2024
 
 - **Task**: users.md file
