@@ -1,4 +1,5 @@
 import { WardrobeItem } from "../../models/WardrobeItem.js";
+import { getTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 
 export class WardrobeViewComponent extends BaseComponent {
@@ -20,56 +21,7 @@ export class WardrobeViewComponent extends BaseComponent {
     title.textContent = "Wardrobe";
 
     // Temp test data only to be used before connecting with search and filter
-    const tempWardrobeItems = [
-      new WardrobeItem(
-        1,
-        2,
-        "https://via.placeholder.com/150",
-        "My Shirt",
-        43.21,
-        "Small",
-        "Shirt",
-        "Casual",
-        "Summer",
-        "ABC"
-      ),
-      new WardrobeItem(
-        2,
-        2,
-        "https://via.placeholder.com/100",
-        "My Pants",
-        20.42,
-        "Medium",
-        "Pants",
-        "Casual",
-        "Winter",
-        "DEF"
-      ),
-      new WardrobeItem(
-        1,
-        2,
-        "https://via.placeholder.com/150",
-        "My Shirt",
-        43.21,
-        "Small",
-        "Shirt",
-        "Casual",
-        "Summer",
-        "ABC"
-      ),
-      new WardrobeItem(
-        1,
-        2,
-        "https://via.placeholder.com/150",
-        "My Shirt",
-        43.21,
-        "Small",
-        "Shirt",
-        "Casual",
-        "Summer",
-        "ABC"
-      ),
-    ];
+    const tempWardrobeItems = getTestWardrobeItems();
 
     // Create the wardrobe grid container
     const wardrobeGrid = document.createElement("div");
@@ -82,28 +34,29 @@ export class WardrobeViewComponent extends BaseComponent {
       wardrobeItem.classList.add("wardrobe-item");
 
       // Add favorite button
-      const favoriteButton = document.createElement("button");
-      favoriteButton.classList.add("wardrobe-favorite-btn");
-      const favoriteButtonImg = document.createElement("img");
-      favoriteButtonImg.src = "../../img/heart-icon.png";
-      favoriteButtonImg.alt = "Favorite Heart";
-      favoriteButton.appendChild(favoriteButtonImg);
-      wardrobeItem.appendChild(favoriteButton);
-      favoriteButton.onclick = function () {
-        if (favoriteButtonImg.src.endsWith("red-heart-icon.png")) {
-          favoriteButtonImg.src = "../../img/heart-icon.png";
-          item.unfavorite();
-        } else {
-          favoriteButtonImg.src = "../../img/red-heart-icon.png";
+      const heartIcon = document.createElement("span");
+      heartIcon.classList.add("favorite-icon");
+      heartIcon.classList.add("wardrobe-favorite-btn");
+      heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
+      wardrobeItem.appendChild(heartIcon);
+      // Make the favorite button red and update the item when clicked
+      heartIcon.onclick = function () {
+        if (heartIcon.classList.contains("favorite-icon")) {
+          heartIcon.classList.remove("favorite-icon");
+          heartIcon.classList.add("favorite-icon-red");
           item.favorite();
+        } else {
+          heartIcon.classList.remove("favorite-icon-red");
+          heartIcon.classList.add("favorite-icon");
+          item.unfavorite();
         }
       };
 
-      // Add 'X' delete button
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "X";
-      deleteButton.classList.add("wardrobe-delete-btn");
-      wardrobeItem.appendChild(deleteButton);
+      // Add trash can delete button
+      const trashIcon = document.createElement("span");
+      trashIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
+      trashIcon.classList.add("wardrobe-delete-btn");
+      wardrobeItem.appendChild(trashIcon);
 
       // Add item image
       const image = document.createElement("img");
