@@ -4,6 +4,13 @@
   gap: 15px;
 }
 
+/* if the screen size is very small, each item should take up the width of the screen */
+@media (max-width: 400px) {
+  .wardrobe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+}
+
 .wardrobe-item {
   background-color: #fff;
   padding: 15px;
@@ -17,6 +24,7 @@
   height: auto;
   max-height: 200px;
   border-radius: 8px;
+  object-fit: contain;
 }
 
 .wardrobe-item p,
@@ -28,22 +36,16 @@
 .wardrobe-favorite-btn {
   position: absolute;
   top: 15px;
-  left: 13px;
-  background: none;
-  border: none;
+  left: 15px;
 }
 
-.wardrobe-favorite-btn img {
-  width: 24px;
-  height: 24px;
+.favorite-icon-red {
+  color: red;
 }
 
 .wardrobe-delete-btn {
   position: absolute;
-  top: 13px;
+  top: 15px;
   right: 15px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #444;
+  color: #3f648a;
 }
