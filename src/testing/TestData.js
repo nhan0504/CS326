@@ -104,7 +104,8 @@ export function getTestOutfits() {
       "First outfit!",
       "01/11/2024",
       "01/11/2024",
-      "01/11/2024"
+      "casual",
+      ["Winter"]
     )
   )
 
@@ -116,7 +117,8 @@ export function getTestOutfits() {
       "Second outfit!",
       "01/11/2024",
       "01/11/2024",
-      "01/11/2024"
+      "formal",
+      ["Summer"]
     )
   )
 
@@ -128,11 +130,11 @@ export function getTestOutfits() {
       "Third outfit!",
       "01/11/2024",
       "01/11/2024",
-      "01/11/2024"
+      "lounge",
+      ["Fall"]
     )
-  )
+  );
     
   return outfits;
-    
-  ;}
+}
     
