@@ -1,3 +1,25 @@
+.stats-title {
+    font-size: 50px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    text-align: center; 
+    margin: 20px 0; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.chart-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
 .columns-container {
     display: flex;
     justify-content: space-between;
@@ -24,6 +46,28 @@
 canvas {
     width: 100%;  
     height: auto;  
+}
+
+#downloadButton {
+    background-color: #4caf99; 
+    color: white; 
+    padding: 15px 30px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+  
+#downloadButton:hover {
+    background-color: #45a09d; 
+    transform: scale(1.05); 
+}
+
+#downloadButton:active {
+    transform: scale(0.95); 
+    background-color: #3e8e82; 
 }
 
 @media (max-width: 1000px) {
