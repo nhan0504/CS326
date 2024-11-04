@@ -26,6 +26,28 @@ canvas {
     height: auto;  
 }
 
+#downloadButton {
+    background-color: #4caf99; 
+    color: white; 
+    padding: 15px 30px; 
+    font-size: 18px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: transform 0.3s ease, background-color 0.3s ease; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+  
+#downloadButton:hover {
+    background-color: #45a09d; 
+    transform: scale(1.05); 
+}
+
+#downloadButton:active {
+    transform: scale(0.95); 
+    background-color: #3e8e82; 
+}
+
 @media (max-width: 1000px) {
     .columns-container {
       flex-direction: column;  

@@ -160,6 +160,20 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
+  //Download all charts as one image
+  downloadAllChartImage(containerId) {
+    const container = document.getElementById(containerId);
+    // Convert the captured canvas to an image and download it
+    html2canvas(container, { backgroundColor: '#FFFFFF' }).then(canvas => {
+      canvas.toBlob(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'Clothing-stats.png';
+        link.click();
+      });
+    });
+  }
+
   render() {
     if (!this.wardrobeItems.length) {
       const loadingMessage = document.createElement('p');
@@ -289,6 +303,7 @@ export class StatsViewComponent extends BaseComponent {
     rightColumn.appendChild(itemsPerCategoryContainer);
 
     const columnsContainer = document.createElement('div');
+    columnsContainer.id = 'stats-container';
     columnsContainer.classList.add('columns-container');
     columnsContainer.appendChild(leftColumn);
     columnsContainer.appendChild(rightColumn);
@@ -296,11 +311,20 @@ export class StatsViewComponent extends BaseComponent {
     this.#container.appendChild(title);
     this.#container.appendChild(columnsContainer);
 
+    const downloadButton = document.createElement('button');
+    downloadButton.textContent = 'Download charts';
+    downloadButton.id = 'downloadButton';
+    this.#container.appendChild(downloadButton);
+
     requestAnimationFrame(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
       this.renderDoughnutChart('wearByCategoryChart', categoryLabels, categoryValues);
       this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues);
+    });
+
+    downloadButton.addEventListener('click', () => {
+      this.downloadAllChartImage('stats-container');
     });
 
     return this.#container;
