@@ -29,6 +29,7 @@ export class LogViewComponent extends BaseComponent {
 
     // Create the outfit list
     const outfitListDiv = document.createElement("div");
+    outfitListDiv.classList.add("outfit-list");
     logContainer.appendChild(outfitListDiv);
     
     // Append outfit container to main container
@@ -48,6 +49,7 @@ export class LogViewComponent extends BaseComponent {
 
     // Search bar
     const searchDiv = document.createElement("div");
+    searchDiv.classList.add("search-div")
     const searchLabel = document.createElement("label");
     searchLabel.htmlFor = "log-search";
     searchLabel.textContent = "Search:";
@@ -55,8 +57,6 @@ export class LogViewComponent extends BaseComponent {
     const searchInput = document.createElement("input");
     searchInput.type = "text";
     searchInput.id = "log-search";
-    searchInput.placeholder = "Search by outfit ID, wardrobe item IDs, or notes";
-
     searchDiv.appendChild(searchLabel);
     searchDiv.appendChild(searchInput);
     filterBar.appendChild(searchDiv);
