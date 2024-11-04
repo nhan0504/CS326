@@ -1,5 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { getTestWardrobeItems } from "../../testing/TestData.js";
+import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 
 export class StatsViewComponent extends BaseComponent {
   #container = null;
@@ -7,6 +8,7 @@ export class StatsViewComponent extends BaseComponent {
   constructor(StatsViewData = {}) {
     super();
     this.StatsViewData = StatsViewData;
+    this.wardrobeService = new WardrobeRepositoryService();
     this.wardrobeItems = [];
     this.loadWardrobeItems();
     this.loadCSS("StatsViewComponent");
@@ -14,7 +16,12 @@ export class StatsViewComponent extends BaseComponent {
 
   async loadWardrobeItems() {
     try {
-      this.wardrobeItems = getTestWardrobeItems();
+      // Use test data
+      // this.wardrobeItems = getTestWardrobeItems();
+
+      // Use data from indexedDB
+      await this.wardrobeService.initDB();
+      this.wardrobeItems = await this.wardrobeService.loadWardrobeItemsFromDB(); 
       this.render(); 
     } catch (error) {
       console.error('Error loading outfits:', error);
