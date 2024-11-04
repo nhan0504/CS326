@@ -58,7 +58,11 @@ export class StatsViewComponent extends BaseComponent {
 
   renderChart(containerId, labels, data, label) {
     const ctx = document.getElementById(containerId);
-    new Chart(ctx, {
+    if (this[containerId]) {
+      this[containerId].destroy();
+    }
+
+    this[containerId] = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: labels,
@@ -84,7 +88,11 @@ export class StatsViewComponent extends BaseComponent {
 
   renderDoughnutChart(containerId, labels, data) {
     const ctx = document.getElementById(containerId);
-    new Chart(ctx, {
+    if (this[containerId]) {
+      this[containerId].destroy();
+    }
+
+    this[containerId] = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: labels,
@@ -123,7 +131,11 @@ export class StatsViewComponent extends BaseComponent {
 
   renderPieChart(containerId, labels, data) {
     const ctx = document.getElementById(containerId);
-    new Chart(ctx, {
+    if (this[containerId]) {
+      this[containerId].destroy();
+    }
+
+    this[containerId] = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: labels,
