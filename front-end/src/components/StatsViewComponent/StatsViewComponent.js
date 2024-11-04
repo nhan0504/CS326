@@ -191,6 +191,7 @@ export class StatsViewComponent extends BaseComponent {
     }
 
     const title = document.createElement('h1');
+    title.classList.add('stats-title');
     title.textContent = 'Stats';
 
     const leftColumn = document.createElement('div');
@@ -213,7 +214,9 @@ export class StatsViewComponent extends BaseComponent {
 
     // Most-worn items
     const mostWornTitle = document.createElement('h2');
+    mostWornTitle.classList.add('most-worn-title');
     mostWornTitle.textContent = 'Top 5 most-worn Items';
+
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
     const mostWornItems = this.getMostWornItems(this.wardrobeItems);
@@ -230,6 +233,7 @@ export class StatsViewComponent extends BaseComponent {
 
     // Least-worn items
     const leastWornTitle = document.createElement('h2');
+    leastWornTitle.classList.add('least-worn-title');
     leastWornTitle.textContent = 'Least-worn or Never-worn Items';
 
     const leastWornCanvas = document.createElement('canvas');
@@ -249,6 +253,8 @@ export class StatsViewComponent extends BaseComponent {
     // Cost-per-wear
     const costPerWearTitle = document.createElement('h2');
     costPerWearTitle.textContent = 'Cost-per-wear for Each Item';
+    costPerWearTitle.classList.add('cost-per-wear-title');
+
     const costPerWearList = document.createElement('ul');
     this.wardrobeItems.forEach(item => {
       const listItem = document.createElement('li');
@@ -259,6 +265,8 @@ export class StatsViewComponent extends BaseComponent {
     // Wear frequency by category
     const wearFrequencyTitle = document.createElement('h2');
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
+    wearFrequencyTitle.classList.add('wear-frequency-title');
+
     const wearFrequencyCanvas = document.createElement('canvas');
     wearFrequencyCanvas.id = 'wearByCategoryChart';  
     const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
@@ -276,9 +284,11 @@ export class StatsViewComponent extends BaseComponent {
     // Items per category 
     const itemsPerCategoryTitle = document.createElement('h2');
     itemsPerCategoryTitle.textContent = 'Items per Category';
+    itemsPerCategoryTitle.classList.add('item-per-category-title');
+
     const itemsPerCategoryCanvas = document.createElement('canvas');
     itemsPerCategoryCanvas.id = 'itemsPerCategoryChart';
-    itemsPerCategoryCanvas.width = 350;
+
     const categoryCount = this.getItemCountByCategory(this.wardrobeItems);
     const itemCategoryLabels = Object.keys(categoryCount);
     const itemCategoryValues = Object.values(categoryCount);

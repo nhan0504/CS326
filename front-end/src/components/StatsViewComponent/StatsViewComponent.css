@@ -1,3 +1,65 @@
+.stats-title {
+    font-size: 50px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    text-align: center; 
+    margin: 20px 0; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.most-worn-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.least-worn-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.cost-per-wear-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.wear-frequency-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
+.item-per-category-title {
+    font-size: 20px; 
+    font-family: 'Arial', sans-serif; 
+    color: #0d7266; 
+    font-weight: bold; 
+    letter-spacing: 1.5px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(3, 53, 49, 0.292); 
+}
+
 .columns-container {
     display: flex;
     justify-content: space-between;
