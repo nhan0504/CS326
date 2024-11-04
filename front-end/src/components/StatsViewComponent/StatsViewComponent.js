@@ -8,6 +8,9 @@ export class StatsViewComponent extends BaseComponent {
   constructor(StatsViewData = {}) {
     super();
     this.StatsViewData = StatsViewData;
+    this.#container = document.createElement('div');
+    this.#container.classList.add('view');
+    this.#container.id = 'statsView';
     this.wardrobeService = new WardrobeRepositoryService();
     this.wardrobeItems = [];
     this.loadWardrobeItems();
@@ -19,9 +22,15 @@ export class StatsViewComponent extends BaseComponent {
       // Use test data
       // this.wardrobeItems = getTestWardrobeItems();
 
+      const loadingMessage = document.createElement('p');
+      loadingMessage.textContent = 'Loading items from wardrobe ...';
+      this.#container.appendChild(loadingMessage);
+
       // Use data from indexedDB
       await this.wardrobeService.initDB();
       this.wardrobeItems = await this.wardrobeService.loadWardrobeItemsFromDB(); 
+
+      loadingMessage.textContent = 'Rendering statistic ...';
       this.render(); 
     } catch (error) {
       console.error('Error loading outfits:', error);
@@ -194,19 +203,13 @@ export class StatsViewComponent extends BaseComponent {
   }
 
   render() {
+    this.#container.innerHTML = '';
+
     if (!this.wardrobeItems.length) {
       const loadingMessage = document.createElement('p');
-      loadingMessage.textContent = 'Loading statistics...';
+      loadingMessage.textContent = 'No items in wardrobe to display statistic.';
       this.#container.appendChild(loadingMessage);
       return this.#container;
-    }
-
-    if (this.#container) {
-      this.#container.innerHTML = '';
-    } else {
-      this.#container = document.createElement('div');
-      this.#container.classList.add('view');
-      this.#container.id = 'statsView';
     }
 
     const title = document.createElement('h1');
