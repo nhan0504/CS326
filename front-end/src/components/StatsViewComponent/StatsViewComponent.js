@@ -214,7 +214,7 @@ export class StatsViewComponent extends BaseComponent {
 
     // Most-worn items
     const mostWornTitle = document.createElement('h2');
-    mostWornTitle.classList.add('most-worn-title');
+    mostWornTitle.classList.add('chart-title');
     mostWornTitle.textContent = 'Top 5 most-worn Items';
 
     const mostWornCanvas = document.createElement('canvas');
@@ -233,7 +233,7 @@ export class StatsViewComponent extends BaseComponent {
 
     // Least-worn items
     const leastWornTitle = document.createElement('h2');
-    leastWornTitle.classList.add('least-worn-title');
+    leastWornTitle.classList.add('chart-title');
     leastWornTitle.textContent = 'Least-worn or Never-worn Items';
 
     const leastWornCanvas = document.createElement('canvas');
@@ -253,7 +253,7 @@ export class StatsViewComponent extends BaseComponent {
     // Cost-per-wear
     const costPerWearTitle = document.createElement('h2');
     costPerWearTitle.textContent = 'Cost-per-wear for Each Item';
-    costPerWearTitle.classList.add('cost-per-wear-title');
+    costPerWearTitle.classList.add('chart-title');
 
     const costPerWearList = document.createElement('ul');
     this.wardrobeItems.forEach(item => {
@@ -265,7 +265,7 @@ export class StatsViewComponent extends BaseComponent {
     // Wear frequency by category
     const wearFrequencyTitle = document.createElement('h2');
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
-    wearFrequencyTitle.classList.add('wear-frequency-title');
+    wearFrequencyTitle.classList.add('chart-title');
 
     const wearFrequencyCanvas = document.createElement('canvas');
     wearFrequencyCanvas.id = 'wearByCategoryChart';  
@@ -284,7 +284,7 @@ export class StatsViewComponent extends BaseComponent {
     // Items per category 
     const itemsPerCategoryTitle = document.createElement('h2');
     itemsPerCategoryTitle.textContent = 'Items per Category';
-    itemsPerCategoryTitle.classList.add('item-per-category-title');
+    itemsPerCategoryTitle.classList.add('chart-title');
 
     const itemsPerCategoryCanvas = document.createElement('canvas');
     itemsPerCategoryCanvas.id = 'itemsPerCategoryChart';
