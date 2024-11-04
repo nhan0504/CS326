@@ -51,11 +51,16 @@
 - **Links to Commit**: [Create suggestions view](https://github.com/nhan0504/CS326/pull/8/commits/ba203cc900d4d7dc2a4b075fbfd1decafbbf3102)
 
 ### October 28, 2024
-- **Task**: Create WardrobeRepositoryService.
-- **Details**: Create WardrobeRepositoryService based on Anisha's service file. Included example use code in the PR for team members.
+- **Task**: Created WardrobeRepositoryService.
+- **Details**: Created WardrobeRepositoryService based on Anisha's service file. Included example use code in the PR for team members.
 - **Links to Commit**: [Create WardrobeRepositoryService](https://github.com/nhan0504/CS326/pull/13/commits/6fca636ccc63ca2ea498095fa736b1027f904760)
 
 ### October 31, 2024
-- **Task**: Use IndexedDB to populate the suggestions view.
+- **Task**: Used IndexedDB to populate the suggestions view.
 - **Details**: Used IndexedDB to get all wardrobe items and display them in the suggestions view instead of displaying hard-coded test data. Added a method to the testing folder allowing teammates to run a function to generate mock data for IndexedDB.
 - **Links to Commit**: [Suggestions view gets data from IndexedDB](https://github.com/nhan0504/CS326/commit/ad76f76bb9dad736710ead55b307f8e77dcf2d93)
+
+### November 4, 2024
+- **Task**: Made outfit suggestions side scroll on small screens
+- **Details**: Implemented Hung's suggestion to make images in suggested outfits scroll sideways on small screens instead of wrapping below.
+- **Links to Commit**: [Make outfit suggestions side scroll on small screens](https://github.com/nhan0504/CS326/commit/838396c08550d671b59eb71ddf202ef6d5812ed9)
