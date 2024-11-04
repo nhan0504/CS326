@@ -28,6 +28,13 @@
     border-radius: 5px;
 }
 
+.outfit-info {
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
 .expand-btn {
     background-color: #f1f6fc;
     color: #3f648a;
@@ -52,7 +59,6 @@
 
 .outfit-images-container {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
 }
 
