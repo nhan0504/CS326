@@ -29,3 +29,13 @@
 - **Task**: Wardrobe Display
 - **Details**: Implemented the grid display for the wardrobe items using test data 
 - **Link to Commit**: [Implemented Wardrobe Display](https://github.com/nhan0504/CS326/pull/18/commits/fef740cdedd25b41165e0e4cc9ad45148ef29e03)
+
+### November 2, 2024
+- **Task**: Style updates to wardrobe display
+- **Details**: Implemented new favorite and delete icon and made the wardrobe items properly resize for different screen sizes.
+- **Link to Commit**: [Wardrobe Display Style Updates](https://github.com/nhan0504/CS326/pull/18/commits/dbb04683f7a3de60c8cad895bc1bd8dc93c401a1)
+
+### November 2, 2024
+- **Task**: Wardrobe Display Merge Conflicts
+- **Details**: Resolved merge conficts for the wardrobe display branch.
+- **Link to Commit**: [Wardrobe Display Style Updates](https://github.com/nhan0504/CS326/pull/18/commits/48dd76c59a09295f98fd3afef96380e108a19992)
