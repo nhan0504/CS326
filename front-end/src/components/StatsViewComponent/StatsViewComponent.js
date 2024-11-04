@@ -9,6 +9,9 @@ export class StatsViewComponent extends BaseComponent {
   constructor(StatsViewData = {}) {
     super();
     this.StatsViewData = StatsViewData;
+    this.#container = document.createElement('div');
+    this.#container.classList.add('view');
+    this.#container.id = 'statsView';
     this.wardrobeService = new WardrobeRepositoryService();
     this.wardrobeItems = [];
     this.loadWardrobeItems();
@@ -20,9 +23,15 @@ export class StatsViewComponent extends BaseComponent {
       // Use test data
       // this.wardrobeItems = getTestWardrobeItems();
 
+      const loadingMessage = document.createElement('p');
+      loadingMessage.textContent = 'Loading items from wardrobe ...';
+      this.#container.appendChild(loadingMessage);
+
       // Use data from indexedDB
       await this.wardrobeService.initDB();
       this.wardrobeItems = await this.wardrobeService.loadWardrobeItemsFromDB(); 
+
+      loadingMessage.textContent = 'Rendering statistic ...';
       this.render(); 
     } catch (error) {
       console.error('Error loading outfits:', error);
