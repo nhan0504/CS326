@@ -39,7 +39,7 @@
 ### November 3rd, 2024
 - **Task**: Implement the download charts feature
 - **Details**: Create a download button that allows user to download all the chart statistic as an image so they can share with other
-- **Link to Commit**: [Create a button to download all the chart so user can share the statistc](https://github.com/nhan0504/CS326/pull/24/commits/dcc1ef0836c982c30debd28b0a958d54844a8101)
+- **Link to Commit**: [Create a button to download all the chart so user can share the statistic](https://github.com/nhan0504/CS326/pull/24/commits/dcc1ef0836c982c30debd28b0a958d54844a8101)
 
 ### November 3rd, 2024
 - **Task**: Create sequence diagram for feature

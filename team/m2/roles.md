@@ -16,6 +16,9 @@
   2. Commit 2: Created a timeline for milestone deliverables on Slack, making sure the team stays on track.
      ![image](https://github.com/user-attachments/assets/7a15752a-efdc-41b9-89cb-d7490069a78a)
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/0bc6ac7e84f529f562016dbac994372a284b801e): Drafted features.md
+  4. [Commit 4](https://github.com/nhan0504/CS326/pull/14/commits/67a7d2bcc722866c948cc7114b152a30625bc1f4): Calculate and generate chart to show statistic on clothing worn in the wardrobe
+  5. [Commit 5](https://github.com/nhan0504/CS326/pull/24/commits/dcc1ef0836c982c30debd28b0a958d54844a8101): Created a download button for user to download the statistic to share with others
+  6. [Commit 6](https://github.com/nhan0504/CS326/pull/26/commits/dd49ea176808bb86fefe7b8a59309d46e113232a): Hook up the statistic page with the indexedDB instead of using test data
 
 ## Hung Nguyen - Note-Taker
 
