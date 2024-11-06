@@ -343,9 +343,12 @@ export class SuggestionsViewComponent extends BaseComponent {
 
   isSameOutfit = (outfit1, outfit2) => {
     if (outfit1.length !== outfit2.length) return false;
-
-    return outfit1.every((item) => outfit2.includes(item));
-  };
+  
+    const ids1 = outfit1.map((item) => item.item_id).sort();
+    const ids2 = outfit2.map((item) => item.item_id).sort();
+  
+    return ids1.every((id, index) => id === ids2[index]);
+  };  
 
   generateOutfitSuggestions(wardrobeItems) {
     const maxNumSuggestions = 10;
