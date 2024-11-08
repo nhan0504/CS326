@@ -1,0 +1,44 @@
+.log-container {
+    display: flex;
+    gap: 20px;
+}
+
+.log-filter-bar {
+    flex: 1;
+    background-color: #f1f6fc;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.1);
+}
+
+.log-apply-filters-button {
+    background-color: white;
+    color: black;
+    border: none;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.log-apply-filters-button:hover {
+    background-color: #d3e8fe;
+}
+
+.search-div {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+#log-search {
+    flex: 1;
+}
+
+/* Changes for narrower screens */
+@media (max-width: 870px) {
+    .log-container {
+        flex-direction: column;
+    }
+}

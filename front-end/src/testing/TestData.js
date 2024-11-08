@@ -1,4 +1,5 @@
 import { WardrobeItem } from "../models/WardrobeItem.js";
+import { OutfitEntry } from "../models/OutfitEntry.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 
 export function getTestWardrobeItems() {
@@ -92,6 +93,52 @@ export function getTestWardrobeItems() {
   return wardrobeItems;
 }
 
+
+export function getTestOutfits() {
+  const outfits = [];
+
+  outfits.push(
+    new OutfitEntry(
+      "1",
+      "user1",
+      ["item1", "item2"],
+      "First outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "casual",
+      ["Winter"]
+    )
+  )
+
+  outfits.push(
+    new OutfitEntry(
+      "2",
+      "user1",
+      ["item4", "item5"],
+      "Second outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "formal",
+      ["Summer"]
+    )
+  )
+
+  outfits.push(
+    new OutfitEntry(
+      "3",
+      "user1",
+      ["item1", "item3"],
+      "Third outfit!",
+      "01/11/2024",
+      "01/11/2024",
+      "lounge",
+      ["Fall"]
+    )
+  );
+    
+  return outfits;
+}
+    
 export async function loadTestWardrobeItems() {
   const wardrobeService = new WardrobeRepositoryService();
   const items = getTestWardrobeItems();
