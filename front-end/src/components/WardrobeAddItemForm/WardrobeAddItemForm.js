@@ -50,12 +50,14 @@ export class WardrobeAddItemForm extends BaseComponent {
     const imageTextLabel = document.createElement("label");
     imageTextLabel.setAttribute("for", "Image");
     imageTextLabel.textContent = "Image";
+    imageTextLabel.classList.add("add-item-form-label");
     form.appendChild(imageTextLabel);
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.id = "Image";
     fileInput.accept = "image/*";
     fileInput.required = true;
+    fileInput.classList.add("add-item-form-input");
     form.appendChild(fileInput);
 
     // Create the input fields of the form
@@ -72,6 +74,7 @@ export class WardrobeAddItemForm extends BaseComponent {
       const textLabel = document.createElement("label");
       textLabel.setAttribute("for", label);
       textLabel.textContent = label;
+      textLabel.classList.add("add-item-form-label");
       form.appendChild(textLabel);
 
       // Create the input
@@ -80,12 +83,35 @@ export class WardrobeAddItemForm extends BaseComponent {
       input.id = label;
       input.placeholder = placeholder;
       input.required = true;
+      input.classList.add("add-item-form-input");
       form.appendChild(input);
     });
 
+    // Create the seasons checkboxes
+    const seasonTextLabel = document.createElement("label");
+    seasonTextLabel.textContent = "Seasons";
+    seasonTextLabel.classList.add("add-item-form-label");
+    form.appendChild(seasonTextLabel);
+    const seasonContainer = document.createElement("div");
+    seasons.forEach((season) => {
+      // Create the label
+      const textLabel = document.createElement("label");
+      textLabel.htmlFor = season;
+      textLabel.textContent = season.charAt(0).toUpperCase() + season.slice(1);
+      textLabel.classList.add("wardrobe-add-seasons");
+      seasonContainer.appendChild(textLabel);
+
+      // Create the input
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.id = season;
+      input.value = season;
+      seasonContainer.appendChild(input);
+    });
+    form.appendChild(seasonContainer);
+
     // Create the select fields of the form
     const selectFields = [
-      { label: "Season", options: seasons },
       {
         label: "Occasion",
         options: occasions,
@@ -102,6 +128,7 @@ export class WardrobeAddItemForm extends BaseComponent {
       const textLabel = document.createElement("label");
       textLabel.setAttribute("for", label);
       textLabel.textContent = label;
+      textLabel.classList.add("add-item-form-label");
       form.appendChild(textLabel);
 
       // Create the select field

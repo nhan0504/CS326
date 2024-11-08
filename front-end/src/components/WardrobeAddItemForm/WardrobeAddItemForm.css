@@ -43,14 +43,14 @@
   text-align: center;
 }
 
-.add-item-form label {
+.add-item-form-label {
   font-weight: bold;
   margin-bottom: 5px;
   display: block;
   color: #555;
 }
 
-.add-item-form input,
+.add-item-form-input,
 .add-item-form select,
 .add-item-form button {
   width: 100%;
@@ -59,6 +59,14 @@
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 16px;
+}
+
+.wardrobe-add-seasons {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-right: 2px;
   font-size: 16px;
 }
 
