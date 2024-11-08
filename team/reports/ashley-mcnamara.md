@@ -42,5 +42,5 @@
 
 ### November 7, 2024
 - **Task**: Wardrobe Add Item Form Display
-- **Details**: Created a modal that opens with a form to add a new item when pushing the new "+" button in the wardrobe page. Created a new branch called "feature-add-wardrobe-item-form" for this task.
-- **Link to Commit**: [Wardrobe Add Item Form](https://github.com/nhan0504/CS326/pull/34/commits/4453b2299f089cc049533109625495d2d1722ff3)
+- **Details**: Created a modal that opens with a form to add a new item when pushing the new "+" button in the wardrobe page. Created a new branch called "feature-add-wardrobe-item-form" and merged in and deleted it.
+- **Link to Commit**: [Wardrobe Add Item Form](https://github.com/nhan0504/CS326/commit/9b1d5e8e65eb0c8d38826f2aaab28567eb4c21ca#diff-d51acda97ae090fb3170e1a8a4f8642a58b73c2d76e5c840e397c5ecf7c6446e)
