@@ -27,15 +27,20 @@
 
 ### November 1, 2024
 - **Task**: Wardrobe Display
-- **Details**: Implemented the grid display for the wardrobe items using test data 
+- **Details**: Implemented the grid display for the wardrobe items using test data. Created a new branch called "feature-wardrobe-display" for this task. 
 - **Link to Commit**: [Implemented Wardrobe Display](https://github.com/nhan0504/CS326/pull/18/commits/fef740cdedd25b41165e0e4cc9ad45148ef29e03)
 
 ### November 2, 2024
 - **Task**: Style updates to wardrobe display
-- **Details**: Implemented new favorite and delete icon and made the wardrobe items properly resize for different screen sizes.
+- **Details**: Implemented new favorite and delete icon and made the wardrobe items properly resize for different screen sizes. Updated the branch "feature-wardrobe-display"
 - **Link to Commit**: [Wardrobe Display Style Updates](https://github.com/nhan0504/CS326/pull/18/commits/dbb04683f7a3de60c8cad895bc1bd8dc93c401a1)
 
 ### November 2, 2024
 - **Task**: Wardrobe Display Merge Conflicts
-- **Details**: Resolved merge conficts for the wardrobe display branch.
+- **Details**: Resolved merge conficts for the wardrobe display branch. Then merged and deleted the branch "feature-wardrobe-display"
 - **Link to Commit**: [Wardrobe Display Style Updates](https://github.com/nhan0504/CS326/pull/18/commits/48dd76c59a09295f98fd3afef96380e108a19992)
+
+### November 7, 2024
+- **Task**: Wardrobe Add Item Form Display
+- **Details**: Created a modal that opens with a form to add a new item when pushing the new "+" button in the wardrobe page. Created a new branch called "feature-add-wardrobe-item-form" for this task.
+- **Link to Commit**: [Wardrobe Add Item Form](https://github.com/nhan0504/CS326/pull/34/commits/4453b2299f089cc049533109625495d2d1722ff3)
