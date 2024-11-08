@@ -1,9 +1,11 @@
 import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { getTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { WardrobeAddItemForm } from "../WardrobeAddItemForm/WardrobeAddItemForm.js";
 
 export class WardrobeViewComponent extends BaseComponent {
   #container = null;
+  #addForm = null;
 
   constructor(WardrobeViewData = {}) {
     super();
@@ -15,10 +17,27 @@ export class WardrobeViewComponent extends BaseComponent {
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
+    this.#container.classList.add("wardrobe-view");
     this.#container.id = "wardrobeView";
 
+    // Create title
     const title = document.createElement("h1");
     title.textContent = "Wardrobe";
+
+    // Create the add item button
+    const addItemButton = document.createElement("span");
+    addItemButton.innerHTML = '<i class="fa-solid fa-circle-plus"></i>';
+    addItemButton.classList.add("wardrobe-add-item-btn");
+    this.#container.appendChild(addItemButton);
+    // Render the add item form when the button is clicked
+    addItemButton.onclick = () => {
+      if (!this.#addForm) {
+        this.#addForm = new WardrobeAddItemForm();
+        const element = this.#addForm.render();
+        document.body.appendChild(element);
+      }
+      this.#addForm.show();
+    };
 
     // Temp test data only to be used before connecting with search and filter
     const tempWardrobeItems = getTestWardrobeItems();

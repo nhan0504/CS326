@@ -1,3 +1,7 @@
+.wardrobe-view {
+  position: relative;
+}
+
 .wardrobe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -47,5 +51,12 @@
   position: absolute;
   top: 15px;
   right: 15px;
+  color: #3f648a;
+}
+
+.wardrobe-add-item-btn {
+  position: absolute;
+  right: 15px;
+  font-size: 35px;
   color: #3f648a;
 }
