@@ -1,6 +1,7 @@
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
+import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
 
 export class SuggestionsViewComponent extends BaseComponent {
   #container = null;
@@ -22,10 +23,11 @@ export class SuggestionsViewComponent extends BaseComponent {
     try {
       await this.wardrobeService.initDB();
 
-      this.#wardrobeItems = await this.wardrobeService.loadWardrobeItemsFromDB();
+      this.#wardrobeItems =
+        await this.wardrobeService.loadWardrobeItemsFromDB();
       this.applyFilters();
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   }
 
@@ -98,8 +100,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     seasonsLabel.textContent = "Seasons:";
     seasonsDiv.appendChild(seasonsLabel);
 
-    const seasons = ["spring", "summer", "fall", "winter"];
-    seasons.forEach((season) => {
+    SEASONS.forEach((season) => {
       const seasonCheckbox = document.createElement("input");
       seasonCheckbox.type = "checkbox";
       seasonCheckbox.id = season;
@@ -130,16 +131,7 @@ export class SuggestionsViewComponent extends BaseComponent {
     occasionSelect.id = "occasion";
     occasionSelect.name = "occasion";
 
-    const occasions = [
-      "any",
-      "formal",
-      "casual",
-      "business",
-      "party",
-      "lounge",
-      "other",
-    ];
-    occasions.forEach((optionValue) => {
+    OCCASIONS.forEach((optionValue) => {
       const option = document.createElement("option");
       option.value = optionValue;
       option.textContent =
@@ -178,7 +170,8 @@ export class SuggestionsViewComponent extends BaseComponent {
     outfitListDiv.appendChild(outfitListTitle);
 
     const applyFiltersMessage = document.createElement("p");
-    applyFiltersMessage.textContent = "Select your filters, and then click 'Apply Filters' to generate outfits!";
+    applyFiltersMessage.textContent =
+      "Select your filters, and then click 'Apply Filters' to generate outfits!";
     applyFiltersMessage.classList.add("apply-filters-message");
     outfitListDiv.appendChild(applyFiltersMessage);
 
@@ -190,7 +183,9 @@ export class SuggestionsViewComponent extends BaseComponent {
   }
 
   applyFilters() {
-    const applyFiltersMessage = document.querySelector(".apply-filters-message");
+    const applyFiltersMessage = document.querySelector(
+      ".apply-filters-message"
+    );
     if (applyFiltersMessage) {
       applyFiltersMessage.style.display = "none";
     }
@@ -239,7 +234,8 @@ export class SuggestionsViewComponent extends BaseComponent {
 
     if (suggestedOutfits.length === 0) {
       const noOutfitsMessage = document.createElement("p");
-      noOutfitsMessage.textContent = "Oops—we're out of ideas! To see more suggestions, adjust your filters or add more items from your wardrobe.";
+      noOutfitsMessage.textContent =
+        "Oops—we're out of ideas! To see more suggestions, adjust your filters or add more items from your wardrobe.";
       outfitList.appendChild(noOutfitsMessage);
       return; // Exit the function early
     }
@@ -316,7 +312,7 @@ export class SuggestionsViewComponent extends BaseComponent {
           item.times_worn === 1
             ? `(${item.times_worn} wear)`
             : `(${item.times_worn} wears)`;
-            itemText.textContent = `${item.name} ${timesWornText}`;
+        itemText.textContent = `${item.name} ${timesWornText}`;
 
         // Append image and text to the entry
         itemInfo.appendChild(itemImage);
@@ -330,8 +326,8 @@ export class SuggestionsViewComponent extends BaseComponent {
           itemEntry.appendChild(heartIcon);
         } else {
           itemEntry.appendChild(document.createElement("span"));
-        }        
-        
+        }
+
         outfitElements.appendChild(itemEntry);
       });
 
@@ -343,24 +339,20 @@ export class SuggestionsViewComponent extends BaseComponent {
 
   isSameOutfit = (outfit1, outfit2) => {
     if (outfit1.length !== outfit2.length) return false;
-  
+
     const ids1 = outfit1.map((item) => item.item_id).sort();
     const ids2 = outfit2.map((item) => item.item_id).sort();
-  
+
     return ids1.every((id, index) => id === ids2[index]);
-  };  
+  };
 
   generateOutfitSuggestions(wardrobeItems) {
     const maxNumSuggestions = 10;
-    const categories = {
-      tops: [],
-      bottoms: [],
-      dresses: [],
-      jackets: [],
-      shoes: [],
-      accessories: [],
-      bags: [],
-    };
+
+    const categories = CATEGORIES.reduce((acc, category) => {
+      acc[category] = [];
+      return acc;
+    }, {});
 
     wardrobeItems.forEach((item) => {
       categories[item.category].push(item);
@@ -370,23 +362,25 @@ export class SuggestionsViewComponent extends BaseComponent {
     for (let i = 0; i < maxNumSuggestions; i++) {
       const outfit = [];
 
-      const hasTopsAndBottoms = categories.tops.length > 0 && categories.bottoms.length > 0;
+      const hasTopsAndBottoms =
+        categories.top.length > 0 && categories.bottoms.length > 0;
 
-      const hasDresses = categories.dresses && categories.dresses.length > 0;
-      const useDress = hasDresses && (Math.random() < 0.2 || !hasTopsAndBottoms); // 20% chance to use a dress
+      const hasDresses = categories.dress && categories.dress.length > 0;
+      const useDress =
+        hasDresses && (Math.random() < 0.2 || !hasTopsAndBottoms); // 20% chance to use a dress
 
       // Select top and bottom or dress if available
       if (useDress) {
         outfit.push(
-          categories["dresses"][
-            Math.floor(Math.random() * categories["dresses"].length)
+          categories["dress"][
+            Math.floor(Math.random() * categories["dress"].length)
           ]
         );
       } else {
         if (hasTopsAndBottoms) {
           outfit.push(
-            categories["tops"][
-              Math.floor(Math.random() * categories["tops"].length)
+            categories["top"][
+              Math.floor(Math.random() * categories["top"].length)
             ]
           );
           outfit.push(
@@ -408,24 +402,24 @@ export class SuggestionsViewComponent extends BaseComponent {
       }
 
       // Select additional items (jackets, bags, accessories)
-      if (Math.random() < 0.5 && categories.jackets.length > 0) {
+      if (Math.random() < 0.5 && categories.jacket.length > 0) {
         outfit.push(
-          categories["jackets"][
-            Math.floor(Math.random() * categories["jackets"].length)
+          categories["jacket"][
+            Math.floor(Math.random() * categories["jacket"].length)
           ]
         );
       }
-      if (Math.random() < 0.5 && categories.accessories.length > 0) {
+      if (Math.random() < 0.5 && categories.accessory.length > 0) {
         outfit.push(
-          categories["accessories"][
-            Math.floor(Math.random() * categories["accessories"].length)
+          categories["accessory"][
+            Math.floor(Math.random() * categories["accessory"].length)
           ]
         );
       }
-      if (Math.random() < 0.5 && categories.bags.length > 0) {
+      if (Math.random() < 0.5 && categories.bag.length > 0) {
         outfit.push(
-          categories["bags"][
-            Math.floor(Math.random() * categories["bags"].length)
+          categories["bag"][
+            Math.floor(Math.random() * categories["bag"].length)
           ]
         );
       }
