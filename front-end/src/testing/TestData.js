@@ -7,16 +7,18 @@ export function getTestWardrobeItems() {
 
   wardrobeItems.push(
     new WardrobeItem(
-      "item1",
-      "user1",
-      "../testing/test-images/blue_shirt.jpg",
-      "Blue T-shirt",
-      20.0,
-      "M",
-      "tops",
-      "casual",
-      ["Spring", "Summer"],
-      "BrandA",
+      {
+        item_id: "item1",
+        user_id: "user1",
+        image: "../testing/test-images/blue_shirt.jpg",
+        name: "Blue T-shirt",
+        cost: 20.0,
+        size: "M",
+        category: "top",
+        occasion: "casual",
+        seasons: ["Spring", "Summer"],
+        brand: "BrandA",
+      },
       false,
       2
     )
@@ -24,16 +26,18 @@ export function getTestWardrobeItems() {
 
   wardrobeItems.push(
     new WardrobeItem(
-      "item2",
-      "user1",
-      "../testing/test-images/red_pants.png",
-      "Red Pants",
-      40.0,
-      "S",
-      "bottoms",
-      "party",
-      ["Fall", "Summer"],
-      "BrandA",
+      {
+        item_id: "item2",
+        user_id: "user1",
+        image: "../testing/test-images/red_pants.png",
+        name: "Red Pants",
+        cost: 40.0,
+        size: "S",
+        category: "bottoms",
+        occasion: "party",
+        seasons: ["Fall", "Summer"],
+        brand: "BrandA",
+      },
       false,
       3
     )
@@ -41,16 +45,18 @@ export function getTestWardrobeItems() {
 
   wardrobeItems.push(
     new WardrobeItem(
-      "item3",
-      "user1",
-      "../testing/test-images/blue_pants.jpg",
-      "Blue Pants",
-      30.0,
-      "S",
-      "bottoms",
-      "casual",
-      ["Summer", "Spring", "Fall", "Winter"],
-      "BrandB",
+      {
+        item_id: "item3",
+        user_id: "user1",
+        image: "../testing/test-images/blue_pants.jpg",
+        name: "Blue Pants",
+        cost: 30.0,
+        size: "S",
+        category: "bottoms",
+        occasion: "casual",
+        seasons: ["Summer", "Spring", "Fall", "Winter"],
+        brand: "BrandB",
+      },
       false,
       5
     )
@@ -58,16 +64,18 @@ export function getTestWardrobeItems() {
 
   wardrobeItems.push(
     new WardrobeItem(
-      "item4",
-      "user1",
-      "../testing/test-images/striped_dress.jpg",
-      "Striped Dress",
-      40.0,
-      "S",
-      "dresses",
-      "casual",
-      ["Summer", "Spring"],
-      "BrandC",
+      {
+        item_id: "item4",
+        user_id: "user1",
+        image: "../testing/test-images/striped_dress.jpg",
+        name: "Striped Dress",
+        cost: 40.0,
+        size: "S",
+        category: "dress",
+        occasion: "casual",
+        seasons: ["Summer", "Spring"],
+        brand: "BrandC",
+      },
       true,
       2
     )
@@ -75,16 +83,18 @@ export function getTestWardrobeItems() {
 
   wardrobeItems.push(
     new WardrobeItem(
-      "item5",
-      "user1",
-      "../testing/test-images/loafers.jpg",
-      "Loafers",
-      30.0,
-      "S",
-      "shoes",
-      "formal",
-      ["Summer", "Fall", "Winter", "Spring"],
-      "BrandC",
+      {
+        item_id: "item5",
+        user_id: "user1",
+        image: "../testing/test-images/loafers.jpg",
+        name: "Loafers",
+        cost: 30.0,
+        size: "S",
+        category: "shoes",
+        occasion: "formal",
+        seasons: ["Summer", "Fall", "Winter", "Spring"],
+        brand: "BrandC",
+      },
       true,
       0
     )
@@ -92,7 +102,6 @@ export function getTestWardrobeItems() {
 
   return wardrobeItems;
 }
-
 
 export function getTestOutfits() {
   const outfits = [];
@@ -108,7 +117,7 @@ export function getTestOutfits() {
       "casual",
       ["Winter"]
     )
-  )
+  );
 
   outfits.push(
     new OutfitEntry(
@@ -121,7 +130,7 @@ export function getTestOutfits() {
       "formal",
       ["Summer"]
     )
-  )
+  );
 
   outfits.push(
     new OutfitEntry(
@@ -135,10 +144,10 @@ export function getTestOutfits() {
       ["Fall"]
     )
   );
-    
+
   return outfits;
 }
-    
+
 export async function loadTestWardrobeItems() {
   const wardrobeService = new WardrobeRepositoryService();
   const items = getTestWardrobeItems();
@@ -147,10 +156,10 @@ export async function loadTestWardrobeItems() {
     await wardrobeService.initDB();
     await wardrobeService.clearWardrobeItems();
 
-    items.forEach(item => {
+    items.forEach((item) => {
       wardrobeService.storeWardrobeItem(item.toJSON());
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
