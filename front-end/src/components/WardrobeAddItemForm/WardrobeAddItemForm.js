@@ -174,7 +174,10 @@ export class WardrobeAddItemForm extends BaseComponent {
         this.hide();
 
         // add the item to indexdb
-        this.addItem(formData, files);
+        this.addItem(formData, files, displayedWardrobeItems);
+
+        // reset the form
+        form.reset();
       } else {
         // error or alert or some shit
       }
@@ -194,7 +197,7 @@ export class WardrobeAddItemForm extends BaseComponent {
     this.#container.style.display = "none";
   }
 
-  addItem(params, files) {
+  addItem(params, files, displayedWardrobeItems) {
     // Read the image
     const image = files[0];
     const reader = new FileReader();
@@ -208,6 +211,7 @@ export class WardrobeAddItemForm extends BaseComponent {
 
       // Display the new item without rerendering everything
       renderWardrobeItems([wardrobeItem]);
+      displayedWardrobeItems.push(wardrobeItem);
 
       // Store the item in indexdb
       this.storeWardrobeItem(wardrobeItem);
