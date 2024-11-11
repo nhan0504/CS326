@@ -1,4 +1,4 @@
-export const occasions = [
+export const OCCASIONS = [
   "any",
   "formal",
   "casual",
@@ -8,9 +8,9 @@ export const occasions = [
   "other",
 ];
 
-export const seasons = ["spring", "summer", "fall", "winter"];
+export const SEASONS = ["spring", "summer", "fall", "winter"];
 
-export const categories = [
+export const CATEGORIES = [
   "top",
   "bottoms",
   "dress",
