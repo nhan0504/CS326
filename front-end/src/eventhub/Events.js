@@ -29,4 +29,8 @@ export const Events = {
   UnStoreWardrobeItem: 'UnStoreWardrobeItem',
   UnStoreWardrobeItemSuccess: 'UnStoreWardrobeItemSuccess',
   UnStoreWardrobeItemFailure: 'UnStoreWardrobeItemFailure',
+
+  UpdateWardrobeItem: 'UpdateWardrobeItem',
+  UpdateWardrobeItemSuccess: 'UpdateWardrobeItemSuccess',
+  UpdateWardrobeItemFailure: 'UpdateWardrobeItemFailure',
 }
