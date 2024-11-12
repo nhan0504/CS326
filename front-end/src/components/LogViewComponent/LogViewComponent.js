@@ -25,7 +25,6 @@ export class LogViewComponent extends BaseComponent {
 
      // Create the outfit list
     const outfitListDiv = document.createElement("div");
-    console.log(outfits);
     outfits.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
 
     outfitListDiv.classList.add("outfit-list");
@@ -38,7 +37,6 @@ export class LogViewComponent extends BaseComponent {
     // Append outfit container to main container
     this.#container.appendChild(logContainer);
 
-    console.log(outfits);
     return this.#container;
   }
 
@@ -210,7 +208,6 @@ export class LogViewComponent extends BaseComponent {
       );
     }
 
-    console.log(filteredItems);
     outfitListDiv.innerHTML="";
     filteredItems.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
     return filteredItems;
@@ -218,7 +215,6 @@ export class LogViewComponent extends BaseComponent {
   createOutfitLog(outfitListDiv,outfit,msg)
   {
     const tempWardrobeItems=[];
-    console.log(outfit.created_at);
     if (outfit.length === 0) {
       alert("No clothes");
       return;
