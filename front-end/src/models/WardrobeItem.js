@@ -38,14 +38,6 @@ export class WardrobeItem {
     this.updated_at = new Date();
   }
 
-  favorite() {
-    this.is_favorite = true;
-  }
-
-  unfavorite() {
-    this.is_favorite = false;
-  }
-
   wear() {
     this.times_worn++;
     this.updated_at = new Date();
