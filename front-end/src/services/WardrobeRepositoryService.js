@@ -96,6 +96,40 @@ export class WardrobeRepositoryService extends Service {
     });
   }
 
+  async toggleFavorite(itemId) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const store = transaction.objectStore(this.storeName);
+      const request = store.get(itemId);
+
+      request.onsuccess = event => {
+        const item = event.target.result;
+
+        if (item) {
+          item.is_favorite = !item.is_favorite;
+
+          const updateRequest = store.put(item);
+
+          updateRequest.onsuccess = () => {
+            this.publish(Events.UpdateWardrobeItemSuccess, item);
+            resolve('Wardrobe item updated successfully');
+          };
+
+          updateRequest.onerror = () => {
+            this.publish(Events.UpdateWardrobeItemFailure, item);
+            reject('Error updating wardrobe item');
+          };
+        } else {
+          reject('Wardrobe item not found');
+        }
+      };
+
+      request.onerror = () => {
+        reject('Error retrieving wardrobe item');
+      };
+    });
+  }
+
   addSubscriptions() {
     this.subscribe(Events.StoreWardrobeItem, data => {
       this.storeWardrobeItem(data);

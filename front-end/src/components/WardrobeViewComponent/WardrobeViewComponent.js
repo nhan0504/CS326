@@ -24,7 +24,7 @@ export class WardrobeViewComponent extends BaseComponent {
       await this.#wardrobeService.initDB();
       this.#wardrobeItems =
         await this.#wardrobeService.loadWardrobeItemsFromDB();
-      renderWardrobeItems(this.#wardrobeItems);
+      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService);
     } catch (e) {
       console.error("Error:", e);
     }
@@ -69,7 +69,7 @@ export class WardrobeViewComponent extends BaseComponent {
 }
 
 // render the wardrobe items
-export function renderWardrobeItems(wardrobeItems) {
+export function renderWardrobeItems(wardrobeItems, wardrobeService) {
   // Get the wardrobe grid container
   const wardrobeGrid = document.getElementById("wardrobe-grid-container");
 
@@ -81,20 +81,27 @@ export function renderWardrobeItems(wardrobeItems) {
 
     // Add favorite button
     const heartIcon = document.createElement("span");
-    heartIcon.classList.add("favorite-icon");
+
+    if (item.is_favorite) {
+      heartIcon.classList.add("favorite-icon");
+    } else {
+      heartIcon.classList.add("non-favorite-icon");
+    }
+
     heartIcon.classList.add("wardrobe-favorite-btn");
     heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
     wardrobeItem.appendChild(heartIcon);
     // Make the favorite button red and update the item when clicked
     heartIcon.onclick = function () {
+      wardrobeService.toggleFavorite(item.id);
+      item.is_favorite = !item.is_favorite;
+      
       if (heartIcon.classList.contains("favorite-icon")) {
+        heartIcon.classList.add("non-favorite-icon");
         heartIcon.classList.remove("favorite-icon");
-        heartIcon.classList.add("favorite-icon-red");
-        item.favorite();
       } else {
-        heartIcon.classList.remove("favorite-icon-red");
         heartIcon.classList.add("favorite-icon");
-        item.unfavorite();
+        heartIcon.classList.remove("non-favorite-icon");
       }
     };
 

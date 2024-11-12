@@ -43,8 +43,8 @@
   left: 15px;
 }
 
-.favorite-icon-red {
-  color: red;
+.non-favorite-icon {
+  color: #bac6d2;
 }
 
 .wardrobe-delete-btn {
