@@ -38,8 +38,9 @@ export class LogViewComponent extends BaseComponent {
   }
 
   render() {
-    let outfits = getTestOutfits();
-    //let outfits = this.#outfitItems;
+    //let outfits = getTestOutfits();
+    //switch back to this if outfit does not load, investigating
+    let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
