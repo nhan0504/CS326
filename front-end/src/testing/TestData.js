@@ -1,6 +1,7 @@
 import { WardrobeItem } from "../models/WardrobeItem.js";
 import { OutfitEntry } from "../models/OutfitEntry.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
+import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
 
 export function getTestWardrobeItems() {
   const wardrobeItems = [];
@@ -155,9 +156,23 @@ export async function loadTestWardrobeItems() {
   try {
     await wardrobeService.initDB();
     await wardrobeService.clearWardrobeItems();
-
     items.forEach((item) => {
       wardrobeService.storeWardrobeItem(item.toJSON());
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+export async function loadOutfitItems() {
+  const wardrobeService = new OutfitRepositoryService();
+  const items = getTestOutfits();
+
+  try {
+    await wardrobeService.initDB();
+    await wardrobeService.clearOutfit();
+
+    items.forEach((item) => {
+      wardrobeService.storeOutfit(item.toJSON());
     });
   } catch (error) {
     console.error("Error:", error);

@@ -22,13 +22,13 @@
   padding: auto;
   margin-bottom: 5px;
 }
-.favorite-icon {
+.fave {
   color: #3f648a;
   position: absolute;
   right: 8%;
   font-size:50px;
 }
-.favorite-icon-red {
+.fave-red {
 color: red;
 position: absolute;
 font-size: 50px;

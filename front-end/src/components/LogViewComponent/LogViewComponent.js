@@ -1,18 +1,45 @@
 import { getTestOutfits,getTestWardrobeItems } from '../../testing/TestData.js';
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
+import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
 import { WardrobeItem } from "../../models/WardrobeItem.js";
 export class LogViewComponent extends BaseComponent {
   #container = null;
-
+  #wardrobeItems = [];
+  #wardrobeService = null;
+  #outfitItems = [];
+  #outfitService = null;
   constructor(LogViewData = {}) {
     super();
     this.LogViewData = LogViewData;
     this.loadCSS("LogViewComponent");
+    this.#wardrobeService = new WardrobeRepositoryService();
+    this.loadWardrobeItems();
+    this.#outfitItems = new OutfitRepositoryService();
+    this.loadOutfitItems();
+  }
+  async loadWardrobeItems() {
+    try {
+      await this.#wardrobeService.initDB();
+      this.#wardrobeItems =
+        await this.#wardrobeService.loadWardrobeItemsFromDB();
+    } catch (e) {
+      console.error("Error:", e);
+    }
+  }
+  async loadOutfitItems() {
+    try {
+      await this.#outfitService.initDB();
+      this.#outfitItems =
+        await this.#outfitService.loadOutfitFromDB();
+    } catch (e) {
+      console.error("Error:", e);
+    }
   }
 
   render() {
-    let outfits = getTestOutfits();
-
+    //let outfits = getTestOutfits();
+    let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
@@ -25,7 +52,8 @@ export class LogViewComponent extends BaseComponent {
 
      // Create the outfit list
     const outfitListDiv = document.createElement("div");
-    outfits.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
+    if (outfits.length>0)
+      outfits.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
 
     outfitListDiv.classList.add("outfit-list");
     
@@ -219,7 +247,7 @@ export class LogViewComponent extends BaseComponent {
       alert("No clothes");
       return;
     }
-    const items =  getTestWardrobeItems();
+    const items =  this.#wardrobeItems;
     outfit.wardrobe_item_ids.forEach((x=>items.forEach(i=>i.item_id===x? tempWardrobeItems.push(i):0)));
     if (outfit.length === 0) {
       alert("No clothes");
@@ -242,16 +270,16 @@ export class LogViewComponent extends BaseComponent {
     const heartItem = document.createElement("div");
     heartItem.classList.add("heartItem");
     const heartIcon = document.createElement("span");
-    heartIcon.classList.add("favorite-icon");
+    heartIcon.classList.add("fave");
       heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
       // Make the favorite button red and update the item when clicked
       heartIcon.onclick = function () {
-        if (heartIcon.classList.contains("favorite-icon")) {
-          heartIcon.classList.remove("favorite-icon");
-          heartIcon.classList.add("favorite-icon-red");
+        if (heartIcon.classList.contains("fave")) {
+          heartIcon.classList.remove("fave");
+          heartIcon.classList.add("fave-red");
         } else {
-          heartIcon.classList.remove("favorite-icon-red");
-          heartIcon.classList.add("favorite-icon");
+          heartIcon.classList.remove("fave-red");
+          heartIcon.classList.add("fave");
         }
       };
     // Create each wardrobe item and add it to the grid
@@ -272,7 +300,7 @@ export class LogViewComponent extends BaseComponent {
       logClothesItem.appendChild(name);
       logGrid.appendChild(logClothesItem);
     });
-    logItem.appendChild(date);
+    logInfo.appendChild(date);
     logInfo.appendChild(text);
     logInfo.appendChild(heartIcon);
     logInfo.appendChild(heartItem);
