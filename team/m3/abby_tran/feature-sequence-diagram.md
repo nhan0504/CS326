@@ -7,4 +7,32 @@ The Statistics on Clothing Worn feature provides users with a visual dashboard t
 - Download Option: Allows users to download an image of their wardrobe statistics so they can share with others
 
 # Sequence Diagram
-[![](https://mermaid.ink/img/pako:eNqdVMtu2zAQ_JUFgQApGvcDdMjBVoIacNDAbpCLL2tybROlSJVc2XWD_HuXkpwoTloY1UWCOLMz--KT0sGQKlSinw15TaXFTcRq6UGeGiNbbWv0DA-JImBq3x-cTvPZgpET3OOG5Md70ILizmrKyEeMJoYVzakOyXKIh_7wPascZ8LUG_pFphwvfQe5uOgsuYAmAW8JkqjbJLwk_E0fKWNG19efH6YFfKvJtx571P0rapoxvYVCxCxbdPa3ePWmlYB97xgsU5U6Wk_I3HLcx38xCpdHSjn-1OHL8UiwoxedEhlXmAh08J402-CBJI2Vs2lLZpDqTCxYvznHxS2x3p4A4TLncCz6NP-6jaH6q7E5cRM9oHP_VBROrutNZRluduQ5fZmd6CwarSkl2FsemDKS-CC70qba4WHYQb2VEUiD7mShCTrdOOSuLaZnLdVdSAz7II47k-pM3ozw_4gTERzVMll7wng261HAsI7dph1gdQAtoI0M_zBEjjAnmaLYF6GN8lqa0wWwnimi5r7GeRNM2Pt2aNeE0sgPVmHirP4hlsojsq-3glXDHPxpRsHvKHIb_Ov3u5kMbFUHLx3P8kEcgq3eblNWkwk_xs_MFtK5zOkkdaUqihVaIxfQU-YuleAqWqpCPg2tsXGca_MsUGw4LA5eq4JjQ1eqqWWKjveVKtboEj3_AeTTn4Y?type=png)](https://mermaid.live/edit#pako:eNqdVMtu2zAQ_JUFgQApGvcDdMjBVoIacNDAbpCLL2tybROlSJVc2XWD_HuXkpwoTloY1UWCOLMz--KT0sGQKlSinw15TaXFTcRq6UGeGiNbbWv0DA-JImBq3x-cTvPZgpET3OOG5Md70ILizmrKyEeMJoYVzakOyXKIh_7wPascZ8LUG_pFphwvfQe5uOgsuYAmAW8JkqjbJLwk_E0fKWNG19efH6YFfKvJtx571P0rapoxvYVCxCxbdPa3ePWmlYB97xgsU5U6Wk_I3HLcx38xCpdHSjn-1OHL8UiwoxedEhlXmAh08J402-CBJI2Vs2lLZpDqTCxYvznHxS2x3p4A4TLncCz6NP-6jaH6q7E5cRM9oHP_VBROrutNZRluduQ5fZmd6CwarSkl2FsemDKS-CC70qba4WHYQb2VEUiD7mShCTrdOOSuLaZnLdVdSAz7II47k-pM3ozw_4gTERzVMll7wng261HAsI7dph1gdQAtoI0M_zBEjjAnmaLYF6GN8lqa0wWwnimi5r7GeRNM2Pt2aNeE0sgPVmHirP4hlsojsq-3glXDHPxpRsHvKHIb_Ov3u5kMbFUHLx3P8kEcgq3eblNWkwk_xs_MFtK5zOkkdaUqihVaIxfQU-YuleAqWqpCPg2tsXGca_MsUGw4LA5eq4JjQ1eqqWWKjveVKtboEj3_AeTTn4Y)
+``` mermaid
+sequenceDiagram
+    participant User as User
+    participant UI as Stats Page UI
+    participant Service as WardrobeRepositoryService
+    participant DB as IndexedDB
+
+    %% User loads the statistics page
+    User->>+UI: Open Statistics Page
+    UI->>+Service: Initialize and load wardrobe items
+    Service->>+DB: Open IndexedDB (wardrobeDB)
+    DB-->>-Service: Database connection established
+
+    %% Loading wardrobe items
+    Service->>+DB: Fetch wardrobe items (loadWardrobeItemsFromDB)
+    DB-->>-Service: Return all wardrobe items
+    Service-->>UI: Emit Events.LoadWardrobeItemSuccess with wardrobe data
+
+    %% Display statistics charts
+    UI->>UI: Calculate and display "Most worn items"
+    UI->>UI: Calculate and display "Least worn items"
+    UI->>UI: Calculate and display "Cost-per-wear"
+    UI->>UI: Calculate and display "Wear frequency by category"
+    UI->UI: Render charts and statistics
+
+    %% User interacts with the download feature
+    User->>+UI: Click "Download charts" button
+    UI->>UI: Convert the HTML component into an image
+    UI->>User: Download the image with stats
