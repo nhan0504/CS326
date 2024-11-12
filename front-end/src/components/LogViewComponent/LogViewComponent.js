@@ -38,8 +38,8 @@ export class LogViewComponent extends BaseComponent {
   }
 
   render() {
-    //let outfits = getTestOutfits();
-    let outfits = this.#outfitItems;
+    let outfits = getTestOutfits();
+    //let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
@@ -52,7 +52,7 @@ export class LogViewComponent extends BaseComponent {
 
      // Create the outfit list
     const outfitListDiv = document.createElement("div");
-    if (outfits.length>0)
+    if (outfits.length>0 && this.#wardrobeItems>0)
       outfits.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
 
     outfitListDiv.classList.add("outfit-list");
