@@ -10,7 +10,7 @@
 ## Feature Name: Clothes Inventory Add Form
 **Description:** A form that allows users to enter a new item into their wardrobe. In the form, the user uploads an image and enters details such as name, cost, size, category, etc. This creates a new wardrobe entry that is saved in IndexedDB, and the form resets for the next entry.
 
-**Point Value:** 2
+**Point Value:** 3
 
 **Team Member:** Ashley McNamara
 
