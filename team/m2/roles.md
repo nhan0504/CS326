@@ -52,6 +52,9 @@
   1. [Commit 1](https://github.com/nhan0504/CS326/commit/85534ba1dc992358ae6ff457300a44ac80cfbb02): Reviewed and edited the `problem.md` file to ensure clarity and alignment with the project requirements.
   2. [Commit 2](https://github.com/nhan0504/CS326/commit/1a4b437f153d5906a13a9f49570929917df82956): Drafted data.md by adding six data types, writing the data relationships, and data sources.
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/40f17e71fd9af1e581eec09fe8f057289f5a126b): Added two new features to features.md.
+  4. [Commit 4](https://github.com/nhan0504/CS326/pull/18/commits/fef740cdedd25b41165e0e4cc9ad45148ef29e03): Implemented the display of the entire wardrobe.
+  5. [Commit 5](https://github.com/nhan0504/CS326/commit/9b1d5e8e65eb0c8d38826f2aaab28567eb4c21ca#diff-d51acda97ae090fb3170e1a8a4f8642a58b73c2d76e5c840e397c5ecf7c6446e): Implemented the display of the add wardrobe item form.
+  6. [Commit 6](https://github.com/nhan0504/CS326/commit/57295146a82c7eaa2bb12f1e7ca787ef6898a876#diff-3e7232ca895987f2da1629aebba926d04f7bc027e5a74848d9c5f27d774d5853): Connected the wardrobe display and add wardrobe item form to indexedDB.
 
 ## Liam Gates - Documentation Lead
 
