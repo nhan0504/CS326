@@ -1,0 +1,140 @@
+/* Main container */
+.log-add-item {
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  /* Title */
+  .log-add-item h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  /* Current outfit items container */
+  .current-outfit-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Outfit item */
+  .outfit-item {
+    position: relative;
+    width: 100px;
+    text-align: center;
+  }
+  
+  /* Outfit item image */
+  .outfit-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Outfit item name */
+  .outfit-item p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Delete item button */
+  .delete-item-button {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Add item button */
+  .add-item-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Modal overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Items list in modal */
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Wardrobe item in modal */
+  .wardrobe-item {
+    width: 100px;
+    text-align: center;
+  }
+  
+  /* Wardrobe item image */
+  .wardrobe-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Wardrobe item name */
+  .wardrobe-item p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Add item button in modal */
+  .wardrobe-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #28a745; /* Bootstrap success color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
