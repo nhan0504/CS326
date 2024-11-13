@@ -52,5 +52,10 @@
 
 ### November 12, 2024
 - **Task**: Add Error Messaging
-- **Details**: Added error messaging to the wardrobe add item form if the form is not properly filled out. Created and merged a new branch called "  error-messaging-add-wardrobe-item-form"
+- **Details**: Added error messaging to the wardrobe add item form if the form is not properly filled out. Created and merged a new branch called "error-messaging-add-wardrobe-item-form"
 - **Link to Commit**: [Error Messaging](https://github.com/nhan0504/CS326/pull/43/commits/41e8d14e990a9a9389ac7466dd5ce56a47e343a3)
+
+### November 13, 2024
+- **Task**: Sequence Diagram
+- **Details**: Created a sequence diagram for adding a new wardrobe item.
+- **Link to Commit**: [Sequence Diagram](https://github.com/nhan0504/CS326/pull/48/commits/c84cb7c20635e387f3d3bf5e1f58eee0d60d26f5)
