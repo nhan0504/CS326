@@ -5,8 +5,8 @@ My feature displays lists of the users outfit history, including the clothing it
 ```mermaid
 sequenceDiagram
     actor User as User
-    participant SuggestionsPageUI as Suggestions Page UI
-    participant WardrobeRepositoryService as Wardrobe Repository Service
+    participant LogPageUI as Log Page UI
+    participant RepositoryService as Repository Service
     participant IndexedDB as IndexedDB
 
     User ->> LogPageUI: Open Log page
