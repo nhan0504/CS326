@@ -15,7 +15,7 @@ export class LogViewComponent extends BaseComponent {
     this.loadCSS("LogViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobeItems();
-    this.#outfitItems = new OutfitRepositoryService();
+    this.#outfitService = new OutfitRepositoryService();
     this.loadOutfitItems();
   }
   async loadWardrobeItems() {
@@ -32,6 +32,7 @@ export class LogViewComponent extends BaseComponent {
       await this.#outfitService.initDB();
       this.#outfitItems =
         await this.#outfitService.loadOutfitFromDB();
+      this.createOutfitLog(this.#outfitItems," ");
     } catch (e) {
       console.error("Error:", e);
     }
@@ -53,13 +54,14 @@ export class LogViewComponent extends BaseComponent {
 
      // Create the outfit list
     const outfitListDiv = document.createElement("div");
+    outfitListDiv.id="outfitList";
     if (outfits.length>0 && this.#wardrobeItems>0)
-      outfits.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
+      outfits.forEach(e=> this.createOutfitLog(e," "));
 
     outfitListDiv.classList.add("outfit-list");
     
     // Create the filter bar
-    const filterBar = this.createFilterBar(outfitListDiv,outfits);
+    const filterBar = this.createFilterBar(outfits);
     logContainer.appendChild(filterBar);
     logContainer.appendChild(outfitListDiv);
     
@@ -69,7 +71,7 @@ export class LogViewComponent extends BaseComponent {
     return this.#container;
   }
 
-  createFilterBar(outfitListDiv,outfits) {
+  createFilterBar(outfits) {
     const filterBar = document.createElement("div");
     filterBar.classList.add("log-filter-bar");
 
@@ -173,7 +175,7 @@ export class LogViewComponent extends BaseComponent {
     applyFiltersButton.textContent = "Apply Filters";
     applyFiltersButton.classList.add("log-apply-filters-button");
     applyFiltersButton.addEventListener("click", () => {
-      this.applyFilters(outfitListDiv,outfits);
+      this.applyFilters(outfits);
     });
 
     // Wrap the button in a div
@@ -186,7 +188,7 @@ export class LogViewComponent extends BaseComponent {
     return filterBar;
   }
 
-  applyFilters(outfitListDiv,outfits) {
+  applyFilters(outfits) {
     const selectedSeasons = Array.from(
       document.querySelectorAll("input[name='log-seasons']:checked")
     ).map((cb) => cb.value);
@@ -236,13 +238,14 @@ export class LogViewComponent extends BaseComponent {
         item.note.toLowerCase().includes(searchTerm)
       );
     }
-
+    const outfitListDiv = document.getElementById("outfitList");
     outfitListDiv.innerHTML="";
-    filteredItems.forEach(e=> this.createOutfitLog(outfitListDiv,e," "));
+    filteredItems.forEach(e=> this.createOutfitLog(e," "));
     return filteredItems;
   }
-  createOutfitLog(outfitListDiv,outfit,msg)
+  createOutfitLog(outfit,msg)
   {
+    const outfitListDiv = document.getElementById("outfitList");
     const tempWardrobeItems=[];
     if (outfit.length === 0) {
       alert("No clothes");

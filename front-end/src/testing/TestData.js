@@ -164,15 +164,15 @@ export async function loadTestWardrobeItems() {
   }
 }
 export async function loadOutfitItems() {
-  const wardrobeService = new OutfitRepositoryService();
+  const outfitService = new OutfitRepositoryService();
   const items = getTestOutfits();
 
   try {
-    await wardrobeService.initDB();
-    await wardrobeService.clearOutfit();
+    await outfitService.initDB();
+    await outfitService.clearOutfit();
 
     items.forEach((item) => {
-      wardrobeService.storeOutfit(item.toJSON());
+      outfitService.storeOutfit(item.toJSON());
     });
   } catch (error) {
     console.error("Error:", error);

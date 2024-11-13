@@ -9,14 +9,13 @@
   overflow-x: auto;
   border-radius: 10px;
 }
-.logItem{
+.logItem {
   background-color: #f1f6fc;
   padding: 10px;
   margin-top: 5px;
   border-radius: 10px;
 }
-.logInfo
-{
+.logInfo {
   width: 90%;
   display: flex;
   padding: auto;
