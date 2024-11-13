@@ -223,7 +223,7 @@ export class WardrobeAddItemForm extends BaseComponent {
       const wardrobeItem = new WardrobeItem(params);
 
       // Display the new item without rerendering everything
-      renderWardrobeItems([wardrobeItem]);
+      renderWardrobeItems([wardrobeItem], this.#wardrobeService);
       displayedWardrobeItems.push(wardrobeItem);
 
       // Store the item in indexdb

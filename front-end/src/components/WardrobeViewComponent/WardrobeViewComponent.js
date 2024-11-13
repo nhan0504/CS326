@@ -93,7 +93,7 @@ export function renderWardrobeItems(wardrobeItems, wardrobeService) {
     wardrobeItem.appendChild(heartIcon);
     // Make the favorite button red and update the item when clicked
     heartIcon.onclick = function () {
-      wardrobeService.toggleFavorite(item.id);
+      wardrobeService.toggleFavorite(item.item_id);
       item.is_favorite = !item.is_favorite;
       
       if (heartIcon.classList.contains("favorite-icon")) {

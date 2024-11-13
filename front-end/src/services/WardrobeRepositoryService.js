@@ -25,8 +25,7 @@ export class WardrobeRepositoryService extends Service {
       request.onupgradeneeded = event => {
         const db = event.target.result;
         db.createObjectStore(this.storeName, {
-          keyPath: 'id',
-          autoIncrement: true,
+          keyPath: 'item_id',
         });
       };
 
