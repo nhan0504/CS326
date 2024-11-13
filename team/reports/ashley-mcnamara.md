@@ -47,5 +47,10 @@
 
 ### November 10, 2024
 - **Task**: Connect Wardobe Add Item Form to IndexDB
-- **Details**: Connected the wardrobe add item form to indexdb and made the display update when adding an item. Created a new branch called "add-wardrobe-item-indexdb"
+- **Details**: Connected the wardrobe add item form to indexdb and made the display update when adding an item. Created and merged a new branch called "add-wardrobe-item-indexdb"
 - **Link to Commit**: [IndexDB for Wardrobe Add Item](https://github.com/nhan0504/CS326/commit/57295146a82c7eaa2bb12f1e7ca787ef6898a876)
+
+### November 12, 2024
+- **Task**: Add Error Messaging
+- **Details**: Added error messaging to the wardrobe add item form if the form is not properly filled out. Created and merged a new branch called "  error-messaging-add-wardrobe-item-form"
+- **Link to Commit**: [Error Messaging](https://github.com/nhan0504/CS326/pull/43/commits/41e8d14e990a9a9389ac7466dd5ce56a47e343a3)
