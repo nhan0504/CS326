@@ -45,7 +45,7 @@ export class OutfitRepositoryService extends Service {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readwrite');
       const store = transaction.objectStore(this.storeName);
-      const request = store.add(OutfitData);
+      const request = store.put(OutfitData); // Use put() to add or update
 
       request.onsuccess = () => {
         this.publish(Events.StoreOutfitSuccess, OutfitData);

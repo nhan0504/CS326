@@ -2,9 +2,13 @@ import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { getTestWardrobeItems } from "../../testing/TestData.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
+import { LogAddItem } from '../LogAddItem/LogAddItem.js'; // Import LogAddItem
+import { LogDeleteItem } from '../LogDeleteItem/LogDeleteItem.js'; // Import LogDeleteItem
+
 export class LogViewComponent extends BaseComponent {
   #container = null;
   #wardrobeItems = [];
+  #logItems = []; // Array to keep track of log items
   constructor(LogViewData = {}) {
     super();
     this.LogViewData = LogViewData;
@@ -17,7 +21,13 @@ export class LogViewComponent extends BaseComponent {
     this.#container.classList.add('view');
     this.#container.id = 'logView';
     this.#container.style.display = "none";
+ 
+    // Integrate LogAddItem component
+    const logAddItemComponent = new LogAddItem();
+    const logAddItemElement = logAddItemComponent.render();
+    this.#container.appendChild(logAddItemElement);
 
+    // Existing "Add Clothes" button and functionality
     const addButton = document.createElement('button');
     addButton.textContent = 'Add Clothes';
     let tempWardrobeItems = getTestWardrobeItems();
@@ -25,6 +35,7 @@ export class LogViewComponent extends BaseComponent {
       this.addClothes(getTestWardrobeItems(),"notes");
       //add log, apparently we are just adding all items till add function is created
     });
+
     // Create the log container
     const logContainer = document.createElement("div");
     logContainer.classList.add("log-container");
@@ -43,6 +54,7 @@ export class LogViewComponent extends BaseComponent {
     this.addClothes(tempWardrobeItems,"test items");
     return this.#container;
   }
+
   createOutfitList()
   {
     const logItem= document.createElement("div");
@@ -53,6 +65,7 @@ export class LogViewComponent extends BaseComponent {
     logItem.appendChild(text);
     return logItem;
   }
+
   addClothes(tempWardrobeItems,msg)
   {
     if (tempWardrobeItems.length === 0) {
@@ -91,6 +104,7 @@ export class LogViewComponent extends BaseComponent {
           item.unfavorite();
         }
       };
+
     // Create each wardrobe item and add it to the grid
     tempWardrobeItems.forEach((item) => {
       // Crate the item container
@@ -109,6 +123,15 @@ export class LogViewComponent extends BaseComponent {
       logClothesItem.appendChild(name);
       logGrid.appendChild(logClothesItem);
     });
+
+    // Create delete button using LogDeleteItem
+    const deleteButtonComponent = new LogDeleteItem(logItem, (logItemToDelete) => {
+      // Remove the log item from the container
+      this.#container.removeChild(logItemToDelete);
+    });
+    const deleteButtonElement = deleteButtonComponent.render();
+    logInfo.ap
+
     logItem.appendChild(date);
     logInfo.appendChild(text);
     logInfo.appendChild(heartIcon);
@@ -116,5 +139,9 @@ export class LogViewComponent extends BaseComponent {
     logItem.appendChild(logInfo);
     logItem.appendChild(logGrid);
     this.#container.appendChild(logItem);
+
+    // Add the log item to the log items array
+    this.#logItems.push(logItem);
+
   }
 }
