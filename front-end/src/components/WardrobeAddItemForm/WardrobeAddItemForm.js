@@ -52,13 +52,6 @@ export class WardrobeAddItemForm extends BaseComponent {
     title.classList.add("add-item-title");
     form.appendChild(title);
 
-    // Add Error Message
-    const errorMessage = document.createElement("p");
-    errorMessage.textContent = "";
-    errorMessage.id = "error-message";
-    errorMessage.classList.add("error-message");
-    form.appendChild(errorMessage);
-
     // Upload image field
     const imageTextLabel = document.createElement("label");
     imageTextLabel.setAttribute("for", "Image");
@@ -158,6 +151,13 @@ export class WardrobeAddItemForm extends BaseComponent {
       select.required = true;
       form.appendChild(select);
     });
+
+    // Add Error Message
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "";
+    errorMessage.id = "error-message";
+    errorMessage.classList.add("error-message");
+    form.appendChild(errorMessage);
 
     // Submit button
     const submitButton = document.createElement("button");
