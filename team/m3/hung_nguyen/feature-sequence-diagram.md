@@ -14,7 +14,7 @@ sequenceDiagram
     RepositoryService ->> IndexedDB: Open IndexedDB
     IndexedDB -->> RepositoryService: Database connection established
     RepositoryService ->> IndexedDB: Fetch wardrobe items
-    IndexedDB -->> RepositoryService: Return all outfits
+    IndexedDB -->> RepositoryService: Return all items
     LogPageUI ->> RepositoryService: Fetch all outfits
     RepositoryService ->> IndexedDB: Open IndexedDB
     IndexedDB -->> RepositoryService: Database connection established
