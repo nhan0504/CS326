@@ -7,6 +7,7 @@ The add wardrobe item feature is a form that allows a user to enter a new item i
 ```mermaid
 sequenceDiagram
     actor User as User
+    participant WardrobeDisplayUI as Wardrobe Display UI
     participant WardrobeAddFormUI as Wardrobe Add Item Form UI
     participant WardrobeRepositoryService as Wardrobe Repository Service
     participant IndexedDB as IndexedDB
@@ -19,6 +20,7 @@ sequenceDiagram
     WardrobeRepositoryService ->> IndexedDB: Open IndexedDB
     IndexedDB -->> WardrobeRepositoryService: Database connection established
     WardrobeRepositoryService ->> IndexedDB: Add wardrobe item with form data
-    WardrobeRepositoryService -->> WardrobeAddFormUI: Emit Events.StoreWardrobeItemSuccess and display new wardrobe item
-    WardrobeAddFormUI ->> WardrobeAddFormUI: Reset and close form
+    WardrobeRepositoryService -->> WardrobeAddFormUI: Emit Events.StoreWardrobeItemSuccess
+    WardrobeAddFormUI -->> WardrobeDisplayUI: Display new wardobe item
+    WardrobeAddFormUI -->> WardrobeDisplayUI: Reset and close form
 ```
