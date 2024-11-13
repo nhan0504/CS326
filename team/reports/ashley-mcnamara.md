@@ -58,4 +58,4 @@
 ### November 13, 2024
 - **Task**: Sequence Diagram
 - **Details**: Created a sequence diagram for adding a new wardrobe item.
-- **Link to Commit**: [Sequence Diagram](https://github.com/nhan0504/CS326/pull/48/commits/c84cb7c20635e387f3d3bf5e1f58eee0d60d26f5)
+- **Link to Commit**: [Sequence Diagram](https://github.com/nhan0504/CS326/pull/48/commits/c84cb7c20635e387f3d3bf5e1f58eee0d60d26f5), [Sequence Diagram Updates](https://github.com/nhan0504/CS326/commit/9e3df597390fdd61f20fef70b78d7ca15a809554)
