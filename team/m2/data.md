@@ -15,6 +15,8 @@
   * `occasion` (string): The occasion of the item (e.g. formal, casual).
   * `seasons` (string[]): Array of the seasons the item is worn in (e.g. summer, fall).
   * `brand` (string): The brand of the item.
+  * `is_favorite` (boolean): If the item is a favorite item.
+  * `times_worn` (integer): The number of times the item has been worn.
   * `created_at` (timestamp): The last time the item was updated.
   * `updated_at` (timestamp): The date and time when the item was created.
 * **Data source:** User-input data via the add item form.
@@ -29,18 +31,20 @@
   * `password` (string): The hashed version of the user's password.
   * `preferences` (string): The user's style preferences.
   * `created_at` (timestamp): The date and time when the account was created.
-  * `udpated_at` (timestamp): The last time the account was updated.
+  * `updated_at` (timestamp): The last time the account was updated.
 * **Data source:** User-input data when registering or updating their profile.
 
 ### 3. Outfit Entry
 * **Description:** Contains information about a logged outfit. 
 * **Attributes:**
-  * `outfit_id` (string): A unique indentifier for each outfit. 
+  * `outfit_id` (string): A unique identifier for each outfit. 
   * `user_id` (string): A unique identifier for each user.
-  * `items` (string array): A list of the item_id's of the items in the outfit.
+  * `wardrobe_item_ids` (string array): A list of the item_id's of the items in the outfit.
   * `note` (string): A note for the outfit.
+  * `occasion` (string): The type of occasion the outfit was worn for.
+  * `seasons` (string): The season the outfit was worn in.
   * `created_at` (timestamp): The date and time when the outfit was created.
-  * `udpated_at` (timestamp): The last time the outfit was updated.
+  * `updated_at` (timestamp): The last time the outfit was updated.
 * **Data source:** User-input data via the daily outfit selector.
 
 ### 4. Statistics
