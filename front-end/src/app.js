@@ -1,5 +1,4 @@
 import { NavBarComponent } from './components/NavBarComponent/NavBarComponent.js';
-import { HomeViewComponent } from './components/HomeViewComponent/HomeViewComponent.js';
 import { LogViewComponent } from './components/LogViewComponent/LogViewComponent.js';
 import { WardrobeViewComponent } from './components/WardrobeViewComponent/WardrobeViewComponent.js';
 import { StatsViewComponent } from './components/StatsViewComponent/StatsViewComponent.js';
@@ -14,14 +13,12 @@ const navBar = new NavBarComponent();
 top.appendChild(navBar.render());
 
 // Create views
-const homeView = new HomeViewComponent();
 const logView = new LogViewComponent();
 const wardrobeView = new WardrobeViewComponent();
 const statsView = new StatsViewComponent();
 const suggestionsView = new SuggestionsViewComponent();
 const loginView = new LoginViewComponent();
 
-main.appendChild(homeView.render());
 main.appendChild(logView.render());
 main.appendChild(wardrobeView.render());
 main.appendChild(statsView.render());
@@ -35,13 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(viewId).style.display = "block";
   };
 
-  document.getElementById("logo").addEventListener("click", () => navigate(`homeView`));
+  document.getElementById("logo").addEventListener("click", () => navigate(`logView`));
 
-  const buttons = ["home", "log", "wardrobe", "stats", "suggestions", "login"];
+  const buttons = ["log", "wardrobe", "stats", "suggestions", "login"];
   buttons.forEach(id => {
     document.getElementById(id).addEventListener("click", () => navigate(`${id}View`));
   });
 
   // Initialize with the home view
-  navigate("homeView");
+  navigate("logView");
 });

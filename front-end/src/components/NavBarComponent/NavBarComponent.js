@@ -31,7 +31,6 @@ export class NavBarComponent extends BaseComponent {
     buttonContainer.classList.add('button-container');
 
     const buttons = [
-      { id: 'home', text: 'Home' },
       { id: 'log', text: 'Log' },
       { id: 'wardrobe', text: 'Wardrobe' },
       { id: 'stats', text: 'Stats' },
