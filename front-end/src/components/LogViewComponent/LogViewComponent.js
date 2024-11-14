@@ -254,7 +254,12 @@ export class LogViewComponent extends BaseComponent {
 
     const text = document.createElement('p');
     const date = document.createElement('p');
-    date.textContent = outfit.created_at.toString().slice(0,10);
+    const datearr =outfit.created_at.toString().slice(0,10).split("-").reverse();
+    let tmp =datearr[0];
+    datearr[0]=datearr[1];
+    datearr[1]=tmp;
+    date.textContent =datearr.join("-");
+    //format : currently mm-dd-yyyy
     text.textContent = msg;
     const logGrid = document.createElement("div");
     logGrid.classList.add("logGrid");
