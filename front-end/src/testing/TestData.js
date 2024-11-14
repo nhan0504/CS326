@@ -113,10 +113,10 @@ export function getTestOutfits() {
       "user1",
       ["item1", "item2"],
       "First outfit!",
-      "01/11/2024",
-      "01/11/2024",
       "casual",
-      ["Winter"]
+      ["Winter"],
+      new Date("2023-12-25"),
+      new Date("2023-12-25")
     )
   );
 
@@ -126,10 +126,10 @@ export function getTestOutfits() {
       "user1",
       ["item4", "item5"],
       "Second outfit!",
-      "01/11/2024",
-      "01/11/2024",
       "formal",
-      ["Summer"]
+      ["Summer"],
+      new Date("2015-06-25"),
+      new Date("2015-06-25")
     )
   );
 
@@ -139,10 +139,10 @@ export function getTestOutfits() {
       "user1",
       ["item1", "item3"],
       "Third outfit!",
-      "01/11/2024",
-      "01/11/2024",
       "lounge",
-      ["Fall"]
+      ["Fall"],
+      new Date("2019-09-25"),
+      new Date("2019-09-25")
     )
   );
 

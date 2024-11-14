@@ -1,4 +1,4 @@
-import { getTestOutfits,getTestWardrobeItems } from '../../testing/TestData.js';
+import { loadOutfitItems, getTestOutfits,getTestWardrobeItems } from '../../testing/TestData.js';
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
@@ -14,33 +14,26 @@ export class LogViewComponent extends BaseComponent {
     this.LogViewData = LogViewData;
     this.loadCSS("LogViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
-    this.loadWardrobeItems();
     this.#outfitService = new OutfitRepositoryService();
     this.loadOutfitItems();
-  }
-  async loadWardrobeItems() {
-    try {
-      await this.#wardrobeService.initDB();
-      this.#wardrobeItems =
-        await this.#wardrobeService.loadWardrobeItemsFromDB();
-    } catch (e) {
-      console.error("Error:", e);
-    }
   }
   async loadOutfitItems() {
     try {
       await this.#outfitService.initDB();
       this.#outfitItems =
         await this.#outfitService.loadOutfitFromDB();
-      this.createOutfitLog(this.#outfitItems," ");
+      await this.#wardrobeService.initDB();
+      this.#wardrobeItems =
+          await this.#wardrobeService.loadWardrobeItemsFromDB();
+      this.#outfitItems.forEach(e=> this.createOutfitLog(e," "));
     } catch (e) {
       console.error("Error:", e);
     }
   }
 
   render() {
-    //let outfits = getTestOutfits();
-    //switch back to this if outfit does not load, investigating
+    //loadOutfitItems();
+    //uncomment to load outfit
     let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
@@ -61,7 +54,7 @@ export class LogViewComponent extends BaseComponent {
     outfitListDiv.classList.add("outfit-list");
     
     // Create the filter bar
-    const filterBar = this.createFilterBar(outfits);
+    const filterBar = this.createFilterBar(this.#outfitItems);
     logContainer.appendChild(filterBar);
     logContainer.appendChild(outfitListDiv);
     
@@ -164,7 +157,6 @@ export class LogViewComponent extends BaseComponent {
     const endDateInput = document.createElement("input");
     endDateInput.type = "date";
     endDateInput.id = "log-end-date";
-
     dateRangeDiv.appendChild(dateRangeLabel);
     dateRangeDiv.appendChild(startDateInput);
     dateRangeDiv.appendChild(endDateInput);
@@ -175,7 +167,7 @@ export class LogViewComponent extends BaseComponent {
     applyFiltersButton.textContent = "Apply Filters";
     applyFiltersButton.classList.add("log-apply-filters-button");
     applyFiltersButton.addEventListener("click", () => {
-      this.applyFilters(outfits);
+      this.applyFilters(this.#outfitItems);
     });
 
     // Wrap the button in a div
@@ -246,17 +238,13 @@ export class LogViewComponent extends BaseComponent {
   createOutfitLog(outfit,msg)
   {
     const outfitListDiv = document.getElementById("outfitList");
-    const tempWardrobeItems=[];
+    let tempWardrobeItems=[];
     if (outfit.length === 0) {
       alert("No clothes");
       return;
     }
     const items =  this.#wardrobeItems;
     outfit.wardrobe_item_ids.forEach((x=>items.forEach(i=>i.item_id===x? tempWardrobeItems.push(i):0)));
-    if (outfit.length === 0) {
-      alert("No clothes");
-      return;
-    }
     const logItem= document.createElement("div");
     logItem.classList.add('logItem');
     logItem.id = 'logItem';
@@ -266,7 +254,7 @@ export class LogViewComponent extends BaseComponent {
 
     const text = document.createElement('p');
     const date = document.createElement('p');
-    date.textContent = outfit.created_at;
+    date.textContent = outfit.created_at.toString().slice(0,10);
     text.textContent = msg;
     const logGrid = document.createElement("div");
     logGrid.classList.add("logGrid");
