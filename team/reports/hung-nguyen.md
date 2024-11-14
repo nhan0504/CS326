@@ -40,6 +40,6 @@
 
 ### November 13, 2024
 - **Task**:
-- Review Pull request #47 LogAddItem and LogDeleteItem (js and css)
-- **Details**: Review pull request #47 LogAddItem and LogDeleteItem file (with a minor addition to the LogViewComponent to add my feature as well).
-- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/47)
+- Review Pull request #48 Created sequence diagram for add wardrobe item
+- **Details**: Review Ashley's pull request #48 Created sequence diagram for add wardrobe item
+- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/48)
