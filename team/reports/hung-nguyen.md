@@ -24,4 +24,3 @@
 - **Task**:
 - Merge log branch to main for Log View Component with a new branch(mergelogbranch)
 - **Details**: See #42
-- **Link to Commit**:((https://github.com/nhan0504/CS326/pull/42))
