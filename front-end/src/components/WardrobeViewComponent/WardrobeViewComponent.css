@@ -60,3 +60,18 @@
   font-size: 35px;
   color: #3f648a;
 }
+
+.wardrobe-filter-bar {
+  flex: 1;
+  background-color: #f1f6fc;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.1);
+}
+
+.search-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
