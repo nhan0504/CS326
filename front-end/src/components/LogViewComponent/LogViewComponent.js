@@ -1,18 +1,40 @@
-import { getTestOutfits } from '../../testing/TestData.js';
+import { loadOutfitItems, getTestOutfits,getTestWardrobeItems } from '../../testing/TestData.js';
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-
+import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
+import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
+import { WardrobeItem } from "../../models/WardrobeItem.js";
 export class LogViewComponent extends BaseComponent {
   #container = null;
-
+  #wardrobeItems = [];
+  #wardrobeService = null;
+  #outfitItems = [];
+  #outfitService = null;
   constructor(LogViewData = {}) {
     super();
     this.LogViewData = LogViewData;
     this.loadCSS("LogViewComponent");
+    this.#wardrobeService = new WardrobeRepositoryService();
+    this.#outfitService = new OutfitRepositoryService();
+    this.loadOutfitItems();
+  }
+  async loadOutfitItems() {
+    try {
+      await this.#outfitService.initDB();
+      this.#outfitItems =
+        await this.#outfitService.loadOutfitFromDB();
+      await this.#wardrobeService.initDB();
+      this.#wardrobeItems =
+          await this.#wardrobeService.loadWardrobeItemsFromDB();
+      this.#outfitItems.forEach(e=> this.createOutfitLog(e," "));
+    } catch (e) {
+      console.error("Error:", e);
+    }
   }
 
   render() {
-    let outfits = getTestOutfits();
-
+    //loadOutfitItems();
+    //uncomment to load outfit
+    let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
@@ -23,19 +45,22 @@ export class LogViewComponent extends BaseComponent {
     const logContainer = document.createElement("div");
     logContainer.classList.add("log-container");
 
-    // Create the filter bar
-    const filterBar = this.createFilterBar(outfits);
-    logContainer.appendChild(filterBar);
-
-    // Create the outfit list
+     // Create the outfit list
     const outfitListDiv = document.createElement("div");
+    outfitListDiv.id="outfitList";
+    if (outfits.length>0 && this.#wardrobeItems>0)
+      outfits.forEach(e=> this.createOutfitLog(e," "));
+
     outfitListDiv.classList.add("outfit-list");
+    
+    // Create the filter bar
+    const filterBar = this.createFilterBar(this.#outfitItems);
+    logContainer.appendChild(filterBar);
     logContainer.appendChild(outfitListDiv);
     
     // Append outfit container to main container
     this.#container.appendChild(logContainer);
 
-    console.log(outfits);
     return this.#container;
   }
 
@@ -132,7 +157,6 @@ export class LogViewComponent extends BaseComponent {
     const endDateInput = document.createElement("input");
     endDateInput.type = "date";
     endDateInput.id = "log-end-date";
-
     dateRangeDiv.appendChild(dateRangeLabel);
     dateRangeDiv.appendChild(startDateInput);
     dateRangeDiv.appendChild(endDateInput);
@@ -143,7 +167,7 @@ export class LogViewComponent extends BaseComponent {
     applyFiltersButton.textContent = "Apply Filters";
     applyFiltersButton.classList.add("log-apply-filters-button");
     applyFiltersButton.addEventListener("click", () => {
-      this.applyFilters(outfits);
+      this.applyFilters(this.#outfitItems);
     });
 
     // Wrap the button in a div
@@ -206,10 +230,79 @@ export class LogViewComponent extends BaseComponent {
         item.note.toLowerCase().includes(searchTerm)
       );
     }
-
-    console.log(filteredItems);
-    
+    const outfitListDiv = document.getElementById("outfitList");
+    outfitListDiv.innerHTML="";
+    filteredItems.forEach(e=> this.createOutfitLog(e," "));
     return filteredItems;
   }
+  createOutfitLog(outfit,msg)
+  {
+    const outfitListDiv = document.getElementById("outfitList");
+    let tempWardrobeItems=[];
+    if (outfit.length === 0) {
+      alert("No clothes");
+      return;
+    }
+    const items =  this.#wardrobeItems;
+    outfit.wardrobe_item_ids.forEach((x=>items.forEach(i=>i.item_id===x? tempWardrobeItems.push(i):0)));
+    const logItem= document.createElement("div");
+    logItem.classList.add('logItem');
+    logItem.id = 'logItem';
 
+    const logInfo= document.createElement("div");
+    logInfo.classList.add('logInfo');
+
+    const text = document.createElement('p');
+    const date = document.createElement('p');
+    const datearr =outfit.created_at.toString().slice(0,10).split("-").reverse();
+    let tmp =datearr[0];
+    datearr[0]=datearr[1];
+    datearr[1]=tmp;
+    date.textContent =datearr.join("-");
+    //format : currently mm-dd-yyyy
+    text.textContent = msg;
+    const logGrid = document.createElement("div");
+    logGrid.classList.add("logGrid");
+    
+    const heartItem = document.createElement("div");
+    heartItem.classList.add("heartItem");
+    const heartIcon = document.createElement("span");
+    heartIcon.classList.add("fave");
+      heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
+      // Make the favorite button red and update the item when clicked
+      heartIcon.onclick = function () {
+        if (heartIcon.classList.contains("fave")) {
+          heartIcon.classList.remove("fave");
+          heartIcon.classList.add("fave-red");
+        } else {
+          heartIcon.classList.remove("fave-red");
+          heartIcon.classList.add("fave");
+        }
+      };
+    // Create each wardrobe item and add it to the grid
+    tempWardrobeItems.forEach((item) => {
+      // Crate the item container
+      const logClothesItem = document.createElement("div");
+      logClothesItem.classList.add("logClothesItem");
+      // Add item image
+      const image = document.createElement("img");
+      image.classList.add("logClothesItemImage");
+      image.src = item.image;
+      image.alt = item.name;
+      logClothesItem.appendChild(image);
+      // Add item name
+      const name = document.createElement("p");
+      name.textContent = item.name;
+      // Add item to the grid
+      logClothesItem.appendChild(name);
+      logGrid.appendChild(logClothesItem);
+    });
+    logInfo.appendChild(date);
+    logInfo.appendChild(text);
+    logInfo.appendChild(heartIcon);
+    logInfo.appendChild(heartItem);
+    logItem.appendChild(logInfo);
+    logItem.appendChild(logGrid);
+    outfitListDiv.appendChild(logItem);
+  }
 }

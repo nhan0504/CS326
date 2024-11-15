@@ -1,8 +1,45 @@
 ## Contribution Log for Anisha Prathi
+### November 14, 2024
+
+- **Task**: Created sequence diagrams
+- **Details**: Created a sequence diagram for the log page feature
+- **Link to Commit**: 
+
+### November 8, 2024
+
+- **Task**: Led stand-up meeting
+- **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
+- **Link to Commit**: 
+
+### November 8, 2024
+
+- **Task**: Reviewed PR for Log page display
+- **Details**: Reviewed PR and suggested changes
+- **Link to Commit**: [Reviewed PR](https://github.com/nhan0504/CS326/pull/38#pullrequestreview-2424819728)
+
+### November 3, 2024
+
+- **Task**: Implemented search and filter bar for log page
+- **Details**: Created search and filter bar for log page, made changes to the data models for outfits, and created outfit test data
+- **Link to Commit**: [Implemented search and filter bar](https://github.com/nhan0504/CS326/pull/32)
+
+### November 1, 2024
+
+- **Task**: Led stand-up meeting
+- **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
+- **Link to Commit**: 
+
+
+### October 18, 2024
+
+- **Task**: Led stand-up meeting
+- **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
+- **Link to Commit**: 
+
 
 ### October 15, 2024
 
-- **Task**: users.md file
+- **Task**: Drafted users.md file
 - **Details**: Drafted the initial version of the users.md file and facilitated team feedback to finalize it.
 - **Link to Commit**: [Created users.md](https://github.com/nhan0504/CS326/commit/b01d98bcc9de7093b8f20c2323903c2539b5c3eam)
 

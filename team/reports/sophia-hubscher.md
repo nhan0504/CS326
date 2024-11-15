@@ -44,3 +44,28 @@
 - **Task**: Rearchitected the project.
 - **Details**: Used the code provided in lecture on Thursday to transition our code into a component structure where all HTML is written in JavaScript files.
 - **Links to Commit**: [Use components for rendering](https://github.com/nhan0504/CS326/pull/6/commits/55e7093bb87e7caf791348b14ec2857d9b151ef5)
+
+### October 26, 2024
+- **Task**: Created the suggestions view.
+- **Details**: Created the suggestions view with filtering. The feature uses test data and will need to be migrated to using IndexedDB once setup for that is complete.
+- **Links to Commit**: [Create suggestions view](https://github.com/nhan0504/CS326/pull/8/commits/ba203cc900d4d7dc2a4b075fbfd1decafbbf3102)
+
+### October 28, 2024
+- **Task**: Created WardrobeRepositoryService.
+- **Details**: Created WardrobeRepositoryService based on Anisha's service file. Included example use code in the PR for team members.
+- **Links to Commit**: [Create WardrobeRepositoryService](https://github.com/nhan0504/CS326/pull/13/commits/6fca636ccc63ca2ea498095fa736b1027f904760)
+
+### October 31, 2024
+- **Task**: Used IndexedDB to populate the suggestions view.
+- **Details**: Used IndexedDB to get all wardrobe items and display them in the suggestions view instead of displaying hard-coded test data. Added a method to the testing folder allowing teammates to run a function to generate mock data for IndexedDB.
+- **Links to Commit**: [Suggestions view gets data from IndexedDB](https://github.com/nhan0504/CS326/commit/ad76f76bb9dad736710ead55b307f8e77dcf2d93)
+
+### November 4, 2024
+- **Task**: Made outfit suggestions side scroll on small screens
+- **Details**: Implemented Hung's suggestion to make images in suggested outfits scroll sideways on small screens instead of wrapping below.
+- **Links to Commit**: [Make outfit suggestions side scroll on small screens](https://github.com/nhan0504/CS326/commit/838396c08550d671b59eb71ddf202ef6d5812ed9)
+
+### November 7, 2024
+- **Task**: Created sequence diagram for suggestions feature
+- **Details**: Created a sequence diagram for suggestions feature using Mermaid
+- **Links to Commit**: [Create suggestions sequence diagram](https://github.com/nhan0504/CS326/commit/705905a366560cff98e7b49bed179e3d7b6b4a26)

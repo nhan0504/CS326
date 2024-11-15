@@ -79,3 +79,8 @@
   background-color: #0066cc;
   color: white;
 }
+
+.error-message {
+  color: red;
+  padding: 0px;
+}

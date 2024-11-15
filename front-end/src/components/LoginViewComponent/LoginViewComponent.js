@@ -18,7 +18,7 @@ export class LoginViewComponent extends BaseComponent {
     title.textContent = 'Login';
 
     const text = document.createElement('p');
-    text.textContent = 'Text here!';
+    text.textContent = 'ClosetIQ currently stores data in your browser. Look our for the next the milestone where this page will let you log in and have your own account!';
 
     this.#container.appendChild(title);
     this.#container.appendChild(text);
