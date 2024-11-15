@@ -22,5 +22,18 @@
 
 ### November 11, 2024
 - **Task**:
-- Merge log branch to main for Log View Component with a new branch(mergelogbranch)
+- Merging log branch with main, but done in mergelogbranch due to merging problems with main , with some slight css modification
 - **Details**: See #42
+- **Link to Commit**:((https://github.com/nhan0504/CS326/pull/42))
+
+### November 13, 2024
+- **Task**:
+- Implementing IndexDB, fixing input format
+- **Details**: fixing indexDB error, changing outfit entry date format from string to Date() to avoid converting problems.
+- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/42)
+
+### November 13, 2024
+- **Task**:
+- Review Pull request #47 LogAddItem and LogDeleteItem (js and css)
+- **Details**: Review pull request #47 LogAddItem and LogDeleteItem file (with a minor addition to the LogViewComponent to add my feature as well).
+- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/47)
