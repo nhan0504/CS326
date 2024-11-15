@@ -22,9 +22,9 @@
 
 ### November 11, 2024
 - **Task**:
-- Merging log branch with main
-- **Details**: Merging log branch with main, but done in mergelogbranch due to merging problems with main , with some slight css modification
-- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/42)
+- Merge log branch to main for Log View Component with a new branch(mergelogbranch)
+- **Details**: See #42
+- **Link to Commit**:((https://github.com/nhan0504/CS326/pull/42))
 
 ### November 13, 2024
 - **Task**:
