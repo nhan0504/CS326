@@ -65,8 +65,16 @@ export class WardrobeViewComponent extends BaseComponent {
     wardrobeGrid.id = "wardrobe-grid-container";
 
     this.#container.appendChild(title);
-    this.#container.appendChild(filterBar);
-    this.#container.appendChild(wardrobeGrid);
+
+    // Create a container to hold the filter bar and grid container
+    const wardrobeContainer = document.createElement("div");
+    wardrobeContainer.classList.add("wardrobe-container");
+    wardrobeContainer.id = "wardrobe-container";
+
+    wardrobeContainer.appendChild(filterBar);
+    wardrobeContainer.appendChild(wardrobeGrid);
+
+    this.#container.appendChild(wardrobeContainer);
 
     return this.#container;
   }
@@ -214,7 +222,7 @@ export class WardrobeViewComponent extends BaseComponent {
     // Filter by occasion
     if (selectedOccasion !== "any") {
       filteredItems = filteredItems.filter(
-        (item) => item.occasion === selectedOccasion
+        (item) => item.occasion === selectedOccasion || item.occasion === "any"
       );
     }
 
