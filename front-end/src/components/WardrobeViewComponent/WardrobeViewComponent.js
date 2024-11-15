@@ -110,6 +110,12 @@ export function renderWardrobeItems(wardrobeItems, wardrobeService) {
     trashIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
     trashIcon.classList.add("wardrobe-delete-btn");
     wardrobeItem.appendChild(trashIcon);
+    // Delete the item when clicked
+    trashIcon.onclick = function () {
+      wardrobeService.clearWardrobeItem(item.item_id);
+      document.getElementById("wardrobe-grid-container").innerHTML = "";
+      renderWardrobeItems(wardrobeItems.filter((i) => i.item_id !== item.item_id), wardrobeService)
+    };
 
     // Add item image
     const image = document.createElement("img");
