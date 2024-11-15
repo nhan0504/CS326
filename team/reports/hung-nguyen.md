@@ -10,21 +10,15 @@
 
 ### October 31, 2024
 - **Task**:
-- Review pull request #17 Suggestions view gets data from IndexedDB
-- **Details**: Review pull request #17 Suggestions view gets data from IndexedDB, checking information and add suggestions to the code author
+- Review pull request 17 (made by Sophia)
+- **Details**: See #17 Suggestions view gets data from IndexedDB
 - **Link to Commit**: (https://github.com/nhan0504/CS326/pull/17)
 
 ### November 08, 2024
 - **Task**:
-- Created basic display for log view component
-- **Details**: Developed basic display with incomplete UI for log view component, with a temporary add function to view the display
-- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/38)
-
-### November 08, 2024
-- **Task**:
-- Created basic display for log view component
-- **Details**: Developed basic display with incomplete UI for log view component, with a temporary add function to view the display
-- **Link to Commit**: (https://github.com/nhan0504/CS326/pull/38)
+- Created display for Log View Component
+- **Details**: See #38
+- **Link to Commit**:((https://github.com/nhan0504/CS326/pull/38))
 
 ### November 11, 2024
 - **Task**:
