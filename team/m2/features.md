@@ -8,7 +8,7 @@
 **Team Member:** Ashley McNamara
 
 ## Feature Name: Clothes Inventory Add Form
-**Description:** A form that allows users to enter a new item into their wardrobe. In the form, the user uploads an image and enters details such as name, cost, size, category, etc. This creates a new wardrobe entry that is saved in IndexedDB, and the form resets for the next entry.
+**Description:** A form that allows users to enter a new item into their wardrobe. In the form, the user uploads an image and enters details such as name, cost, size, category, etc. There is also form validation. This creates a new wardrobe entry that is saved in IndexedDB, and the form resets for the next entry.
 
 **Point Value:** 3
 
@@ -22,7 +22,7 @@
 **Team Member:** Liam Gates
 
 ## Feature Name: Log Outfit Display
-**Description:** A grid display in the "Log" page of the user's past outfits based on the outfits stored in IndexedDB. Should display a filtered set of outfits based on the search and filter. For each outfit, we should display the date it was worn, the wardrobe items that are a part of it, a heart to favorite the item, and the note the user might have written for the outfit.
+**Description:** A grid display in the "Log" page of the user's past outfits based on the outfits stored in IndexedDB. Should display a filtered set of outfits based on the search and filter. For each outfit, we should display the date it was worn, and the wardrobe items that are a part of it.
 
 **Point Value:** 3
 
@@ -50,7 +50,7 @@
 - Wear frequency by category (e.g., tops, bottoms, shoes)
 - Share option to share the stat with others
   
-Users can also set personal goals, such as reducing the cost-per-wear of certain items or redistributing the use of their wardrobe more evenly. The dashboard can suggest decluttering or donating rarely worn items to encourage more mindful consumption.
+Users can also set personal goals, such as reducing the cost-per-wear of certain items or redistributing the use of their wardrobe more evenly. The dashboard can suggest decluttering or donating rarely worn items to encourage more mindful consumption. Users can also download the graphs.
 
 **Point Value:** 4
 
