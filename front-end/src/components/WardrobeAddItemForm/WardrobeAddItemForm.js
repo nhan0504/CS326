@@ -152,6 +152,13 @@ export class WardrobeAddItemForm extends BaseComponent {
       form.appendChild(select);
     });
 
+    // Add Error Message
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "";
+    errorMessage.id = "error-message";
+    errorMessage.classList.add("error-message");
+    form.appendChild(errorMessage);
+
     // Submit button
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
@@ -166,6 +173,10 @@ export class WardrobeAddItemForm extends BaseComponent {
       // Get the image
       const imageElement = document.getElementById("Image");
       const files = imageElement.files;
+      if (files.length === 0) {
+        const errorMessageElement = document.getElementById("error-message");
+        errorMessageElement.textContent = "Please upload an image.";
+      }
 
       // Check if the form input is valid
       const itemIds = displayedWardrobeItems.map((item) => item.item_id);
@@ -192,9 +203,11 @@ export class WardrobeAddItemForm extends BaseComponent {
     this.#container.style.display = "block";
   }
 
-  // Hide the add form
+  // Hide the add form and reset the error message
   hide() {
     this.#container.style.display = "none";
+    const errorMessageElement = document.getElementById("error-message");
+    errorMessageElement.textContent = "";
   }
 
   addItem(params, files, displayedWardrobeItems) {
@@ -210,7 +223,7 @@ export class WardrobeAddItemForm extends BaseComponent {
       const wardrobeItem = new WardrobeItem(params);
 
       // Display the new item without rerendering everything
-      renderWardrobeItems([wardrobeItem]);
+      renderWardrobeItems([wardrobeItem], this.#wardrobeService);
       displayedWardrobeItems.push(wardrobeItem);
 
       // Store the item in indexdb
@@ -261,14 +274,27 @@ export class WardrobeAddItemForm extends BaseComponent {
 
   checkValid(formData, itemIds) {
     const { item_id, name, cost, size, brand, seasons } = formData;
-    return (
-      name &&
-      cost &&
-      !isNaN(cost) &&
-      size &&
-      brand &&
-      seasons.length > 0 &&
-      !itemIds.includes(item_id)
-    );
+
+    const errorMessageElement = document.getElementById("error-message");
+    if (!name) {
+      errorMessageElement.textContent = "Please enter a title.";
+    } else if (!cost) {
+      errorMessageElement.textContent = "Please enter the cost.";
+    } else if (isNaN(cost)) {
+      errorMessageElement.textContent = "Please enter a number for the cost.";
+    } else if (!size) {
+      errorMessageElement.textContent = "Please enter the size.";
+    } else if (!brand) {
+      errorMessageElement.textContent = "Please enter the brand.";
+    } else if (seasons.length === 0) {
+      errorMessageElement.textContent = "Please select at least one season.";
+    } else if (itemIds.includes(item_id)) {
+      errorMessageElement.textContent =
+        "This title is already in use. Please enter a new title.";
+    } else {
+      return true;
+    }
+
+    return false;
   }
 }
