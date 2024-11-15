@@ -23,4 +23,3 @@
 ### November 11, 2024
 - **Task**:
 - Merge log branch to main for Log View Component with a new branch(mergelogbranch)
-- **Details**: See #42
