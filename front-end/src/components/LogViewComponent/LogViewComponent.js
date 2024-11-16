@@ -290,21 +290,21 @@ export class LogViewComponent extends BaseComponent {
     const logGrid = document.createElement("div");
     logGrid.classList.add("logGrid");
     
-    const heartItem = document.createElement("div");
-    heartItem.classList.add("heartItem");
-    const heartIcon = document.createElement("span");
-    heartIcon.classList.add("fave");
-      heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
-      // Make the favorite button red and update the item when clicked
-      heartIcon.onclick = function () {
-        if (heartIcon.classList.contains("fave")) {
-          heartIcon.classList.remove("fave");
-          heartIcon.classList.add("fave-red");
-        } else {
-          heartIcon.classList.remove("fave-red");
-          heartIcon.classList.add("fave");
-        }
-      };
+    // const heartItem = document.createElement("div");
+    // heartItem.classList.add("heartItem");
+    // const heartIcon = document.createElement("span");
+    // heartIcon.classList.add("fave");
+    //   heartIcon.innerHTML = '<i class="fa-solid fa-heart"></i>';
+    //   // Make the favorite button red and update the item when clicked
+    //   heartIcon.onclick = function () {
+    //     if (heartIcon.classList.contains("fave")) {
+    //       heartIcon.classList.remove("fave");
+    //       heartIcon.classList.add("fave-red");
+    //     } else {
+    //       heartIcon.classList.remove("fave-red");
+    //       heartIcon.classList.add("fave");
+    //     }
+    //   };
     // Create each wardrobe item and add it to the grid
     tempWardrobeItems.forEach((item) => {
       // Crate the item container
@@ -325,8 +325,8 @@ export class LogViewComponent extends BaseComponent {
     });
     logInfo.appendChild(date);
     logInfo.appendChild(text);
-    logInfo.appendChild(heartIcon);
-    logInfo.appendChild(heartItem);
+//    logInfo.appendChild(heartIcon);
+//    logInfo.appendChild(heartItem);
     logItem.appendChild(logInfo);
     logItem.appendChild(logGrid);
     outfitListDiv.appendChild(logItem);
