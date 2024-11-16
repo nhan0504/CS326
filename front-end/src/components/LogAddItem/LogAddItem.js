@@ -164,7 +164,7 @@ export class LogAddItem extends BaseComponent {
 
     this.#wardrobeItems.forEach((item) => {
       const itemElement = document.createElement('div');
-      itemElement.classList.add('wardrobe-item');
+      itemElement.classList.add('log-wardrobe-item');
 
       // Item image
       const itemImage = document.createElement('img');
