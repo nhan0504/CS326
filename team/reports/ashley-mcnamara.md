@@ -59,3 +59,8 @@
 - **Task**: Sequence Diagram
 - **Details**: Created a sequence diagram for adding a new wardrobe item.
 - **Link to Commit**: [Sequence Diagram](https://github.com/nhan0504/CS326/pull/48/commits/c84cb7c20635e387f3d3bf5e1f58eee0d60d26f5), [Sequence Diagram Updates](https://github.com/nhan0504/CS326/commit/9e3df597390fdd61f20fef70b78d7ca15a809554)
+
+### November 16, 2024
+- **Task**: Fix bugs with deleting wardrobe item
+- **Details**: Deleting an item just added no longer deletes everything and the deleted item is properly removed from the displayed array so that it will not reappear if you filter.
+- **Link to Commit**: [Wardrobe Delete Bug Fixes](https://github.com/nhan0504/CS326/pull/63/commits/21d059b89a10314b4daada2490926056ee05f910)
