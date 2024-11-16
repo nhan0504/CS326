@@ -6,6 +6,7 @@ import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { LogAddItem } from '../LogAddItem/LogAddItem.js'; // Import LogAddItem component
 import { LogDeleteItem } from '../LogDeleteItem/LogDeleteItem.js'; // Import LogDeleteItem component
 import { Events } from '../../eventhub/Events.js'; // Import Events for event handling
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class LogViewComponent extends BaseComponent {
   #container = null;
@@ -13,6 +14,8 @@ export class LogViewComponent extends BaseComponent {
   #wardrobeService = null;
   #outfitItems = [];
   #outfitService = null;
+  #eventHub = null;
+
   constructor(LogViewData = {}) {
     super();
     this.LogViewData = LogViewData;
@@ -20,13 +23,14 @@ export class LogViewComponent extends BaseComponent {
     this.#wardrobeService = new WardrobeRepositoryService();
     this.#outfitService = new OutfitRepositoryService();
     this.loadOutfitItems();
+    this.#eventHub = new EventHub();
 
     // Subscribe to events to update the outfit list when changes occur
-    this.subscribe(Events.OutfitUpdated, () => {
+    this.#eventHub.subscribe(Events.OutfitUpdated, () => {
       this.refreshOutfitList();
     });
 
-    this.subscribe(Events.OutfitDeleted, (outfitId) => {
+    this.#eventHub.subscribe(Events.OutfitDeleted, (outfitId) => {
       this.removeOutfitFromList(outfitId);
     });
   }
@@ -40,7 +44,7 @@ export class LogViewComponent extends BaseComponent {
       this.#wardrobeItems =
           await this.#wardrobeService.loadWardrobeItemsFromDB();
       // Commented out the following line because we will render the outfits in the render method
-      // this.#outfitItems.forEach(e => this.createOutfitLog(e, " "));
+      this.#outfitItems.forEach(e => this.createOutfitLog(e, " "));
     } catch (e) {
       console.error("Error:", e);
     }
@@ -49,7 +53,7 @@ export class LogViewComponent extends BaseComponent {
   render() {
     //loadOutfitItems();
     //uncomment to load outfit
-    //let outfits = this.#outfitItems;
+    let outfits = this.#outfitItems;
     // Create the main container
     this.#container = document.createElement("div");
     this.#container.classList.add("view");
@@ -216,8 +220,9 @@ export class LogViewComponent extends BaseComponent {
     const endDate = endDateValue ? new Date(endDateValue) : null;
 
     const searchTerm = document.getElementById("log-search").value.toLowerCase();
-
-    let filteredItems = outfits;
+    
+    const today = new Date().toISOString().split('T')[0];
+    let filteredItems = outfits.filter(outfit => outfit.date !== today);
 
     // Filter by season
     filteredItems = filteredItems.filter((item) =>
@@ -259,8 +264,12 @@ export class LogViewComponent extends BaseComponent {
     filteredItems.forEach(e=> this.createOutfitLog(e," "));
     return filteredItems;
   }
+
   createOutfitLog(outfit,msg)
   {
+    const today = new Date().toISOString().split('T')[0];
+    if (outfit.date == today) return;
+
     const outfitListDiv = document.getElementById("outfitList");
     let tempWardrobeItems=[];
     if (outfit.length === 0) {
