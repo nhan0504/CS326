@@ -1,27 +1,71 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
-import { getTestWardrobeItems } from "../../testing/TestData.js";
+import { WardrobeRepositoryService } from '../../services/WardrobeRepositoryService.js';
+import { OutfitRepositoryService } from '../../services/OutfitRepositoryService.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class LogAddItem extends BaseComponent {
-  #currentOutfitItems = [];
+  #currentOutfit = null;
+  #wardrobeItems = [];
+  #wardrobeService = null;
+  #outfitService = null;
+  #container = null;
 
   constructor() {
     super();
     this.loadCSS('LogAddItem');
+    this.#wardrobeService = new WardrobeRepositoryService();
+    this.#outfitService = new OutfitRepositoryService();
+
+    this.initialize();
+  }
+
+  async initialize() {
+    await this.#wardrobeService.initDB();
+    await this.#outfitService.initDB();
+
+    // Load wardrobe items
+    this.#wardrobeItems = await this.#wardrobeService.loadWardrobeItemsFromDB();
+
+    // Load or create today's outfit
+    const today = new Date().toISOString().split('T')[0];
+    const outfits = await this.#outfitService.loadOutfitFromDB();
+    const userId = getCurrentUserId();
+
+    this.#currentOutfit = outfits.find(
+      (outfit) => outfit.user_id === userId && outfit.date === today
+    );
+
+    if (!this.#currentOutfit) {
+      // Create a new outfit for today
+      this.#currentOutfit = {
+        outfit_id: generateUniqueId(),
+        user_id: userId,
+        wardrobe_item_ids: [],
+        note: '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        date: today,
+      };
+      await this.#outfitService.storeOutfit(this.#currentOutfit);
+    }
+
+    // Render the component after initialization
+    this.render();
   }
 
   render() {
-    const container = document.createElement('div');
-    container.classList.add('log-add-item');
+    this.#container = document.createElement('div');
+    this.#container.classList.add('log-add-item');
 
     // Title
     const title = document.createElement('h2');
     title.textContent = "Today I'm wearing...";
-    container.appendChild(title);
+    this.#container.appendChild(title);
 
     // Current outfit items container
     const itemsContainer = document.createElement('div');
     itemsContainer.classList.add('current-outfit-items');
-    container.appendChild(itemsContainer);
+    this.#container.appendChild(itemsContainer);
 
     // Add item button
     const addButton = document.createElement('button');
@@ -30,26 +74,29 @@ export class LogAddItem extends BaseComponent {
     addButton.addEventListener('click', () => {
       this.openAddItemModal(itemsContainer);
     });
-    container.appendChild(addButton);
+    this.#container.appendChild(addButton);
 
     // Display current outfit items
     this.displayCurrentOutfitItems(itemsContainer);
 
-    return container;
+    return this.#container;
   }
 
   displayCurrentOutfitItems(itemsContainer) {
     // Clear existing items
     itemsContainer.innerHTML = '';
 
-    if (this.#currentOutfitItems.length === 0) {
+    if (this.#currentOutfit.wardrobe_item_ids.length === 0) {
       const noItemsText = document.createElement('p');
       noItemsText.textContent = 'No items added yet.';
       itemsContainer.appendChild(noItemsText);
     } else {
-      this.#currentOutfitItems.forEach((item) => {
-        const itemElement = this.createItemElement(item, itemsContainer);
-        itemsContainer.appendChild(itemElement);
+      this.#currentOutfit.wardrobe_item_ids.forEach((itemId) => {
+        const item = this.#wardrobeItems.find((i) => i.item_id === itemId);
+        if (item) {
+          const itemElement = this.createItemElement(item, itemsContainer);
+          itemsContainer.appendChild(itemElement);
+        }
       });
     }
   }
@@ -74,7 +121,7 @@ export class LogAddItem extends BaseComponent {
     deleteButton.textContent = 'x';
     deleteButton.classList.add('delete-item-button');
     deleteButton.addEventListener('click', () => {
-      this.removeItemFromOutfit(item, itemsContainer);
+      this.removeItemFromOutfit(item.item_id, itemsContainer);
     });
     itemElement.appendChild(deleteButton);
 
@@ -108,10 +155,7 @@ export class LogAddItem extends BaseComponent {
     const itemsList = document.createElement('div');
     itemsList.classList.add('items-list');
 
-    // Get test wardrobe items
-    const wardrobeItems = getTestWardrobeItems();
-
-    wardrobeItems.forEach((item) => {
+    this.#wardrobeItems.forEach((item) => {
       const itemElement = document.createElement('div');
       itemElement.classList.add('wardrobe-item');
 
@@ -129,8 +173,8 @@ export class LogAddItem extends BaseComponent {
       // Add button
       const addItemButton = document.createElement('button');
       addItemButton.textContent = 'Add';
-      addItemButton.addEventListener('click', () => {
-        this.addItemToOutfit(item, itemsContainer);
+      addItemButton.addEventListener('click', async () => {
+        await this.addItemToOutfit(item.item_id, itemsContainer);
         modalOverlay.remove();
       });
       itemElement.appendChild(addItemButton);
@@ -143,20 +187,55 @@ export class LogAddItem extends BaseComponent {
     document.body.appendChild(modalOverlay);
   }
 
-  addItemToOutfit(item, itemsContainer) {
-    if (!this.#currentOutfitItems.includes(item)) {
-      this.#currentOutfitItems.push(item);
+  async addItemToOutfit(itemId, itemsContainer) {
+    if (!this.#currentOutfit.wardrobe_item_ids.includes(itemId)) {
+      this.#currentOutfit.wardrobe_item_ids.push(itemId);
+      this.#currentOutfit.updated_at = new Date().toISOString();
+
+      // Save the outfit using storeOutfit
+      await this.#outfitService.storeOutfit(this.#currentOutfit);
+
+      // Update the UI
       this.displayCurrentOutfitItems(itemsContainer);
+
+      // Update LogViewComponent
+      this.updateLogView();
     } else {
       alert('Item already added to outfit.');
     }
   }
 
-  removeItemFromOutfit(item, itemsContainer) {
-    const index = this.#currentOutfitItems.indexOf(item);
+  async removeItemFromOutfit(itemId, itemsContainer) {
+    const index = this.#currentOutfit.wardrobe_item_ids.indexOf(itemId);
     if (index > -1) {
-      this.#currentOutfitItems.splice(index, 1);
+      this.#currentOutfit.wardrobe_item_ids.splice(index, 1);
+      this.#currentOutfit.updated_at = new Date().toISOString();
+
+      // Save the outfit using storeOutfit
+      await this.#outfitService.storeOutfit(this.#currentOutfit);
+
+      // Update the UI
       this.displayCurrentOutfitItems(itemsContainer);
+
+      // Update LogViewComponent
+      this.updateLogView();
     }
   }
+
+  updateLogView() {
+    // Publish an event or directly update the LogViewComponent
+    // Assuming we have access to LogViewComponent instance or use events
+    this.publish(Events.OutfitUpdated, this.#currentOutfit);
+  }
+}
+
+// Helper functions
+function getCurrentUserId() {
+  // Implement a method to get the current logged-in user's ID
+  return 'user123';
+}
+
+function generateUniqueId() {
+  // Simple unique ID generator
+  return '_' + Math.random().toString(36).substr(2, 9);
 }

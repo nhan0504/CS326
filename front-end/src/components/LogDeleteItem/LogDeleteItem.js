@@ -1,31 +1,36 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { OutfitRepositoryService } from '../../services/OutfitRepositoryService.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class LogDeleteItem extends BaseComponent {
-  constructor(logItemElement, onDeleteCallback) {
+  constructor(outfitId) {
     super();
-    this.logItemElement = logItemElement; // The DOM element representing the log item
-    this.onDeleteCallback = onDeleteCallback; // Callback function to execute on deletion
+    this.outfitId = outfitId; // The ID of the outfit to be deleted
+    this.outfitService = new OutfitRepositoryService();
     this.loadCSS('LogDeleteItem');
   }
 
-  render() {
+  async render() {
+    await this.outfitService.initDB();
+
     // Create the delete button
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'Delete Outfit';
     deleteButton.classList.add('delete-log-button');
 
     // Add event listener for the delete action
-    deleteButton.addEventListener('click', () => {
-      this.deleteLogItem();
+    deleteButton.addEventListener('click', async () => {
+      await this.deleteOutfit();
     });
 
     return deleteButton;
   }
 
-  deleteLogItem() {
-    // Call the callback function to delete the log item
-    if (typeof this.onDeleteCallback === 'function') {
-      this.onDeleteCallback(this.logItemElement);
-    }
+  async deleteOutfit() {
+    // Delete the outfit from IndexedDB
+    await this.outfitService.deleteOutfit(this.outfitId);
+
+    // Publish an event to notify that an outfit was deleted
+    this.publish(Events.OutfitDeleted, this.outfitId);
   }
 }
