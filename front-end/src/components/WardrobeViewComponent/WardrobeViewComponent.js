@@ -160,23 +160,6 @@ export class WardrobeViewComponent extends BaseComponent {
     occasionDiv.appendChild(occasionSelect);
     filterBar.appendChild(occasionDiv);
 
-    // Date range filter
-    const dateRangeDiv = document.createElement("div");
-    const dateRangeLabel = document.createElement("label");
-    dateRangeLabel.textContent = "Date Range:";
-
-    const startDateInput = document.createElement("input");
-    startDateInput.type = "date";
-    startDateInput.id = "wardrobe-start-date";
-
-    const endDateInput = document.createElement("input");
-    endDateInput.type = "date";
-    endDateInput.id = "wardrobe-end-date";
-    dateRangeDiv.appendChild(dateRangeLabel);
-    dateRangeDiv.appendChild(startDateInput);
-    dateRangeDiv.appendChild(endDateInput);
-
-    filterBar.appendChild(dateRangeDiv);
     // Apply filters button
     const applyFiltersButton = document.createElement("button");
     applyFiltersButton.textContent = "Apply Filters";
@@ -200,11 +183,6 @@ export class WardrobeViewComponent extends BaseComponent {
       document.querySelectorAll("input[name='wardrobe-seasons']:checked")
     ).map((cb) => cb.value);
     const selectedOccasion = document.getElementById("wardrobe-occasion").value;
-  
-    const startDateValue = document.getElementById("wardrobe-start-date").value;
-    const endDateValue = document.getElementById("wardrobe-end-date").value;
-    const startDate = startDateValue ? new Date(startDateValue) : null;
-    const endDate = endDateValue ? new Date(endDateValue) : null;
 
     const searchTerm = document.getElementById("wardrobe-search").value.toLowerCase();
 
@@ -224,17 +202,6 @@ export class WardrobeViewComponent extends BaseComponent {
       filteredItems = filteredItems.filter(
         (item) => item.occasion === selectedOccasion || item.occasion === "any"
       );
-    }
-
-    // Filter by date range
-    if (startDate || endDate) {
-      filteredItems = filteredItems.filter((item) => {
-        const itemDate = new Date(item.updated_at);
-        return (
-          (!startDate || itemDate >= startDate) &&
-          (!endDate || itemDate <= endDate)
-        );
-      });
     }
     
     // Filter by search term
