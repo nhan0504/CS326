@@ -235,6 +235,7 @@ export class LogViewComponent extends BaseComponent {
     filteredItems.forEach(e=> this.createOutfitLog(e," "));
     return filteredItems;
   }
+  
   createOutfitLog(outfit,msg)
   {
     const outfitListDiv = document.getElementById("outfitList");

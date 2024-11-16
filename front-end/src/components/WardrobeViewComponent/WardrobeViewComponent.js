@@ -56,15 +56,166 @@ export class WardrobeViewComponent extends BaseComponent {
       this.#addForm.show();
     };
 
+    // Create the filter bar
+    const filterBar = this.createFilterBar(this.#wardrobeItems);
+
     // Create the wardrobe grid container
     const wardrobeGrid = document.createElement("div");
     wardrobeGrid.classList.add("wardrobe-grid");
     wardrobeGrid.id = "wardrobe-grid-container";
 
     this.#container.appendChild(title);
-    this.#container.appendChild(wardrobeGrid);
+
+    // Create a container to hold the filter bar and grid container
+    const wardrobeContainer = document.createElement("div");
+    wardrobeContainer.classList.add("wardrobe-container");
+    wardrobeContainer.id = "wardrobe-container";
+
+    wardrobeContainer.appendChild(filterBar);
+    wardrobeContainer.appendChild(wardrobeGrid);
+
+    this.#container.appendChild(wardrobeContainer);
 
     return this.#container;
+  }
+
+  createFilterBar(wardrobeItems) {
+    const filterBar = document.createElement("div");
+    filterBar.classList.add("wardrobe-filter-bar");
+
+    const filterTitle = document.createElement("h2");
+    filterTitle.textContent = "Filters";
+    filterBar.appendChild(filterTitle);
+
+    // Search bar
+    const searchDiv = document.createElement("div");
+    searchDiv.classList.add("search-div");
+    const searchLabel = document.createElement("label");
+    searchLabel.htmlFor = "wardrobe-search";
+    searchLabel.textContent = "Search:";
+
+    const searchInput = document.createElement("input");
+    searchInput.type = "text";
+    searchInput.id = "wardrobe-search";
+    searchDiv.appendChild(searchLabel);
+    searchDiv.appendChild(searchInput);
+    filterBar.appendChild(searchDiv);
+
+    // Seasons checkboxes
+    const seasonsDiv = document.createElement("div");
+    const seasonsLabel = document.createElement("p");
+    seasonsLabel.textContent = "Seasons:";
+    seasonsDiv.appendChild(seasonsLabel);
+
+    const seasons = ["spring", "summer", "fall", "winter"];
+    seasons.forEach((season) => {
+      const seasonCheckbox = document.createElement("input");
+      seasonCheckbox.type = "checkbox";
+      seasonCheckbox.id = "wardrobe-" + season;
+      seasonCheckbox.name = "wardrobe-seasons";
+      seasonCheckbox.value = season;
+      seasonCheckbox.checked = true;
+
+      const seasonLabel = document.createElement("label");
+      seasonLabel.htmlFor = season;
+      seasonLabel.textContent =
+        season.charAt(0).toUpperCase() + season.slice(1);
+
+      seasonsDiv.appendChild(seasonCheckbox);
+      seasonsDiv.appendChild(seasonLabel);
+      seasonsDiv.appendChild(document.createElement("br"));
+    });
+
+    filterBar.appendChild(seasonsDiv);
+    filterBar.appendChild(document.createElement("br"));
+      
+    // Occasion dropdown
+    const occasionDiv = document.createElement("div");
+    const occasionLabel = document.createElement("label");
+    occasionLabel.htmlFor = "occasion";
+    occasionLabel.textContent = "Occasion:";
+
+    const occasionSelect = document.createElement("select");
+    occasionSelect.id = "wardrobe-occasion";
+    occasionSelect.name = "wardrobe-occasion";
+
+    const occasions = [
+      "any",
+      "formal",
+      "casual",
+      "business",
+      "party",
+      "lounge",
+      "other",
+    ];
+    occasions.forEach((optionValue) => {
+      const option = document.createElement("option");
+      option.value = optionValue;
+      option.textContent =
+        optionValue.charAt(0).toUpperCase() + optionValue.slice(1);
+      occasionSelect.appendChild(option);
+    });
+
+    occasionDiv.appendChild(occasionLabel);
+    occasionDiv.appendChild(occasionSelect);
+    filterBar.appendChild(occasionDiv);
+
+    // Apply filters button
+    const applyFiltersButton = document.createElement("button");
+    applyFiltersButton.textContent = "Apply Filters";
+    applyFiltersButton.classList.add("wardrobe-apply-filters-button");
+    applyFiltersButton.addEventListener("click", () => {
+      this.applyFilters(this.#wardrobeItems);
+    });
+
+    // Wrap the button in a div
+    const buttonWrapper = document.createElement("div");
+    buttonWrapper.style.display = "flex";
+    buttonWrapper.style.justifyContent = "center";
+    buttonWrapper.appendChild(applyFiltersButton);
+
+    filterBar.appendChild(buttonWrapper);
+    return filterBar;
+  }
+
+  applyFilters(wardrobeItems) {
+    const selectedSeasons = Array.from(
+      document.querySelectorAll("input[name='wardrobe-seasons']:checked")
+    ).map((cb) => cb.value);
+    const selectedOccasion = document.getElementById("wardrobe-occasion").value;
+
+    const searchTerm = document.getElementById("wardrobe-search").value.toLowerCase();
+
+    let filteredItems = wardrobeItems;
+
+    // Filter by season
+    filteredItems = filteredItems.filter((item) =>
+      item.seasons.some((season) =>
+        selectedSeasons
+          .map((s) => s.toLowerCase())
+          .includes(season.toLowerCase())
+      )
+    );
+
+    // Filter by occasion
+    if (selectedOccasion !== "any") {
+      filteredItems = filteredItems.filter(
+        (item) => item.occasion === selectedOccasion || item.occasion === "any"
+      );
+    }
+    
+    // Filter by search term
+    if (searchTerm) {
+      filteredItems = filteredItems.filter((item) =>
+        item.item_id.toString().includes(searchTerm.toLowerCase()) || 
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        item.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    const wardrobeGrid = document.getElementById("wardrobe-grid-container");
+    wardrobeGrid.innerHTML="";
+    renderWardrobeItems(filteredItems, this.#wardrobeService);
+    return filteredItems;
   }
 }
 

@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "html2canvas": "^1.4.1",
-    "http-server": "^14.1.1",
-    "jest": "^29.7.0"
+    "http-server": "^14.1.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^25.0.1"
   }
