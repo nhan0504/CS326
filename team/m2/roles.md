@@ -30,11 +30,14 @@
 
 ## Bruce Le - Task Manager
 
-- **Role**: Responsible for organizing and tracking team tasks. Bruce manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
+- **Role**: Responsible for organizing and tracking team tasks. Bruce manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time. Additionally, Bruce has significantly contributed to the development of the LogAddItem and LogDeleteItem features, enhancing the application's functionality.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/repo/commit1): Set up the team’s Trello board with tasks for Milestone #1, including task descriptions and deadlines.
   2. [Commit 2](https://github.com/repo/commit2): Assigned tasks to team members based on discussions during the team’s planning meetings and updated Trello with new assignments.
   3. [Commit 3](https://github.com/repo/commit3): Monitored task progress and updated the board, ensuring that tasks were completed by the deadline.
+  4. [Commit 4](https://github.com/repo/commit4): Implemented LogAddItem to allow users to add items from their wardrobe to their current outfit.
+  5. [Commit 5](https://github.com/repo/commit5): Developed LogDeleteItem to enable users to remove items from their current outfit log.
+  6. [Commit 6](https://github.com/repo/commit6): Created sequence diagrams for the LogAddItem and LogDeleteItem features, documenting the interaction flow between the user interface and services.
 
 ## Sophia Hubscher - Communication Lead
 
