@@ -24,7 +24,7 @@ export class WardrobeViewComponent extends BaseComponent {
       await this.#wardrobeService.initDB();
       this.#wardrobeItems =
         await this.#wardrobeService.loadWardrobeItemsFromDB();
-      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService);
+      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService, this.#wardrobeItems);
     } catch (e) {
       console.error("Error:", e);
     }
@@ -111,8 +111,8 @@ export class WardrobeViewComponent extends BaseComponent {
     seasons.forEach((season) => {
       const seasonCheckbox = document.createElement("input");
       seasonCheckbox.type = "checkbox";
-      seasonCheckbox.id = "wardrobe-" + season;
-      seasonCheckbox.name = "wardrobe-seasons";
+      seasonCheckbox.id = "wardrobe-filter-" + season;
+      seasonCheckbox.name = "wardrobe-filter-seasons";
       seasonCheckbox.value = season;
       seasonCheckbox.checked = true;
 
@@ -180,7 +180,7 @@ export class WardrobeViewComponent extends BaseComponent {
 
   applyFilters(wardrobeItems) {
     const selectedSeasons = Array.from(
-      document.querySelectorAll("input[name='wardrobe-seasons']:checked")
+      document.querySelectorAll("input[name='wardrobe-filter-seasons']:checked")
     ).map((cb) => cb.value);
     const selectedOccasion = document.getElementById("wardrobe-occasion").value;
 
