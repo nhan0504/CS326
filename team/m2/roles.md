@@ -7,6 +7,9 @@
   1. [Commit 1](https://docs.google.com/document/d/1K1DXzFCZuhf6Vd_p5dW52NF7W1mOVx7mjVKIlJdaC_A/edit): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
   2. [Commit 2](https://github.com/nhan0504/CS326/commit/b01d98bcc9de7093b8f20c2323903c2539b5c3ea): Drafted users.md
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/a2f3334d67c75d8c51bce8234e6f30f0a543f572): Reviewed data.md
+  4. [Commit 4](https://github.com/nhan0504/CS326/pull/32): Implemented search and filter bar for log page
+  5. [Commit 5](https://github.com/nhan0504/CS326/commit/759ac0e1aac91cc0cbbc21a1b89b38fc13e7d8b2): Implemented dynamic wardrobe item updates for statistics, log, and suggestions page
+  6. [Commit 6](https://github.com/nhan0504/CS326/pull/57): Reviewed PRs for wardrobe search and filter and log page display
 
 ## Abby Tran - Timekeeper
 

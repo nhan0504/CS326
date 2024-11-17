@@ -1,5 +1,12 @@
 ## Contribution Log for Anisha Prathi
 
+
+### November 17, 2024
+
+- **Task**: Implemented dynamic wardrobe item updates for statistics, log, and suggestions page
+- **Details**: Added event listeners and re-renders pages when changes are made to wardrobe inventory
+- **Link to Commit**: [Implemented Feature](https://github.com/nhan0504/CS326/commit/759ac0e1aac91cc0cbbc21a1b89b38fc13e7d8b2)
+
 ### November 15, 2024
 
 - **Task**: Reviewed PR for Wardrobe Search and Filter
