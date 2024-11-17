@@ -35,7 +35,7 @@ export class LogViewComponent extends BaseComponent {
       this.#wardrobeItems =
           await this.#wardrobeService.loadWardrobeItemsFromDB();
       // Commented out the following line because we will render the outfits in the render method
-      this.#outfitItems.forEach(e => this.createOutfitLog(e, " "));
+      this.applyFilters(this.#outfitItems);
     } catch (e) {
       console.error("Error:", e);
     }
@@ -94,7 +94,6 @@ export class LogViewComponent extends BaseComponent {
     
     document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
       console.log('All wardrobe items cleared');
-  
       this.loadOutfitItems();
     });
   
