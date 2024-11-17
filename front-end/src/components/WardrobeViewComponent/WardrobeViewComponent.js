@@ -128,7 +128,7 @@ export class WardrobeViewComponent extends BaseComponent {
 
     filterBar.appendChild(seasonsDiv);
     filterBar.appendChild(document.createElement("br"));
-      
+
     // Occasion dropdown
     const occasionDiv = document.createElement("div");
     const occasionLabel = document.createElement("label");
@@ -184,7 +184,9 @@ export class WardrobeViewComponent extends BaseComponent {
     ).map((cb) => cb.value);
     const selectedOccasion = document.getElementById("wardrobe-occasion").value;
 
-    const searchTerm = document.getElementById("wardrobe-search").value.toLowerCase();
+    const searchTerm = document
+      .getElementById("wardrobe-search")
+      .value.toLowerCase();
 
     let filteredItems = wardrobeItems;
 
@@ -203,24 +205,33 @@ export class WardrobeViewComponent extends BaseComponent {
         (item) => item.occasion === selectedOccasion || item.occasion === "any"
       );
     }
-    
+
     // Filter by search term
     if (searchTerm) {
-      filteredItems = filteredItems.filter((item) =>
-        item.item_id.toString().includes(searchTerm.toLowerCase()) || 
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        item.brand.toLowerCase().includes(searchTerm.toLowerCase())
+      filteredItems = filteredItems.filter(
+        (item) =>
+          item.item_id.toString().includes(searchTerm.toLowerCase()) ||
+          item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.brand.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     const wardrobeGrid = document.getElementById("wardrobe-grid-container");
-    wardrobeGrid.innerHTML="";
-    renderWardrobeItems(filteredItems, this.#wardrobeService);
+    wardrobeGrid.innerHTML = "";
+    renderWardrobeItems(
+      filteredItems,
+      this.#wardrobeService,
+      this.#wardrobeItems
+    );
     return filteredItems;
   }
 }
 
 // render the wardrobe items
-export function renderWardrobeItems(wardrobeItems, wardrobeService) {
+export function renderWardrobeItems(
+  wardrobeItems,
+  wardrobeService,
+  displayedWardrobeItems
+) {
   // Get the wardrobe grid container
   const wardrobeGrid = document.getElementById("wardrobe-grid-container");
 
@@ -246,7 +257,7 @@ export function renderWardrobeItems(wardrobeItems, wardrobeService) {
     heartIcon.onclick = function () {
       wardrobeService.toggleFavorite(item.item_id);
       item.is_favorite = !item.is_favorite;
-      
+
       if (heartIcon.classList.contains("favorite-icon")) {
         heartIcon.classList.add("non-favorite-icon");
         heartIcon.classList.remove("favorite-icon");
@@ -261,6 +272,15 @@ export function renderWardrobeItems(wardrobeItems, wardrobeService) {
     trashIcon.innerHTML = '<i class="fa-solid fa-trash"></i>';
     trashIcon.classList.add("wardrobe-delete-btn");
     wardrobeItem.appendChild(trashIcon);
+    // Delete the item when clicked
+    trashIcon.onclick = function () {
+      wardrobeService.clearWardrobeItem(item.item_id);
+      wardrobeItem.remove();
+      const index = displayedWardrobeItems.findIndex(
+        (i) => i.item_id === item.item_id
+      );
+      displayedWardrobeItems.splice(index, 1);
+    };
 
     // Add item image
     const image = document.createElement("img");
