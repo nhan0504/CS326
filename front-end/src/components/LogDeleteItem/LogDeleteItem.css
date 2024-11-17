@@ -1,0 +1,15 @@
+.delete-log-button {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+  
+  .delete-log-button:hover {
+    background-color: #c82333;
+  }
+  

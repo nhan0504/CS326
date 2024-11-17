@@ -105,4 +105,23 @@ export class OutfitRepositoryService extends Service {
       this.clearOutfit();
     });
   }
+
+  //We need to ensure that OutfitRepositoryService has a method to delete an outfit
+  async deleteOutfit(outfitId) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const store = transaction.objectStore(this.storeName);
+      const request = store.delete(outfitId);
+
+      request.onsuccess = () => {
+        resolve('Outfit deleted successfully');
+      };
+
+      request.onerror = () => {
+        reject('Error deleting outfit');
+      };
+    });
+  }
+
 }
+
