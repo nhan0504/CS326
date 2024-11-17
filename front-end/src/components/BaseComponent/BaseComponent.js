@@ -1,3 +1,5 @@
+import { EventHub } from '../../eventhub/EventHub.js';
+
 export class BaseComponent {
   constructor() {
     this.cssLoaded = false;
@@ -22,6 +24,24 @@ export class BaseComponent {
     link.href = `./components/${fileName}/${fileName}.css`;
     document.head.appendChild(link);
     this.cssLoaded = true;
+  }
+
+  /**
+   * Subscribe to an event.
+   * @param {string} event - The event name.
+   * @param {function} listener - The callback function.
+   */
+  subscribe(event, listener) {
+    return this.eventHub.subscribe(event, listener);
+  }
+
+  /**
+ * Publish an event.
+ * @param {string} event - The event name.
+ * @param {any} data - The data to pass with the event.
+ */
+  publish(event, data) {
+    this.eventHub.publish(event, data);
   }
 
   dispatchCustomEvent(eventName, detail = {}) {
