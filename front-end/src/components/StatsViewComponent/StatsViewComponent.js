@@ -15,6 +15,7 @@ export class StatsViewComponent extends BaseComponent {
     this.wardrobeItems = [];
     this.loadWardrobeItems();
     this.loadCSS("StatsViewComponent");
+    this.subscribeToWardrobeEvents();
   }
 
   async loadWardrobeItems() {
@@ -36,6 +37,28 @@ export class StatsViewComponent extends BaseComponent {
       console.error('Error loading outfits:', error);
     }
   }
+  
+  subscribeToWardrobeEvents() {
+    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+      this.loadWardrobeItems();
+    });
+  
+    document.addEventListener('StoreWardrobeItemFailure', (event) => {
+      console.error('Failed to store wardrobe item:');
+    });
+
+    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
+      console.log('All wardrobe items cleared');
+  
+      this.loadWardrobeItems();
+    });
+  
+    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
+      console.error('Failed to clear wardrobe items:');
+      alert('Failed to clear wardrobe items. Please try again.');
+    });
+  }
+
 
   // Get 5 most worn items
   getMostWornItems(wardrobeItems) {

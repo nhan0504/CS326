@@ -23,18 +23,9 @@ export class LogViewComponent extends BaseComponent {
     this.#wardrobeService = new WardrobeRepositoryService();
     this.#outfitService = new OutfitRepositoryService();
     this.loadOutfitItems();
-    this.#eventHub = new EventHub();
-
-    // Subscribe to events to update the outfit list when changes occur
-    this.#eventHub.subscribe(Events.OutfitUpdated, () => {
-      this.refreshOutfitList();
-    });
-
-    this.#eventHub.subscribe(Events.OutfitDeleted, (outfitId) => {
-      this.removeOutfitFromList(outfitId);
-    });
+    this.subscribeToWardrobeEvents();
   }
-  
+
   async loadOutfitItems() {
     try {
       await this.#outfitService.initDB();
@@ -44,7 +35,7 @@ export class LogViewComponent extends BaseComponent {
       this.#wardrobeItems =
           await this.#wardrobeService.loadWardrobeItemsFromDB();
       // Commented out the following line because we will render the outfits in the render method
-      this.#outfitItems.forEach(e => this.createOutfitLog(e, " "));
+      this.applyFilters(this.#outfitItems);
     } catch (e) {
       console.error("Error:", e);
     }
@@ -90,6 +81,26 @@ export class LogViewComponent extends BaseComponent {
     this.#outfitItems.forEach(e => this.createOutfitLog(e, " "));
 
     return this.#container;
+  }
+
+  subscribeToWardrobeEvents() {
+    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+      this.loadOutfitItems();
+    });
+  
+    document.addEventListener('StoreWardrobeItemFailure', (event) => {
+      console.error('Failed to delete wardrobe item:');
+    });
+    
+    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
+      console.log('All wardrobe items cleared');
+      this.loadOutfitItems();
+    });
+  
+    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
+      console.error('Failed to clear wardrobe items:');
+      alert('Failed to clear wardrobe items. Please try again.');
+    });
   }
 
   createFilterBar(outfits) {
