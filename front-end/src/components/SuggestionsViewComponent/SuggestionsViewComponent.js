@@ -273,7 +273,7 @@ export class SuggestionsViewComponent extends BaseComponent {
 
     suggestedOutfits.forEach((outfit, i) => {
       const outfitItem = document.createElement("li");
-      outfitItem.classList.add("outfit-item");
+      outfitItem.classList.add("suggested-outfit-item");
 
       const outfitInfo = document.createElement("div");
       outfitInfo.classList.add("outfit-info");
