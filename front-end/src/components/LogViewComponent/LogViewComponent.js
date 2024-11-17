@@ -91,15 +91,7 @@ export class LogViewComponent extends BaseComponent {
     document.addEventListener('StoreWardrobeItemFailure', (event) => {
       console.error('Failed to delete wardrobe item:');
     });
-
-    document.addEventListener('DeleteWardrobeItemSuccess', (event) => {
-      this.loadOutfitItems();
-    });
-  
-    document.addEventListener('DeleteWardrobeItemFailure', (event) => {
-      console.error('Failed to delete wardrobe item:');
-    });
-
+    
     document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
       console.log('All wardrobe items cleared');
   

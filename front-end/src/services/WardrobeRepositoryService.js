@@ -65,12 +65,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.delete(wardrobeItemId);
 
       request.onsuccess = () => {
-        document.dispatchEvent(new Event(Events.DeleteWardrobeItemSuccess));
+        document.dispatchEvent(new Event(Events.UnStoreWardrobeItemSuccess));
         resolve('Wardrobe item cleared successfully');
       };
 
       request.onerror = () => {
-        document.dispatchEvent(new Event(Events.DeleteWardrobeItemFailure));
+        document.dispatchEvent(new Event(Events.UnStoreWardrobeItemFailure));
         reject('Error clearing wardrobe item:');
       };
     });

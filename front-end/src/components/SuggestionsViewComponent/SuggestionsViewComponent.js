@@ -30,14 +30,6 @@ export class SuggestionsViewComponent extends BaseComponent {
       console.error('Failed to store wardrobe item:');
     });
 
-    document.addEventListener('DeleteWardrobeItemSuccess', (event) => {
-      this.loadWardrobe();
-    });
-  
-    document.addEventListener('DeleteWardrobeItemFailure', (event) => {
-      console.error('Failed to delete wardrobe item:');
-    });
-
     document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
       console.log('All wardrobe items cleared');
   
