@@ -47,12 +47,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.add(wardrobeItemData);
 
       request.onsuccess = () => {
-        document.dispatchEvent(Events.StoreWardrobeItemSuccess, wardrobeItemData);
+        document.dispatchEvent(new Event(Events.StoreWardrobeItemSuccess));
         resolve('Wardrobe item stored successfully');
       };
 
       request.onerror = () => {
-        document.dispatchEvent(Events.StoreWardrobeItemFailure, wardrobeItemData);
+        document.dispatchEvent(new Event(Events.StoreWardrobeItemFailure));
         reject('Error storing wardrobe item:');
       };
     });
@@ -65,12 +65,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.delete(wardrobeItemId);
 
       request.onsuccess = () => {
-        this.publish(Events.StoreWardrobeItemSuccess, wardrobeItemId);
+        document.dispatchEvent(new Event(Events.DeleteWardrobeItemSuccess));
         resolve('Wardrobe item cleared successfully');
       };
 
       request.onerror = () => {
-        this.publish(Events.StoreWardrobeItemFailure, wardrobeItemId);
+        document.dispatchEvent(new Event(Events.DeleteWardrobeItemFailure));
         reject('Error clearing wardrobe item:');
       };
     });
@@ -102,12 +102,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.clear();
 
       request.onsuccess = () => {
-        document.dispatchEvent(Events.UnStoreWardrobeItemSuccess);
+        document.dispatchEvent(new Event(Events.UnStoreWardrobeItemSuccess));
         resolve('All wardrobe items cleared');
       };
 
       request.onerror = () => {
-        document.dispatchEvent(Events.UnStoreWardrobeItemFailure);
+        document.dispatchEvent(new Event(Events.UnStoreWardrobeItemFailure));
         reject('Error clearing wardrobe items');
       };
     });

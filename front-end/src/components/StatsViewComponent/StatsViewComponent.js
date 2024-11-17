@@ -40,30 +40,33 @@ export class StatsViewComponent extends BaseComponent {
   
   subscribeToWardrobeEvents() {
     document.addEventListener('StoreWardrobeItemSuccess', (event) => {
-      const newItem = event.detail;
-      this.wardrobeItems.push(newItem);
-      console.log('New wardrobe item added:', newItem);
-  
-      this.render()
+      this.loadWardrobeItems();
     });
   
     document.addEventListener('StoreWardrobeItemFailure', (event) => {
-      console.error('Failed to store wardrobe item:', event.detail);
+      console.error('Failed to store wardrobe item:');
+    });
+
+    document.addEventListener('DeleteWardrobeItemSuccess', (event) => {
+      this.loadWardrobeItems();
+    });
+  
+    document.addEventListener('DeleteWardrobeItemFailure', (event) => {
+      console.error('Failed to delete wardrobe item:');
     });
 
     document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
       console.log('All wardrobe items cleared');
   
-      this.wardrobeItems = [];
-  
-      this.render();
+      this.loadWardrobeItems();
     });
   
     document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
-      console.error('Failed to clear wardrobe items:', event.detail);
+      console.error('Failed to clear wardrobe items:');
       alert('Failed to clear wardrobe items. Please try again.');
     });
   }
+
 
   // Get 5 most worn items
   getMostWornItems(wardrobeItems) {
