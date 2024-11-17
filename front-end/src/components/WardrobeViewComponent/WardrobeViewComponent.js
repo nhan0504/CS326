@@ -180,7 +180,7 @@ export class WardrobeViewComponent extends BaseComponent {
 
   applyFilters(wardrobeItems) {
     const selectedSeasons = Array.from(
-      document.querySelectorAll("input[name='wardrobe-seasons']:checked")
+      document.querySelectorAll("input[name='wardrobe-filter-seasons']:checked")
     ).map((cb) => cb.value);
     const selectedOccasion = document.getElementById("wardrobe-occasion").value;
 
