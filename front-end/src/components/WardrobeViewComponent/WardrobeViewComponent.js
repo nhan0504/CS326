@@ -24,7 +24,7 @@ export class WardrobeViewComponent extends BaseComponent {
       await this.#wardrobeService.initDB();
       this.#wardrobeItems =
         await this.#wardrobeService.loadWardrobeItemsFromDB();
-      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService);
+      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService, this.#wardrobeItems);
     } catch (e) {
       console.error("Error:", e);
     }
