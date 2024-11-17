@@ -111,8 +111,8 @@ export class WardrobeViewComponent extends BaseComponent {
     seasons.forEach((season) => {
       const seasonCheckbox = document.createElement("input");
       seasonCheckbox.type = "checkbox";
-      seasonCheckbox.id = "wardrobe-" + season;
-      seasonCheckbox.name = "wardrobe-seasons";
+      seasonCheckbox.id = "wardrobe-filter-" + season;
+      seasonCheckbox.name = "wardrobe-filter-seasons";
       seasonCheckbox.value = season;
       seasonCheckbox.checked = true;
 
