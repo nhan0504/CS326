@@ -65,12 +65,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.delete(wardrobeItemId);
 
       request.onsuccess = () => {
-        this.publish(Events.StoreWardrobeItemSuccess, wardrobeItemId);
+        this.publish(Events.UnStoreWardrobeItemSuccess, wardrobeItemId);
         resolve('Wardrobe item cleared successfully');
       };
 
       request.onerror = () => {
-        this.publish(Events.StoreWardrobeItemFailure, wardrobeItemId);
+        this.publish(Events.UnStoreWardrobeItemFailure, wardrobeItemId);
         reject('Error clearing wardrobe item:');
       };
     });
