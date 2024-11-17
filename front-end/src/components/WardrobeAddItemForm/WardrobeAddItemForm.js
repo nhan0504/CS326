@@ -189,8 +189,6 @@ export class WardrobeAddItemForm extends BaseComponent {
 
         // reset the form
         form.reset();
-      } else {
-        // error or alert or some shit
       }
     });
     form.appendChild(submitButton);
@@ -223,7 +221,11 @@ export class WardrobeAddItemForm extends BaseComponent {
       const wardrobeItem = new WardrobeItem(params);
 
       // Display the new item without rerendering everything
-      renderWardrobeItems([wardrobeItem], this.#wardrobeService);
+      renderWardrobeItems(
+        [wardrobeItem],
+        this.#wardrobeService,
+        displayedWardrobeItems
+      );
       displayedWardrobeItems.push(wardrobeItem);
 
       // Store the item in indexdb

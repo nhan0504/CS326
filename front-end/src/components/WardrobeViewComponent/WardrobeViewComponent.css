@@ -2,7 +2,13 @@
   position: relative;
 }
 
+.wardrobe-container {
+  display: flex;
+  gap: 20px;
+}
+
 .wardrobe-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 15px;
@@ -59,4 +65,43 @@
   right: 15px;
   font-size: 35px;
   color: #3f648a;
+}
+
+.wardrobe-filter-bar {
+  background-color: #f1f6fc;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.1);
+}
+
+.wardrobe-apply-filters-button {
+  background-color: white;
+  color: black;
+  border: none;
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wardrobe-apply-filters-button:hover {
+  background-color: #d3e8fe;
+}
+
+.search-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+#wardrobe-search {
+  flex: 1;
+}
+
+/* Changes for narrower screens */
+@media (max-width: 870px) {
+  .wardrobe-container {
+      flex-direction: column;
+  }
 }

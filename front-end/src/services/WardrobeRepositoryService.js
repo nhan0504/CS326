@@ -58,6 +58,24 @@ export class WardrobeRepositoryService extends Service {
     });
   }
 
+  async clearWardrobeItem(wardrobeItemId) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const store = transaction.objectStore(this.storeName);
+      const request = store.delete(wardrobeItemId);
+
+      request.onsuccess = () => {
+        this.publish(Events.StoreWardrobeItemSuccess, wardrobeItemId);
+        resolve('Wardrobe item cleared successfully');
+      };
+
+      request.onerror = () => {
+        this.publish(Events.StoreWardrobeItemFailure, wardrobeItemId);
+        reject('Error clearing wardrobe item:');
+      };
+    });
+  }
+
   async loadWardrobeItemsFromDB() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readonly');
