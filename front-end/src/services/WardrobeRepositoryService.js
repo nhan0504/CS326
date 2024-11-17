@@ -47,12 +47,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.add(wardrobeItemData);
 
       request.onsuccess = () => {
-        this.publish(Events.StoreWardrobeItemSuccess, wardrobeItemData);
+        document.dispatchEvent(Events.StoreWardrobeItemSuccess, wardrobeItemData);
         resolve('Wardrobe item stored successfully');
       };
 
       request.onerror = () => {
-        this.publish(Events.StoreWardrobeItemFailure, wardrobeItemData);
+        document.dispatchEvent(Events.StoreWardrobeItemFailure, wardrobeItemData);
         reject('Error storing wardrobe item:');
       };
     });
@@ -102,12 +102,12 @@ export class WardrobeRepositoryService extends Service {
       const request = store.clear();
 
       request.onsuccess = () => {
-        this.publish(Events.UnStoreWardrobeItemSuccess);
+        document.dispatchEvent(Events.UnStoreWardrobeItemSuccess);
         resolve('All wardrobe items cleared');
       };
 
       request.onerror = () => {
-        this.publish(Events.UnStoreWardrobeItemFailure);
+        document.dispatchEvent(Events.UnStoreWardrobeItemFailure);
         reject('Error clearing wardrobe items');
       };
     });

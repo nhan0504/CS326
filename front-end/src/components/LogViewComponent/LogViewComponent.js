@@ -16,7 +16,9 @@ export class LogViewComponent extends BaseComponent {
     this.#wardrobeService = new WardrobeRepositoryService();
     this.#outfitService = new OutfitRepositoryService();
     this.loadOutfitItems();
+    this.subscribeToWardrobeEvents();
   }
+
   async loadOutfitItems() {
     try {
       await this.#outfitService.initDB();
@@ -62,6 +64,33 @@ export class LogViewComponent extends BaseComponent {
     this.#container.appendChild(logContainer);
 
     return this.#container;
+  }
+
+  subscribeToWardrobeEvents() {
+    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+      const newItem = event.detail;
+      this.#wardrobeItems.push(newItem);
+      console.log('New wardrobe item added:', newItem);
+  
+      this.render()
+    });
+  
+    document.addEventListener('StoreWardrobeItemFailure', (event) => {
+      console.error('Failed to store wardrobe item:', event.detail);
+    });
+
+    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
+      console.log('All wardrobe items cleared');
+  
+      this.#wardrobeItems = [];
+  
+      this.render();
+    });
+  
+    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
+      console.error('Failed to clear wardrobe items:', event.detail);
+      alert('Failed to clear wardrobe items. Please try again.');
+    });
   }
 
   createFilterBar(outfits) {
