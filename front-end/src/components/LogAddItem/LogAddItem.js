@@ -2,6 +2,7 @@ import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { WardrobeRepositoryService } from '../../services/WardrobeRepositoryService.js';
 import { OutfitRepositoryService } from '../../services/OutfitRepositoryService.js';
 import { Events } from '../../eventhub/Events.js';
+import { EventHub } from '../../eventhub/EventHub.js';
 
 export class LogAddItem extends BaseComponent {
   #currentOutfit = null;
@@ -9,12 +10,14 @@ export class LogAddItem extends BaseComponent {
   #wardrobeService = null;
   #outfitService = null;
   #container = null;
+  #eventHub = null;
 
   constructor() {
     super();
     this.loadCSS('LogAddItem');
     this.#wardrobeService = new WardrobeRepositoryService();
     this.#outfitService = new OutfitRepositoryService();
+    this.#eventHub = new EventHub();
 
     this.initialize();
   }
@@ -84,7 +87,11 @@ export class LogAddItem extends BaseComponent {
 
   displayCurrentOutfitItems(itemsContainer) {
     // Clear existing items
-    itemsContainer.innerHTML = '';
+    if (!this.#currentOutfit) {
+      return;
+    } else {
+      itemsContainer.innerHTML = '';
+    }
 
     if (this.#currentOutfit.wardrobe_item_ids.length === 0) {
       const noItemsText = document.createElement('p');
@@ -157,7 +164,7 @@ export class LogAddItem extends BaseComponent {
 
     this.#wardrobeItems.forEach((item) => {
       const itemElement = document.createElement('div');
-      itemElement.classList.add('wardrobe-item');
+      itemElement.classList.add('log-wardrobe-item');
 
       // Item image
       const itemImage = document.createElement('img');
@@ -193,6 +200,7 @@ export class LogAddItem extends BaseComponent {
       this.#currentOutfit.updated_at = new Date().toISOString();
 
       // Save the outfit using storeOutfit
+      await this.#outfitService.deleteOutfit(this.#currentOutfit.id)
       await this.#outfitService.storeOutfit(this.#currentOutfit);
 
       // Update the UI
@@ -212,6 +220,7 @@ export class LogAddItem extends BaseComponent {
       this.#currentOutfit.updated_at = new Date().toISOString();
 
       // Save the outfit using storeOutfit
+      await this.#outfitService.deleteOutfit(this.#currentOutfit.id)
       await this.#outfitService.storeOutfit(this.#currentOutfit);
 
       // Update the UI
@@ -225,7 +234,7 @@ export class LogAddItem extends BaseComponent {
   updateLogView() {
     // Publish an event or directly update the LogViewComponent
     // Assuming we have access to LogViewComponent instance or use events
-    this.publish(Events.OutfitUpdated, this.#currentOutfit);
+    this.#eventHub.publish(Events.OutfitUpdated, this.#currentOutfit);
   }
 }
 

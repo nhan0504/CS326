@@ -108,26 +108,26 @@
 }
 
 /* Wardrobe item in modal */
-.wardrobe-item {
+.log-wardrobe-item {
   width: 100px;
   text-align: center;
 }
 
 /* Wardrobe item image */
-.wardrobe-item img {
+.log-wardrobe-item img {
   width: 100%;
   height: auto;
   border-radius: 5px;
 }
 
 /* Wardrobe item name */
-.wardrobe-item p {
+.log-wardrobe-item p {
   margin-top: 5px;
   font-size: 14px;
 }
 
 /* Add item button in modal */
-.wardrobe-item button {
+.log-wardrobe-item button {
   margin-top: 5px;
   padding: 5px 10px;
   font-size: 14px;
