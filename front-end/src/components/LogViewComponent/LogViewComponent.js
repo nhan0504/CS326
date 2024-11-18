@@ -1,17 +1,11 @@
 import {
   loadOutfitItems,
-  getTestOutfits,
-  getTestWardrobeItems,
   loadTestWardrobeItems,
 } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
-import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { LogAddItem } from "../LogAddItem/LogAddItem.js"; // Import LogAddItem component
-import { LogDeleteItem } from "../LogDeleteItem/LogDeleteItem.js"; // Import LogDeleteItem component
-import { Events } from "../../eventhub/Events.js"; // Import Events for event handling
-import { EventHub } from "../../eventhub/EventHub.js";
 
 export class LogViewComponent extends BaseComponent {
   #container = null;
@@ -19,7 +13,6 @@ export class LogViewComponent extends BaseComponent {
   #wardrobeService = null;
   #outfitItems = [];
   #outfitService = null;
-  #eventHub = null;
 
   constructor(LogViewData = {}) {
     super();
@@ -30,9 +23,10 @@ export class LogViewComponent extends BaseComponent {
     this.loadAllOutfitItems();
     this.subscribeToWardrobeEvents();
 
-    //uncomment to load test outfits (only works in combination with the test wardrobe). Must refresh after
-    //loadOutfitItems();
-    //loadTestWardrobeItems();
+    // Uncomment to load test outfits
+    // (only works in combination with the test wardrobe which can be loaded in in the wardrobeViewComponent in the same way)
+    // Must refresh after
+    // loadOutfitItems();
   }
 
   async loadAllOutfitItems() {

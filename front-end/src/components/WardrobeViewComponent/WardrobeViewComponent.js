@@ -1,6 +1,5 @@
-import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
-import { getTestWardrobeItems } from "../../testing/TestData.js";
+import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { WardrobeAddItemForm } from "../WardrobeAddItemForm/WardrobeAddItemForm.js";
 
@@ -18,6 +17,9 @@ export class WardrobeViewComponent extends BaseComponent {
     this.#wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobeItems();
 
+    // uncomment to load in test wardrobe items to indexdb
+    // loadTestWardrobeItems();
+
     this.subscribeToWardrobeEvents();
   }
 
@@ -26,7 +28,11 @@ export class WardrobeViewComponent extends BaseComponent {
       await this.#wardrobeService.initDB();
       this.#wardrobeItems =
         await this.#wardrobeService.loadWardrobeItemsFromDB();
-      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService, this.#wardrobeItems);
+      renderWardrobeItems(
+        this.#wardrobeItems,
+        this.#wardrobeService,
+        this.#wardrobeItems
+      );
     } catch (e) {
       console.error("Error:", e);
     }
@@ -181,32 +187,32 @@ export class WardrobeViewComponent extends BaseComponent {
   }
 
   subscribeToWardrobeEvents() {
-    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+    document.addEventListener("StoreWardrobeItemSuccess", (event) => {
       const newItem = event.detail;
       this.#wardrobeItems.push(newItem);
-      console.log('New wardrobe item added:', newItem);
-  
-      this.render()
-    });
-  
-    document.addEventListener('StoreWardrobeItemFailure', (event) => {
-      console.error('Failed to store wardrobe item:', event.detail);
-    });
+      console.log("New wardrobe item added:", newItem);
 
-    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
-      console.log('All wardrobe items cleared');
-  
-      this.#wardrobeItems = [];
-  
       this.render();
     });
-  
-    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
-      console.error('Failed to clear wardrobe items:', event.detail);
-      alert('Failed to clear wardrobe items. Please try again.');
+
+    document.addEventListener("StoreWardrobeItemFailure", (event) => {
+      console.error("Failed to store wardrobe item:", event.detail);
+    });
+
+    document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
+      console.log("All wardrobe items cleared");
+
+      this.#wardrobeItems = [];
+
+      this.render();
+    });
+
+    document.addEventListener("UnStoreWardrobeItemFailure", (event) => {
+      console.error("Failed to clear wardrobe items:", event.detail);
+      alert("Failed to clear wardrobe items. Please try again.");
     });
   }
-  
+
   applyFilters(wardrobeItems) {
     const selectedSeasons = Array.from(
       document.querySelectorAll("input[name='wardrobe-filter-seasons']:checked")
