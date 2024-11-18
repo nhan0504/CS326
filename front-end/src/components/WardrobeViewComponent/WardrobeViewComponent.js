@@ -311,9 +311,11 @@ export function renderWardrobeItems(
     trashIcon.onclick = function () {
       wardrobeService.clearWardrobeItem(item.item_id);
       wardrobeItem.remove();
-      const index = displayedWardrobeItems.findIndex(
-        (i) => i.item_id === item.item_id
-      );
+      const index = displayedWardrobeItems.findIndex((i) => {
+        if (i) {
+          return i.item_id === item.item_id;
+        } else return false;
+      });
       displayedWardrobeItems.splice(index, 1);
     };
 
