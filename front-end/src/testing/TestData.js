@@ -9,7 +9,7 @@ export function getTestWardrobeItems() {
   wardrobeItems.push(
     new WardrobeItem(
       {
-        item_id: "item1",
+        item_id: "Blue T-shirt",
         user_id: "user1",
         image: "../testing/test-images/blue_shirt.jpg",
         name: "Blue T-shirt",
@@ -28,7 +28,7 @@ export function getTestWardrobeItems() {
   wardrobeItems.push(
     new WardrobeItem(
       {
-        item_id: "item2",
+        item_id: "Red Pants",
         user_id: "user1",
         image: "../testing/test-images/red_pants.png",
         name: "Red Pants",
@@ -47,7 +47,7 @@ export function getTestWardrobeItems() {
   wardrobeItems.push(
     new WardrobeItem(
       {
-        item_id: "item3",
+        item_id: "Blue Pants",
         user_id: "user1",
         image: "../testing/test-images/blue_pants.jpg",
         name: "Blue Pants",
@@ -66,7 +66,7 @@ export function getTestWardrobeItems() {
   wardrobeItems.push(
     new WardrobeItem(
       {
-        item_id: "item4",
+        item_id: "Striped Dress",
         user_id: "user1",
         image: "../testing/test-images/striped_dress.jpg",
         name: "Striped Dress",
@@ -85,7 +85,7 @@ export function getTestWardrobeItems() {
   wardrobeItems.push(
     new WardrobeItem(
       {
-        item_id: "item5",
+        item_id: "Loafers",
         user_id: "user1",
         image: "../testing/test-images/loafers.jpg",
         name: "Loafers",
@@ -111,7 +111,7 @@ export function getTestOutfits() {
     new OutfitEntry(
       "1",
       "user1",
-      ["item1", "item2"],
+      ["Blue T-shirt", "Red Pants"],
       "First outfit!",
       "casual",
       ["Winter"],
@@ -124,7 +124,7 @@ export function getTestOutfits() {
     new OutfitEntry(
       "2",
       "user1",
-      ["item4", "item5"],
+      ["Striped Dress", "Loafers"],
       "Second outfit!",
       "formal",
       ["Summer"],
@@ -137,7 +137,7 @@ export function getTestOutfits() {
     new OutfitEntry(
       "3",
       "user1",
-      ["item1", "item3"],
+      ["Blue T-shirt", "Blue Pants"],
       "Third outfit!",
       "lounge",
       ["Fall"],

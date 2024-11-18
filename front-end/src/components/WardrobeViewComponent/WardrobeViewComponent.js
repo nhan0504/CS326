@@ -1,6 +1,5 @@
-import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
-import { getTestWardrobeItems } from "../../testing/TestData.js";
+import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { WardrobeAddItemForm } from "../WardrobeAddItemForm/WardrobeAddItemForm.js";
 
@@ -16,6 +15,9 @@ export class WardrobeViewComponent extends BaseComponent {
     this.loadCSS("WardrobeViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobeItems();
+
+    // uncomment to load in test wardrobe items to indexdb
+    // loadTestWardrobeItems();
   }
 
   async loadWardrobeItems() {
@@ -286,9 +288,11 @@ export function renderWardrobeItems(
     trashIcon.onclick = function () {
       wardrobeService.clearWardrobeItem(item.item_id);
       wardrobeItem.remove();
-      const index = displayedWardrobeItems.findIndex(
-        (i) => i.item_id === item.item_id
-      );
+      const index = displayedWardrobeItems.findIndex((i) => {
+        if (i) {
+          return i.item_id === item.item_id;
+        } else return false;
+      });
       displayedWardrobeItems.splice(index, 1);
     };
 

@@ -179,7 +179,9 @@ export class WardrobeAddItemForm extends BaseComponent {
       }
 
       // Check if the form input is valid
-      const itemIds = displayedWardrobeItems.map((item) => item.item_id);
+      const itemIds = displayedWardrobeItems
+        .filter((item) => item)
+        .map((item) => item.item_id);
       if (files.length > 0 && this.checkValid(formData, itemIds)) {
         // hide the add item form
         this.hide();
