@@ -64,3 +64,8 @@
 - **Task**: Fix bugs with deleting wardrobe item
 - **Details**: Deleting an item just added no longer deletes everything and the deleted item is properly removed from the displayed array so that it will not reappear if you filter.
 - **Link to Commit**: [Wardrobe Delete Bug Fixes](https://github.com/nhan0504/CS326/pull/63/commits/21d059b89a10314b4daada2490926056ee05f910)
+
+### November 17, 2024
+- **Task**: Fix bugs with the log page add item
+- **Details**: Made the add item listen for wardrobe events and made it properly display the items on refresh.
+- **Link to Commit**: [Log bug fixes](https://github.com/nhan0504/CS326/commit/865657d8f84d17a614038f923ad7a76af6ec859a)
