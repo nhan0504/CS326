@@ -63,8 +63,8 @@ export class LogAddItem extends BaseComponent {
       await this.#outfitService.storeOutfit(this.#currentOutfit);
     }
 
-    // Render the component after initialization
-    this.render();
+    const itemsContainer = document.getElementById("itemsContainer");
+    this.displayCurrentOutfitItems(itemsContainer);
   }
 
   render() {
@@ -78,6 +78,7 @@ export class LogAddItem extends BaseComponent {
 
     // Current outfit items container
     const itemsContainer = document.createElement("div");
+    itemsContainer.id = "itemsContainer";
     itemsContainer.classList.add("current-outfit-items");
     this.#container.appendChild(itemsContainer);
 
@@ -89,9 +90,6 @@ export class LogAddItem extends BaseComponent {
       this.openAddItemModal(itemsContainer);
     });
     this.#container.appendChild(addButton);
-
-    // Display current outfit items
-    this.displayCurrentOutfitItems(itemsContainer);
 
     return this.#container;
   }
