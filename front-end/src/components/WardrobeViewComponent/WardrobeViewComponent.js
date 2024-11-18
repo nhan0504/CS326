@@ -13,14 +13,11 @@ export class WardrobeViewComponent extends BaseComponent {
     super();
     this.WardrobeViewData = WardrobeViewData;
     this.loadCSS("WardrobeViewComponent");
-
     this.#wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobeItems();
 
     // uncomment to load in test wardrobe items to indexdb
     // loadTestWardrobeItems();
-
-    this.subscribeToWardrobeEvents();
   }
 
   async loadWardrobeItems() {
@@ -88,20 +85,23 @@ export class WardrobeViewComponent extends BaseComponent {
   }
 
   createFilterBar(wardrobeItems) {
+    // Create container for filter bar elements
     const filterBar = document.createElement("div");
     filterBar.classList.add("wardrobe-filter-bar");
 
+    // Title of filter bar
     const filterTitle = document.createElement("h2");
     filterTitle.textContent = "Filters";
     filterBar.appendChild(filterTitle);
 
-    // Search bar
+    // Search bar label
     const searchDiv = document.createElement("div");
     searchDiv.classList.add("search-div");
     const searchLabel = document.createElement("label");
     searchLabel.htmlFor = "wardrobe-search";
     searchLabel.textContent = "Search:";
 
+    // Search bar input
     const searchInput = document.createElement("input");
     searchInput.type = "text";
     searchInput.id = "wardrobe-search";
@@ -124,6 +124,7 @@ export class WardrobeViewComponent extends BaseComponent {
       seasonCheckbox.value = season;
       seasonCheckbox.checked = true;
 
+      // Season Checkbox Label
       const seasonLabel = document.createElement("label");
       seasonLabel.htmlFor = season;
       seasonLabel.textContent =
@@ -186,34 +187,8 @@ export class WardrobeViewComponent extends BaseComponent {
     return filterBar;
   }
 
-  subscribeToWardrobeEvents() {
-    document.addEventListener("StoreWardrobeItemSuccess", (event) => {
-      const newItem = event.detail;
-      this.#wardrobeItems.push(newItem);
-      console.log("New wardrobe item added:", newItem);
-
-      this.render();
-    });
-
-    document.addEventListener("StoreWardrobeItemFailure", (event) => {
-      console.error("Failed to store wardrobe item:", event.detail);
-    });
-
-    document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
-      console.log("All wardrobe items cleared");
-
-      this.#wardrobeItems = [];
-
-      this.render();
-    });
-
-    document.addEventListener("UnStoreWardrobeItemFailure", (event) => {
-      console.error("Failed to clear wardrobe items:", event.detail);
-      alert("Failed to clear wardrobe items. Please try again.");
-    });
-  }
-
   applyFilters(wardrobeItems) {
+    // Retrieve selected seasons from checkboxes
     const selectedSeasons = Array.from(
       document.querySelectorAll("input[name='wardrobe-filter-seasons']:checked")
     ).map((cb) => cb.value);
@@ -250,6 +225,8 @@ export class WardrobeViewComponent extends BaseComponent {
           item.brand.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
+
+    // Render filtered wardrobe items
     const wardrobeGrid = document.getElementById("wardrobe-grid-container");
     wardrobeGrid.innerHTML = "";
     renderWardrobeItems(
