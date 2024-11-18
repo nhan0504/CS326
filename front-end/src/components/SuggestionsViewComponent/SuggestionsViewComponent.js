@@ -17,8 +17,31 @@ export class SuggestionsViewComponent extends BaseComponent {
 
     this.wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobe();
+
+    this.subscribeToWardrobeEvents();
   }
 
+  subscribeToWardrobeEvents() {
+    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+      this.loadWardrobe();
+    });
+  
+    document.addEventListener('StoreWardrobeItemFailure', (event) => {
+      console.error('Failed to store wardrobe item:');
+    });
+
+    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
+      console.log('All wardrobe items cleared');
+  
+      this.loadWardrobe();
+    });
+  
+    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
+      console.error('Failed to clear wardrobe items:');
+      alert('Failed to clear wardrobe items. Please try again.');
+    });
+  }
+  
   async loadWardrobe() {
     try {
       await this.wardrobeService.initDB();
@@ -242,7 +265,7 @@ export class SuggestionsViewComponent extends BaseComponent {
 
     suggestedOutfits.forEach((outfit, i) => {
       const outfitItem = document.createElement("li");
-      outfitItem.classList.add("outfit-item");
+      outfitItem.classList.add("suggested-outfit-item");
 
       const outfitInfo = document.createElement("div");
       outfitInfo.classList.add("outfit-info");

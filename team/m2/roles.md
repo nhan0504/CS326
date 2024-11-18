@@ -7,6 +7,9 @@
   1. [Commit 1](https://docs.google.com/document/d/1K1DXzFCZuhf6Vd_p5dW52NF7W1mOVx7mjVKIlJdaC_A/edit): Organized and led the first team meeting, distributing tasks and ensuring deadlines were agreed upon.
   2. [Commit 2](https://github.com/nhan0504/CS326/commit/b01d98bcc9de7093b8f20c2323903c2539b5c3ea): Drafted users.md
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/a2f3334d67c75d8c51bce8234e6f30f0a543f572): Reviewed data.md
+  4. [Commit 4](https://github.com/nhan0504/CS326/pull/32): Implemented search and filter bar for log page
+  5. [Commit 5](https://github.com/nhan0504/CS326/commit/759ac0e1aac91cc0cbbc21a1b89b38fc13e7d8b2): Implemented dynamic wardrobe item updates for statistics, log, and suggestions page
+  6. [Commit 6](https://github.com/nhan0504/CS326/pull/57): Reviewed PRs for wardrobe search and filter and log page display
 
 ## Abby Tran - Timekeeper
 
@@ -29,16 +32,18 @@
   3. [Commit 3](https://github.com/nhan0504/CS326/edit/main/team/m2/roles.md): Review the `roles.md` file with detailed action items and responsibilities following each meeting.
   4. [Commit 4](https://github.com/nhan0504/CS326/pull/38/commits): Add Basic front end display for log view component
   5. [Commit 5](https://github.com/nhan0504/CS326/pull/42/commits): Merging logbranch with existing main due to merging conflicts, as well as implementing IndexDB and fix outfit entry format.
-  5. [Commit 6](https://github.com/nhan0504/CS326/pull/48): Review Ashley's sequence diagram for add wardrobe item.
-  
+  6. [Commit 6](https://github.com/nhan0504/CS326/pull/48): Review Ashley's sequence diagram for add wardrobe item.
 
 ## Bruce Le - Task Manager
 
-- **Role**: Responsible for organizing and tracking team tasks. Bruce manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time.
+- **Role**: Responsible for organizing and tracking team tasks. Bruce manages the team’s Trello board and ensures that all tasks are properly assigned and completed on time. Additionally, Bruce has significantly contributed to the development of the LogAddItem and LogDeleteItem features, enhancing the application's functionality.
 - **Top 3 Commits**:
   1. [Commit 1](https://github.com/repo/commit1): Set up the team’s Trello board with tasks for Milestone #1, including task descriptions and deadlines.
   2. [Commit 2](https://github.com/repo/commit2): Assigned tasks to team members based on discussions during the team’s planning meetings and updated Trello with new assignments.
   3. [Commit 3](https://github.com/repo/commit3): Monitored task progress and updated the board, ensuring that tasks were completed by the deadline.
+  4. [Commit 4](https://github.com/repo/commit4): Implemented LogAddItem to allow users to add items from their wardrobe to their current outfit.
+  5. [Commit 5](https://github.com/repo/commit5): Developed LogDeleteItem to enable users to remove items from their current outfit log.
+  6. [Commit 6](https://github.com/repo/commit6): Created sequence diagrams for the LogAddItem and LogDeleteItem features, documenting the interaction flow between the user interface and services.
 
 ## Sophia Hubscher - Communication Lead
 
@@ -70,3 +75,6 @@
   1. [Commit 1](https://github.com/nhan0504/CS326/commit/1254893a73528c9605c68df5d648e4c8194401aa): Reviewed the contents of `users.md` file to ensure that the requirements of Milestone 2 were satisfied.
   2. [Commit 2](https://github.com/nhan0504/CS326/commit/d2ca24dd6295fe8f4ef1ef1d19d66d2c4aca7c6f): Reviewed the contents of `ui-diagrams.md` file to ensure that the requirements of Milestone 2 were satisfied.
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/1abc39fa1969e43ba857c71bccef948e5dd1e70b): Reviewed the contents of `features.md` file to ensure that the requirements of Milestone 2 were satisfied.
+  4. [Commit 4](https://github.com/nhan0504/CS326/commit/96385bb865ecf4ce58241380e8a62f69c1099587): Implemented the delete item feature in the wardrobe page and connected the feature to IndexedDB.
+  5. [Commit 5](https://github.com/nhan0504/CS326/commit/55e1ff0e1752c7227fe628b1ed954fc82d83b589): Implemented the search and filter feature in the wardrobe page.
+  6. [Commit 6](https://github.com/nhan0504/CS326/pull/71/commits/8a0bace8e384a4831a69692bd4b74422b195676b): Design the feature sequence diagram for the search and filter feature of the wardrobe page.

@@ -1,15 +1,35 @@
 ## Contribution Log for Anisha Prathi
+
+
+### November 17, 2024
+
+- **Task**: Implemented dynamic wardrobe item updates for statistics, log, and suggestions page
+- **Details**: Added event listeners and re-renders pages when changes are made to wardrobe inventory
+- **Link to Commit**: [Implemented Feature](https://github.com/nhan0504/CS326/commit/759ac0e1aac91cc0cbbc21a1b89b38fc13e7d8b2)
+
+### November 15, 2024
+
+- **Task**: Reviewed PR for Wardrobe Search and Filter
+- **Details**: Reviewed a PR that implements the search and filter bar on the wardrobe page
+- **Link to Commit**: [Reviewed PR](https://github.com/nhan0504/CS326/pull/57)
+
 ### November 14, 2024
 
-- **Task**: Created sequence diagrams
+- **Task**: Updated data.md
+- **Details**: Updated data.md with updates to models for both the outfit entry and wardrobe item models
+- **Link to Commit**: [Updated data.md](https://github.com/nhan0504/CS326/commit/476d86d03088337e27a0f45f2a469e5720a62b26)
+
+### November 14, 2024
+
+- **Task**: Created sequence diagram
 - **Details**: Created a sequence diagram for the log page feature
-- **Link to Commit**: 
+- **Link to Commit**: [Created sequence diagram](https://github.com/nhan0504/CS326/commit/476d86d03088337e27a0f45f2a469e5720a62b26)
 
 ### November 8, 2024
 
 - **Task**: Led stand-up meeting
 - **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
-- **Link to Commit**: 
+- **Link to Commit**: N/A
 
 ### November 8, 2024
 
@@ -27,14 +47,14 @@
 
 - **Task**: Led stand-up meeting
 - **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
-- **Link to Commit**: 
+- **Link to Commit**: N/A
 
 
 ### October 18, 2024
 
 - **Task**: Led stand-up meeting
 - **Details**: Organized and led stand-up meeting, going over the past week and assigning tasks for the next week
-- **Link to Commit**: 
+- **Link to Commit**: N/A
 
 
 ### October 15, 2024
