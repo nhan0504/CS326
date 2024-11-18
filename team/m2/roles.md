@@ -72,6 +72,6 @@
   1. [Commit 1](https://github.com/nhan0504/CS326/commit/1254893a73528c9605c68df5d648e4c8194401aa): Reviewed the contents of `users.md` file to ensure that the requirements of Milestone 2 were satisfied.
   2. [Commit 2](https://github.com/nhan0504/CS326/commit/d2ca24dd6295fe8f4ef1ef1d19d66d2c4aca7c6f): Reviewed the contents of `ui-diagrams.md` file to ensure that the requirements of Milestone 2 were satisfied.
   3. [Commit 3](https://github.com/nhan0504/CS326/commit/1abc39fa1969e43ba857c71bccef948e5dd1e70b): Reviewed the contents of `features.md` file to ensure that the requirements of Milestone 2 were satisfied.
-  4. [Commit 4](https://github.com/nhan0504/CS326/commit/96385bb865ecf4ce58241380e8a62f69c1099587): Implemented the delete item feature in the wardrobe view and connected the feature to IndexedDB.
-  5. [Commit 5](https://github.com/nhan0504/CS326/commit/55e1ff0e1752c7227fe628b1ed954fc82d83b589): Implemented the search and filter feature in the wardrobe view.
+  4. [Commit 4](https://github.com/nhan0504/CS326/commit/96385bb865ecf4ce58241380e8a62f69c1099587): Implemented the delete item feature in the wardrobe page and connected the feature to IndexedDB.
+  5. [Commit 5](https://github.com/nhan0504/CS326/commit/55e1ff0e1752c7227fe628b1ed954fc82d83b589): Implemented the search and filter feature in the wardrobe page.
   6. [Commit 6](https://github.com/nhan0504/CS326/pull/71/commits/8a0bace8e384a4831a69692bd4b74422b195676b): Design the feature sequence diagram for the search and filter feature of the wardrobe page.
