@@ -16,8 +16,6 @@ export class WardrobeViewComponent extends BaseComponent {
     this.loadCSS("WardrobeViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
     this.loadWardrobeItems();
-
-    this.subscribeToWardrobeEvents();
   }
 
   async loadWardrobeItems() {
@@ -25,7 +23,11 @@ export class WardrobeViewComponent extends BaseComponent {
       await this.#wardrobeService.initDB();
       this.#wardrobeItems =
         await this.#wardrobeService.loadWardrobeItemsFromDB();
-      renderWardrobeItems(this.#wardrobeItems, this.#wardrobeService, this.#wardrobeItems);
+      renderWardrobeItems(
+        this.#wardrobeItems,
+        this.#wardrobeService,
+        this.#wardrobeItems
+      );
     } catch (e) {
       console.error("Error:", e);
     }
@@ -123,7 +125,8 @@ export class WardrobeViewComponent extends BaseComponent {
       // Season Checkbox Label
       const seasonLabel = document.createElement("label");
       seasonLabel.htmlFor = season;
-      seasonLabel.textContent = season.charAt(0).toUpperCase() + season.slice(1);
+      seasonLabel.textContent =
+        season.charAt(0).toUpperCase() + season.slice(1);
 
       seasonsDiv.appendChild(seasonCheckbox);
       seasonsDiv.appendChild(seasonLabel);
@@ -155,7 +158,8 @@ export class WardrobeViewComponent extends BaseComponent {
     occasions.forEach((optionValue) => {
       const option = document.createElement("option");
       option.value = optionValue;
-      option.textContent = optionValue.charAt(0).toUpperCase() + optionValue.slice(1);
+      option.textContent =
+        optionValue.charAt(0).toUpperCase() + optionValue.slice(1);
       occasionSelect.appendChild(option);
     });
 
@@ -181,33 +185,6 @@ export class WardrobeViewComponent extends BaseComponent {
     return filterBar;
   }
 
-  subscribeToWardrobeEvents() {
-    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
-      const newItem = event.detail;
-      this.#wardrobeItems.push(newItem);
-      console.log('New wardrobe item added:', newItem);
-  
-      this.render()
-    });
-  
-    document.addEventListener('StoreWardrobeItemFailure', (event) => {
-      console.error('Failed to store wardrobe item:', event.detail);
-    });
-
-    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
-      console.log('All wardrobe items cleared');
-  
-      this.#wardrobeItems = [];
-  
-      this.render();
-    });
-  
-    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
-      console.error('Failed to clear wardrobe items:', event.detail);
-      alert('Failed to clear wardrobe items. Please try again.');
-    });
-  }
-  
   applyFilters(wardrobeItems) {
     // Retrieve selected seasons from checkboxes
     const selectedSeasons = Array.from(
