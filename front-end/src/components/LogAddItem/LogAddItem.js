@@ -27,11 +27,11 @@ export class LogAddItem extends BaseComponent {
 
   subscribeToWardrobeEvents() {
     document.addEventListener("StoreWardrobeItemSuccess", () => {
-      this.initialize();
+      this.render();
     });
 
     document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
-      this.initialize();
+      this.render();
     });
   }
 
@@ -64,21 +64,21 @@ export class LogAddItem extends BaseComponent {
       };
       await this.#outfitService.storeOutfit(this.#currentOutfit);
     }
-
     
-    this.renderItemsContainer();
+    const form = document.getElementById("add-wardrobe-item-outfit");
+    const itemsContainer = form.querySelector("#itemsContainer");
+    this.displayCurrentOutfitItems(itemsContainer);
   }
 
   render(){
     // Create the main container
     this.#container = document.createElement("div");
-    this.#container.classList.add("add-outfit-container");
+    this.#container.classList.add("add-item-container");
 
     // Grey out the background
-    //TODO: figure out how to only grey out background and not form
-    // const background = document.createElement("div");
-    // background.classList.add("background-overlay");
-    // this.#container.appendChild(background);
+    const background = document.createElement("div");
+    background.classList.add("background-overlay");
+    this.#container.appendChild(background);
 
     // Create the modal
     const modal = document.createElement("div");
@@ -87,8 +87,8 @@ export class LogAddItem extends BaseComponent {
 
     // Create the form
     const form = document.createElement("form");
-    form.id = "add-log-item-outfit";
-    form.classList.add("add-outfit-form");
+    form.id = "add-wardrobe-item-outfit";
+    form.classList.add("add-item-form");
     modal.appendChild(form);
 
     // X button to close the modal
@@ -104,26 +104,24 @@ export class LogAddItem extends BaseComponent {
     // Add Form Title
     const title = document.createElement("h2");
     title.textContent = "Add New Outfit";
-    title.classList.add("add-outfit-title");
+    title.classList.add("add-item-title");
     form.appendChild(title);
 
-  
-    //TODO: add in modal where wardrobe items are brought up
+    // Current outfit items container
+    const itemsContainer = document.createElement("div");
+    itemsContainer.id = "itemsContainer";
+    itemsContainer.classList.add("current-outfit-items");
+    form.appendChild(itemsContainer);
 
     // Add item button
     const addButton = document.createElement("button");
     addButton.textContent = "+";
     addButton.classList.add("add-item-button");
     addButton.addEventListener("click", () => {
-      this.openAddItemModal();
+      this.openAddItemModal(itemsContainer);
     });
-    this.#container.appendChild(addButton);
-
-    //TODO: Remove this if not needed
-    // const itemsAdded = document.createElement("div");
-    // itemsAdded.id = "itemsAdded";
-    // itemsAdded.classList.add("current-outfit-items");
-    // this.#container.appendChild(itemsAdded);
+    form.appendChild(addButton);
+      
 
     //TODO: Make sure that items are properly added to the current outfit
     //TODO: Make sure that items are properly deleted from the current outfit 
@@ -140,7 +138,7 @@ export class LogAddItem extends BaseComponent {
       const textLabel = document.createElement("label");
       textLabel.setAttribute("for", label);
       textLabel.textContent = label;
-      textLabel.classList.add("add-outfit-form-label");
+      textLabel.classList.add("add-item-form-label");
       form.appendChild(textLabel);
 
       // Create the input
@@ -149,14 +147,14 @@ export class LogAddItem extends BaseComponent {
       input.id = label;
       input.placeholder = placeholder;
       input.required = true;
-      input.classList.add("add-outfit-form-input");
+      input.classList.add("add-item-form-input");
       form.appendChild(input);
     });
 
     // Create the seasons checkboxes
     const seasonTextLabel = document.createElement("label");
     seasonTextLabel.textContent = "Seasons";
-    seasonTextLabel.classList.add("add-outfit-form-label");
+    seasonTextLabel.classList.add("add-item-form-label");
     form.appendChild(seasonTextLabel);
     const seasonContainer = document.createElement("div");
     SEASONS.forEach((season) => {
@@ -164,14 +162,14 @@ export class LogAddItem extends BaseComponent {
       const textLabel = document.createElement("label");
       textLabel.htmlFor = season;
       textLabel.textContent = season.charAt(0).toUpperCase() + season.slice(1);
-      textLabel.classList.add("outfit-add-seasons");
+      textLabel.classList.add("wardrobe-add-seasons");
       seasonContainer.appendChild(textLabel);
 
       // Create the input
       const input = document.createElement("input");
       input.type = "checkbox";
       input.id = season;
-      input.name = "outfit-seasons";
+      input.name = "wardrobe-seasons";
       input.value = season;
       seasonContainer.appendChild(input);
     });
@@ -191,7 +189,7 @@ export class LogAddItem extends BaseComponent {
       const textLabel = document.createElement("label");
       textLabel.setAttribute("for", label);
       textLabel.textContent = label;
-      textLabel.classList.add("add-outfit-form-label");
+      textLabel.classList.add("add-item-form-label");
       form.appendChild(textLabel);
 
       // Create the select field
@@ -212,13 +210,13 @@ export class LogAddItem extends BaseComponent {
     const notesLabel = document.createElement("label");
     notesLabel.setAttribute("for", "Notes");
     notesLabel.textContent = "Notes";
-    notesLabel.classList.add("add-outfit-form-label");
+    notesLabel.classList.add("add-item-form-label");
     form.appendChild(notesLabel);
 
     const notesTextarea = document.createElement("textarea");
     notesTextarea.id = "Notes";
     notesTextarea.placeholder = "Add any notes or details here...";
-    notesTextarea.classList.add("add-outfit-form-input");
+    notesTextarea.classList.add("add-item-form-input");
     notesTextarea.rows = 5; // Adjust rows for height
     form.appendChild(notesTextarea);
 
@@ -233,7 +231,7 @@ export class LogAddItem extends BaseComponent {
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
     submitButton.textContent = "Add Outfit";
-    submitButton.classList.add("add-outfit-item-submit");
+    submitButton.classList.add("add-wardrobe-item-submit");
     submitButton.addEventListener("click", (event) => {
       event.preventDefault();
 
@@ -264,36 +262,155 @@ export class LogAddItem extends BaseComponent {
     return this.#container;
   }
 
-  renderItemsContainer () {
-    this.#itemsContainer = document.createElement("div");
-    this.#itemsContainer.id = "itemsContainer";
-    this.#itemsContainer.classList.add("current-outfit-items");
-    this.#container.appendChild(this.#itemsContainer);
+  displayCurrentOutfitItems(itemsContainer) {
+    if (!itemsContainer) {
+      console.error("Error: itemsContainer is not found in the DOM.");
+      return;
+    }
 
     // Clear existing items
     if (!this.#currentOutfit) {
       return;
     } else {
-      this.#itemsContainer.innerHTML = "";
+      itemsContainer.innerHTML = "";
     }
 
     if (this.#currentOutfit.wardrobe_item_ids.length === 0) {
       const noItemsText = document.createElement("p");
       noItemsText.textContent = "No items added yet.";
-      this.#itemsContainer.appendChild(noItemsText);
+      itemsContainer.appendChild(noItemsText);
     } else {
       this.#currentOutfit.wardrobe_item_ids.forEach((itemId) => {
         const item = this.#wardrobeItems.find((i) => i.item_id === itemId);
         if (item) {
-          const itemElement = this.createItemElement(item);
-          this.#itemsContainer.appendChild(itemElement);
+          const itemElement = this.createItemElement(item, itemsContainer);
+          itemsContainer.appendChild(itemElement);
         }
       });
     }
   }
 
-  showItemsContainer() {
-    this.#itemsContainer.style.display = "block";
+  createItemElement(item, itemsContainer) {
+    const itemElement = document.createElement("div");
+    itemElement.classList.add("outfit-item");
+
+    // Item image
+    const itemImage = document.createElement("img");
+    itemImage.src = item.image;
+    itemImage.alt = item.name;
+    itemElement.appendChild(itemImage);
+
+    // Item name
+    const itemName = document.createElement("p");
+    itemName.textContent = item.name;
+    itemElement.appendChild(itemName);
+
+    // Delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "x";
+    deleteButton.classList.add("delete-item-button");
+    deleteButton.addEventListener("click", () => {
+      this.removeItemFromOutfit(item.item_id, itemsContainer);
+    });
+    itemElement.appendChild(deleteButton);
+
+    return itemElement;
+  }
+
+  openAddItemModal(itemsContainer) {
+    // Create modal overlay
+    const modalOverlay = document.createElement("div");
+    modalOverlay.classList.add("modal-overlay");
+
+    // Modal content
+    const modalContent = document.createElement("div");
+    modalContent.classList.add("modal-content");
+
+    // Close button
+    const closeButton = document.createElement("span");
+    closeButton.classList.add("close-button");
+    closeButton.innerHTML = "&times;";
+    closeButton.addEventListener("click", () => {
+      modalOverlay.remove();
+    });
+    modalContent.appendChild(closeButton);
+
+    // Title
+    const modalTitle = document.createElement("h3");
+    modalTitle.textContent = "Select Items to Add";
+    modalContent.appendChild(modalTitle);
+
+    // Items list
+    const itemsList = document.createElement("div");
+    itemsList.classList.add("items-list");
+
+    this.#wardrobeItems.forEach((item) => {
+      const itemElement = document.createElement("div");
+      itemElement.classList.add("log-wardrobe-item");
+
+      // Item image
+      const itemImage = document.createElement("img");
+      itemImage.src = item.image;
+      itemImage.alt = item.name;
+      itemElement.appendChild(itemImage);
+
+      // Item name
+      const itemName = document.createElement("p");
+      itemName.textContent = item.name;
+      itemElement.appendChild(itemName);
+
+      // Add button
+      const addItemButton = document.createElement("button");
+      addItemButton.textContent = "Add";
+      addItemButton.addEventListener("click", async () => {
+        await this.addItemToOutfit(item.item_id, itemsContainer);
+        modalOverlay.remove();
+      });
+      itemElement.appendChild(addItemButton);
+
+      itemsList.appendChild(itemElement);
+    });
+
+    modalContent.appendChild(itemsList);
+    modalOverlay.appendChild(modalContent);
+    document.body.appendChild(modalOverlay);
+  }
+
+  async addItemToOutfit(itemId, itemsContainer) {
+    if (!this.#currentOutfit.wardrobe_item_ids.includes(itemId)) {
+      this.#currentOutfit.wardrobe_item_ids.push(itemId);
+      this.#currentOutfit.updated_at = new Date().toISOString();
+
+      // Save the outfit using storeOutfit
+      await this.#outfitService.deleteOutfit(this.#currentOutfit.id);
+      await this.#outfitService.storeOutfit(this.#currentOutfit);
+
+      // Update the UI
+      this.displayCurrentOutfitItems(itemsContainer);
+
+      // Update LogViewComponent
+      this.updateLogView();
+    } else {
+      alert("Item already added to outfit.");
+    }
+  }
+
+  async removeItemFromOutfit(itemId, itemsContainer) {
+    const index = this.#currentOutfit.wardrobe_item_ids.indexOf(itemId);
+    if (index > -1) {
+      this.#currentOutfit.wardrobe_item_ids.splice(index, 1);
+      this.#currentOutfit.updated_at = new Date().toISOString();
+
+      // Save the outfit using storeOutfit
+      await this.#outfitService.deleteOutfit(this.#currentOutfit.id);
+      await this.#outfitService.storeOutfit(this.#currentOutfit);
+
+      // Update the UI
+      this.displayCurrentOutfitItems(itemsContainer);
+
+      // Update LogViewComponent
+      this.updateLogView();
+    }
   }
 
   // Show the add form
@@ -340,130 +457,6 @@ export class LogAddItem extends BaseComponent {
 
   }
 
-  createItemElement(item) {
-    const itemElement = document.createElement("div");
-    itemElement.classList.add("outfit-item");
-
-    // Item image
-    const itemImage = document.createElement("img");
-    itemImage.src = item.image;
-    itemImage.alt = item.name;
-    itemElement.appendChild(itemImage);
-
-    // Item name
-    const itemName = document.createElement("p");
-    itemName.textContent = item.name;
-    itemElement.appendChild(itemName);
-
-    // Delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "x";
-    deleteButton.classList.add("delete-item-button");
-    deleteButton.addEventListener("click", () => {
-      this.removeItemFromOutfit(item.item_id);
-    });
-    itemElement.appendChild(deleteButton);
-
-    return itemElement;
-  }
-
-
-  openAddItemModal() {
-    // Create modal overlay
-    const modalOverlay = document.createElement("div");
-    modalOverlay.classList.add("modal-overlay");
-
-    // Modal content
-    const modalContent = document.createElement("div");
-    modalContent.classList.add("modal-content");
-
-    // Close button
-    const closeButton = document.createElement("span");
-    closeButton.classList.add("close-button");
-    closeButton.innerHTML = "&times;";
-    closeButton.addEventListener("click", () => {
-      modalOverlay.remove();
-    });
-    modalContent.appendChild(closeButton);
-
-    // Title
-    const modalTitle = document.createElement("h3");
-    modalTitle.textContent = "Select Items to Add";
-    modalContent.appendChild(modalTitle);
-
-    // Items list
-    const itemsList = document.createElement("div");
-    itemsList.classList.add("items-list");
-
-    this.#wardrobeItems.forEach((item) => {
-      const itemElement = document.createElement("div");
-      itemElement.classList.add("log-wardrobe-item");
-
-      // Item image
-      const itemImage = document.createElement("img");
-      itemImage.src = item.image;
-      itemImage.alt = item.name;
-      itemElement.appendChild(itemImage);
-
-      // Item name
-      const itemName = document.createElement("p");
-      itemName.textContent = item.name;
-      itemElement.appendChild(itemName);
-
-      // Add button
-      const addItemButton = document.createElement("button");
-      addItemButton.textContent = "Add";
-      addItemButton.addEventListener("click", async () => {
-        await this.addItemToOutfit(item.item_id);
-        modalOverlay.remove();
-      });
-      itemElement.appendChild(addItemButton);
-
-      itemsList.appendChild(itemElement);
-    });
-
-    modalContent.appendChild(itemsList);
-    modalOverlay.appendChild(modalContent);
-    this.#container.appendChild(modalOverlay);
-  }
-
-  async addItemToOutfit(itemId) {
-    if (!this.#currentOutfit.wardrobe_item_ids.includes(itemId)) {
-      this.#currentOutfit.wardrobe_item_ids.push(itemId);
-      this.#currentOutfit.updated_at = new Date().toISOString();
-
-      // Save the outfit using storeOutfit
-      await this.#outfitService.deleteOutfit(this.#currentOutfit.id);
-      await this.#outfitService.storeOutfit(this.#currentOutfit);
-
-      // Update the UI
-      this.renderItemsContainer();
-
-      // Update LogViewComponent
-      this.updateLogView();
-    } else {
-      alert("Item already added to outfit.");
-    }
-  }
-
-  async removeItemFromOutfit(itemId) {
-    const index = this.#currentOutfit.wardrobe_item_ids.indexOf(itemId);
-    if (index > -1) {
-      this.#currentOutfit.wardrobe_item_ids.splice(index, 1);
-      this.#currentOutfit.updated_at = new Date().toISOString();
-
-      // Save the outfit using storeOutfit
-      await this.#outfitService.deleteOutfit(this.#currentOutfit.id);
-      await this.#outfitService.storeOutfit(this.#currentOutfit);
-
-      // Update the UI
-      this.renderItemsContainer();
-
-      // Update LogViewComponent
-      this.updateLogView();
-    }
-  }
-
   collectFormData() {
     const params = {};
     // Get the title, cost, size, brand, occasion, and category
@@ -485,7 +478,7 @@ export class LogAddItem extends BaseComponent {
 
     // Get the seasons
     const selectedSeasons = Array.from(
-      document.querySelectorAll("input[name='outfit-seasons']:checked")
+      document.querySelectorAll("input[name='wardrobe-seasons']:checked")
     ).map((checkbox) => checkbox.value);
     params["seasons"] = selectedSeasons;
 
@@ -545,7 +538,6 @@ function generateUniqueId() {
   return "_" + Math.random().toString(36).substr(2, 9);
 }
 
-//TODO: re-render with events and take out other re-rendering
 
 //TODO: Implement daily outfit thing where outfit of the day is displayed and the container doesn't show up if not
 

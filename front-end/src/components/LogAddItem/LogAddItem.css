@@ -1,152 +1,3 @@
-.background-overlay {
-  position: fixed; /* Ensures the overlay covers the entire viewport */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
-  z-index: 998; /* Higher than most other elements */
-}
-
-/* Main container */
-.log-add-item {
-  margin: 20px;
-  padding: 10px;
-}
-
-/* Title */
-.log-add-item h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-}
-
-/* Current outfit items container */
-.current-outfit-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-/* Outfit item */
-.outfit-item {
-  position: relative;
-  width: 100px;
-  text-align: center;
-}
-
-/* Outfit item image */
-.outfit-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* Outfit item name */
-.outfit-item p {
-  margin-top: 5px;
-  font-size: 14px;
-}
-
-/* Delete item button */
-.delete-item-button {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-}
-
-/* Add item button */
-.add-item-button {
-  display: inline-block;
-  padding: 10px 15px;
-  font-size: 18px;
-  cursor: pointer;
-  background-color: #007bff; /* Bootstrap primary color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-/* Modal overlay */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Modal content */
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 10px;
-  position: relative;
-}
-
-/* Close button */
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Items list in modal */
-.items-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 20px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-/* Wardrobe item in modal */
-.log-wardrobe-item {
-  width: 100px;
-  text-align: center;
-}
-
-/* Wardrobe item image */
-.log-wardrobe-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* Wardrobe item name */
-.log-wardrobe-item p {
-  margin-top: 5px;
-  font-size: 14px;
-}
-
-/* Add item button in modal */
-.log-wardrobe-item button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: #28a745; /* Bootstrap success color */
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
 .add-item-container {
   display: none;
   position: fixed;
@@ -157,6 +8,11 @@
   z-index: 1000;
 }
 
+.background-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 .modal {
   padding: 20px;
@@ -178,25 +34,34 @@
   right: 10px;
 }
 
-.add-outfit-form {
+.add-item-form {
   border-radius: 10px;
   padding: 30px;
 }
 
-.add-outfit-title {
+.add-item-title {
   text-align: center;
 }
 
-.add-outfit-form-label {
+.add-item-form-label {
   font-weight: bold;
   margin-bottom: 5px;
   display: block;
   color: #555;
 }
 
-.add-outfit-form-input,
-.add-outfit-form select,
-.add-outfit-form button {
+.add-item-form-input,
+.add-item-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.add-wardrobe-item-submit {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -214,12 +79,12 @@
   font-size: 16px;
 }
 
-.add-outfit-form input:focus {
+.add-item-form input:focus {
   border-color: #0066cc;
   outline: none;
 }
 
-.add-outfit-submit {
+.add-wardrobe-item-submit {
   background-color: #0066cc;
   color: white;
 }
@@ -229,3 +94,144 @@
   padding: 0px;
 }
 
+/* Main container */
+.log-add-item {
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  /* Title */
+  .log-add-item h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  /* Current outfit items container */
+  .current-outfit-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  /* Outfit item */
+  .outfit-item {
+    position: relative;
+    width: 100px;
+    text-align: center;
+  }
+  
+  /* Outfit item image */
+  .outfit-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Outfit item name */
+  .outfit-item p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Delete item button */
+  .delete-item-button {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Add item button */
+  .add-item-button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Modal overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal content */
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  /* Items list in modal */
+  .items-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  /* Wardrobe item in modal */
+  .log-wardrobe-item {
+    width: 100px;
+    text-align: center;
+  }
+  
+  /* Wardrobe item image */
+  .log-wardrobe-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Wardrobe item name */
+  .log-wardrobe-item p {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Add item button in modal */
+  .log-wardrobe-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #28a745; /* Bootstrap success color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  
