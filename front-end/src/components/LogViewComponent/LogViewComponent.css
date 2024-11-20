@@ -60,6 +60,13 @@ right: 8%;
     box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.1);
 }
 
+.log-add-outfit-btn {
+  position: absolute;
+  right: 15px;
+  font-size: 35px;
+  color: #3f648a;
+}
+
 .log-apply-filters-button {
     background-color: white;
     color: black;

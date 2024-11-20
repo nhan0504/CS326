@@ -13,6 +13,7 @@ export class LogViewComponent extends BaseComponent {
   #wardrobeService = null;
   #outfitItems = [];
   #outfitService = null;
+  #addForm = null;
 
   constructor(LogViewData = {}) {
     super();
@@ -51,10 +52,26 @@ export class LogViewComponent extends BaseComponent {
     this.#container.id = "logView";
     this.#container.style.display = "none";
 
-    // Create the LogAddItem component and append it
-    const logAddItemComponent = new LogAddItem();
-    const logAddItemElement = logAddItemComponent.render();
-    this.#container.appendChild(logAddItemElement);
+    // // Create the LogAddItem component and append it
+    // const logAddItemComponent = new LogAddItem();
+    // const logAddItemElement = logAddItemComponent.render();
+    // this.#container.appendChild(logAddItemElement);
+
+    // Create the add item button
+    const addItemButton = document.createElement("span");
+    addItemButton.innerHTML = '<i class="fa-solid fa-circle-plus"></i>';
+    addItemButton.classList.add("log-add-outfit-btn");
+    this.#container.appendChild(addItemButton);
+
+    // Render the add item form when the button is clicked
+    addItemButton.onclick = () => {
+      if (!this.#addForm) {
+        this.#addForm = new LogAddItem();
+        const element = this.#addForm.render();
+        document.body.appendChild(element);
+      }
+      this.#addForm.show();
+    };
 
     // Create the outfit container
     const logContainer = document.createElement("div");
