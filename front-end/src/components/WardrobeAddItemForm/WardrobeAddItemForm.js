@@ -2,7 +2,6 @@ import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
-import { renderWardrobeItems } from "../WardrobeViewComponent/WardrobeViewComponent.js";
 
 export class WardrobeAddItemForm extends BaseComponent {
   #container = null;
@@ -187,7 +186,7 @@ export class WardrobeAddItemForm extends BaseComponent {
         this.hide();
 
         // add the item to indexdb
-        this.addItem(formData, files, displayedWardrobeItems);
+        this.addItem(formData, files);
 
         // reset the form
         form.reset();
@@ -210,7 +209,7 @@ export class WardrobeAddItemForm extends BaseComponent {
     errorMessageElement.textContent = "";
   }
 
-  addItem(params, files, displayedWardrobeItems) {
+  addItem(params, files) {
     // Read the image
     const image = files[0];
     const reader = new FileReader();
@@ -221,14 +220,6 @@ export class WardrobeAddItemForm extends BaseComponent {
 
       // Construct the WardrobeItem object
       const wardrobeItem = new WardrobeItem(params);
-
-      // Display the new item without rerendering everything
-      renderWardrobeItems(
-        [wardrobeItem],
-        this.#wardrobeService,
-        displayedWardrobeItems
-      );
-      displayedWardrobeItems.push(wardrobeItem);
 
       // Store the item in indexdb
       this.storeWardrobeItem(wardrobeItem);
