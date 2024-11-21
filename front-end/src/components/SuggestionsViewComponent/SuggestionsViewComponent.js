@@ -2,6 +2,7 @@ import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
+import { Events } from "../../eventhub/Events.js";
 
 export class SuggestionsViewComponent extends BaseComponent {
   #container = null;
@@ -22,26 +23,30 @@ export class SuggestionsViewComponent extends BaseComponent {
   }
 
   subscribeToWardrobeEvents() {
-    document.addEventListener('StoreWardrobeItemSuccess', (event) => {
+    document.addEventListener("StoreWardrobeItemSuccess", (event) => {
       this.loadWardrobe();
-    });
-  
-    document.addEventListener('StoreWardrobeItemFailure', (event) => {
-      console.error('Failed to store wardrobe item:');
     });
 
-    document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
-      console.log('All wardrobe items cleared');
-  
+    document.addEventListener("StoreWardrobeItemFailure", (event) => {
+      console.error("Failed to store wardrobe item:");
+    });
+
+    document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
+      console.log("All wardrobe items cleared");
+
       this.loadWardrobe();
     });
-  
-    document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
-      console.error('Failed to clear wardrobe items:');
-      alert('Failed to clear wardrobe items. Please try again.');
+
+    document.addEventListener("UnStoreWardrobeItemFailure", (event) => {
+      console.error("Failed to clear wardrobe items:");
+      alert("Failed to clear wardrobe items. Please try again.");
+    });
+
+    document.addEventListener(Events.UpdateWardrobeItemSuccess, () => {
+      this.loadWardrobe();
     });
   }
-  
+
   async loadWardrobe() {
     try {
       await this.wardrobeService.initDB();

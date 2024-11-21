@@ -1,11 +1,11 @@
-import { Events } from '../eventhub/Events.js';
-import Service from './Service.js';
+import { Events } from "../eventhub/Events.js";
+import Service from "./Service.js";
 
 export class WardrobeRepositoryService extends Service {
   constructor() {
     super();
-    this.dbName = 'wardrobeDB';
-    this.storeName = 'wardrobeItem';
+    this.dbName = "wardrobeDB";
+    this.storeName = "wardrobeItem";
     this.db = null;
 
     // Initialize the database
@@ -13,7 +13,7 @@ export class WardrobeRepositoryService extends Service {
       .then(() => {
         this.loadWardrobeItemsFromDB(); // Load wardrobe items on initialization
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
@@ -22,104 +22,106 @@ export class WardrobeRepositoryService extends Service {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, 1);
 
-      request.onupgradeneeded = event => {
+      request.onupgradeneeded = (event) => {
         const db = event.target.result;
         db.createObjectStore(this.storeName, {
-          keyPath: 'item_id',
+          keyPath: "item_id",
         });
       };
 
-      request.onsuccess = event => {
+      request.onsuccess = (event) => {
         this.db = event.target.result;
         resolve(this.db);
       };
 
-      request.onerror = event => {
-        reject('Error initializing IndexedDB');
+      request.onerror = (event) => {
+        reject("Error initializing IndexedDB");
       };
     });
   }
 
   async storeWardrobeItem(wardrobeItemData) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const transaction = this.db.transaction([this.storeName], "readwrite");
       const store = transaction.objectStore(this.storeName);
       const request = store.add(wardrobeItemData);
 
       request.onsuccess = () => {
         document.dispatchEvent(new Event(Events.StoreWardrobeItemSuccess));
-        resolve('Wardrobe item stored successfully');
+        resolve("Wardrobe item stored successfully");
       };
 
       request.onerror = () => {
         document.dispatchEvent(new Event(Events.StoreWardrobeItemFailure));
-        reject('Error storing wardrobe item:');
+        reject("Error storing wardrobe item:");
       };
     });
   }
 
   async clearWardrobeItem(wardrobeItemId) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const transaction = this.db.transaction([this.storeName], "readwrite");
       const store = transaction.objectStore(this.storeName);
       const request = store.delete(wardrobeItemId);
 
       request.onsuccess = () => {
         document.dispatchEvent(new Event(Events.UnStoreWardrobeItemSuccess));
-        resolve('Wardrobe item cleared successfully');
+        resolve("Wardrobe item cleared successfully");
       };
 
       request.onerror = () => {
         document.dispatchEvent(new Event(Events.UnStoreWardrobeItemFailure));
-        reject('Error clearing wardrobe item:');
+        reject("Error clearing wardrobe item:");
       };
     });
   }
 
   async loadWardrobeItemsFromDB() {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readonly');
+      const transaction = this.db.transaction([this.storeName], "readonly");
       const store = transaction.objectStore(this.storeName);
       const request = store.getAll();
 
-      request.onsuccess = event => {
+      request.onsuccess = (event) => {
         const wardrobeItems = event.target.result;
-        wardrobeItems.forEach(item => this.publish(Events.NewWardrobeItem, item));
+        wardrobeItems.forEach((item) =>
+          this.publish(Events.NewWardrobeItem, item)
+        );
         resolve(wardrobeItems);
       };
 
       request.onerror = () => {
         this.publish(Events.LoadWardrobeItemFailure);
-        reject('Error retrieving wardrobe items');
+        reject("Error retrieving wardrobe items");
       };
     });
   }
 
   async clearWardrobeItems() {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const transaction = this.db.transaction([this.storeName], "readwrite");
       const store = transaction.objectStore(this.storeName);
       const request = store.clear();
 
       request.onsuccess = () => {
         document.dispatchEvent(new Event(Events.UnStoreWardrobeItemSuccess));
-        resolve('All wardrobe items cleared');
+        resolve("All wardrobe items cleared");
       };
 
       request.onerror = () => {
         document.dispatchEvent(new Event(Events.UnStoreWardrobeItemFailure));
-        reject('Error clearing wardrobe items');
+        reject("Error clearing wardrobe items");
       };
     });
   }
 
   async toggleFavorite(itemId) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction([this.storeName], 'readwrite');
+      const transaction = this.db.transaction([this.storeName], "readwrite");
       const store = transaction.objectStore(this.storeName);
       const request = store.get(itemId);
 
-      request.onsuccess = event => {
+      request.onsuccess = (event) => {
         const item = event.target.result;
 
         if (item) {
@@ -128,27 +130,27 @@ export class WardrobeRepositoryService extends Service {
           const updateRequest = store.put(item);
 
           updateRequest.onsuccess = () => {
-            this.publish(Events.UpdateWardrobeItemSuccess, item);
-            resolve('Wardrobe item updated successfully');
+            document.dispatchEvent(new Event(Events.UpdateWardrobeItemSuccess));
+            resolve("Wardrobe item updated successfully");
           };
 
           updateRequest.onerror = () => {
             this.publish(Events.UpdateWardrobeItemFailure, item);
-            reject('Error updating wardrobe item');
+            reject("Error updating wardrobe item");
           };
         } else {
-          reject('Wardrobe item not found');
+          reject("Wardrobe item not found");
         }
       };
 
       request.onerror = () => {
-        reject('Error retrieving wardrobe item');
+        reject("Error retrieving wardrobe item");
       };
     });
   }
 
   addSubscriptions() {
-    this.subscribe(Events.StoreWardrobeItem, data => {
+    this.subscribe(Events.StoreWardrobeItem, (data) => {
       this.storeWardrobeItem(data);
     });
 
