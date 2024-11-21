@@ -69,3 +69,9 @@
 - **Task**: Fix bugs with the log page add item
 - **Details**: Made the add item listen for wardrobe events and made it properly display the items on refresh.
 - **Link to Commit**: [Log bug fixes](https://github.com/nhan0504/CS326/commit/865657d8f84d17a614038f923ad7a76af6ec859a)
+
+### November 21, 2024
+- **Task**: Wardrobe Events
+- **Details**: Refactored the wardrobe a little bit so that it responds to events. Made suggestions page respond to the event published when a wardrobe item is favorited.
+- **Link to Commit**: [Wardrobe Events](https://github.com/nhan0504/CS326/commit/4127ec8f79d77802a4b5a69b2067fbf785af427d)
+
