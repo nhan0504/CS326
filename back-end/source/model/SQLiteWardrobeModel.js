@@ -27,7 +27,7 @@ const WardrobeItem = sequelize.define("WardrobeItem", {
   },
   cost: {
     type: DataTypes.FLOAT,
-    allowNull: true,
+    allowNull: false,
   },
   size: {
     type: DataTypes.STRING,
@@ -109,7 +109,12 @@ class _SQLiteWardrobeModel {
   }
 
   async create(item) {
-    return await WardrobeItem.create(item);
+    try {
+      return await WardrobeItem.create(item);
+    } catch (error) {
+      console.error("Error creating WardrobeItem:", error);
+      throw error;
+    }
   }
 
   async read(id = null) {

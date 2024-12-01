@@ -26,7 +26,7 @@ class Server {
   }
 
   // Start the server on a specified port
-  start(port = 3000) {
+  start(port = 4000) {
     this.app.listen(port, () => {
       console.log(`Server started on port ${port}`);
     });

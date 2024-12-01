@@ -1,5 +1,4 @@
 import express from "express";
-import ItemController from "../controller/ItemController.js";
 import WardrobeController from "../controller/WardrobeController.js";
 
 class ItemRoutes {

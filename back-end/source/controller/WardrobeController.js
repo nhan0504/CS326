@@ -8,8 +8,8 @@ class WardrobeController {
   }
 
   // Get all wardrobe items
-  async getAllWardobeItems(req, res) {
-    const outfits = await this.model.read();
+  async getAllWardrobeItems(req, res) {
+    const items = await this.model.read();
     res.json({ items });
   }
 
