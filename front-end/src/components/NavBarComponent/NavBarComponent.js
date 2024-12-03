@@ -1,4 +1,6 @@
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
+import { getUsername } from '../../models/User.js';
+import { Events } from '../../eventhub/Events.js';
 
 export class NavBarComponent extends BaseComponent {
   #container = null;
@@ -7,6 +9,7 @@ export class NavBarComponent extends BaseComponent {
     super();
     this.NavBarData = NavBarData;
     this.loadCSS('NavBarComponent');
+    this.listenForUsernameUpdates();
   }
 
   render() {
@@ -34,8 +37,7 @@ export class NavBarComponent extends BaseComponent {
       { id: 'log', text: 'Log' },
       { id: 'wardrobe', text: 'Wardrobe' },
       { id: 'stats', text: 'Stats' },
-      { id: 'suggestions', text: 'Suggestions' },
-      { id: 'login', text: 'Log In' }
+      { id: 'suggestions', text: 'Suggestions' }
     ];
 
     // Create and append buttons
@@ -46,10 +48,26 @@ export class NavBarComponent extends BaseComponent {
       buttonContainer.appendChild(button);
     });
 
+    // Add google sign-in button
+    const googleSignIn = document.createElement('a');
+    googleSignIn.textContent = "Login"
+    googleSignIn.id = "googleSignInButton";
+    googleSignIn.setAttribute('href', 'http://127.0.0.1:4000/auth/google');
+    buttonContainer.appendChild(googleSignIn);
+
     // Append the logo and buttons to the main container
     this.#container.appendChild(logo);
     this.#container.appendChild(buttonContainer);
 
     return this.#container;
+  }
+
+  listenForUsernameUpdates() {
+    document.addEventListener("DOMContentLoaded", (event) => {
+      setTimeout(function(){
+        if (getUsername() != null)
+        document.getElementById('googleSignInButton').textContent = "Login (" + getUsername() + ")";
+      }, 200);
+    });
   }
 }

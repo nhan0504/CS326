@@ -22,8 +22,12 @@
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "dependencies": {
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "html2canvas": "^1.4.1",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
