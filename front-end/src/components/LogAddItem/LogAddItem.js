@@ -3,6 +3,7 @@ import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryServ
 import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
 import { Events } from "../../eventhub/Events.js";
 import { EventHub } from "../../eventhub/EventHub.js";
+import { getId } from '../../models/User.js';
 
 export class LogAddItem extends BaseComponent {
   #currentOutfit = null;
@@ -43,7 +44,7 @@ export class LogAddItem extends BaseComponent {
     // Load or create today's outfit
     const today = new Date().toISOString().split("T")[0];
     const outfits = await this.#outfitService.loadOutfitFromDB();
-    const userId = getCurrentUserId();
+    const userId = getId();
 
     this.#currentOutfit = outfits.find(
       (outfit) => outfit.user_id === userId && outfit.date === today
