@@ -29,10 +29,26 @@ main.appendChild(loginView.render());
 document.addEventListener("DOMContentLoaded", async () => {
   // Create nav bar/view logic
   const navigate = (viewId) => {
+    // Remove any existing log in prompts
+    const elements = document.querySelectorAll('.loginPromptDiv');
+    elements.forEach(element => element.remove());
+
     if (getId() != null)
     {
+      // If user is logged in, navigate
       document.querySelectorAll(".view").forEach(view => view.style.display = "none");
       document.getElementById(viewId).style.display = "block";
+    } else {
+      // If user is not logged in, prompt them to log in
+      const viewsContainer = document.getElementById("views");
+
+      if (viewsContainer) {
+        const loginPromptDiv = document.createElement("div");
+        loginPromptDiv.classList.add('loginPromptDiv')
+        loginPromptDiv.textContent = "Please log in to access this page.";
+        
+        viewsContainer.appendChild(loginPromptDiv);
+      }
     }
   };
 
@@ -43,16 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById(id).addEventListener("click", () => navigate(`${id}View`));
   });
 
-  if (getId() == null) {
-    const viewsContainer = document.getElementById("views");
-
-    if (viewsContainer) {
-      const loginPromptDiv = document.createElement("div");
-      loginPromptDiv.textContent = "Please log in to access this page.";
-      
-      viewsContainer.appendChild(loginPromptDiv);
-    }
-  }
+  navigate("logView");
 
   // Get user ID
   try {
@@ -64,12 +71,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await response.json();
       setId(data.googleId);
       setUsername(data.username);
-
-      // Initialize with the home view
-      navigate("logView");
     } else {
       console.error("Failed to fetch user data:", response.statusText);
     }
+
+    // Initialize with the log view
+    navigate("logView");
   } catch (error) {
     console.error("Error fetching user data:", error);
   }
