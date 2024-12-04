@@ -53,7 +53,15 @@ class StatRoutes {
         });
 
         // Number of items in each category
-
+        this.router.get("/items-per-category", async (req, res) => {
+            try {;
+              const categoryCounts = await WardrobeController.getItemPerCategory(req, res);
+              res.json(categoryCounts);
+            } catch (error) {
+              console.error("Error fetching items per category:", error);
+              res.status(500).json({ error: "Failed to fetch items per category." });
+            }
+          });
     }
 
     getRouter() {

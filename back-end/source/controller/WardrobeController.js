@@ -74,7 +74,6 @@ class WardrobeController {
   }
 
   async getFrequencyPerCategory(req, res) {
-    req.user = { googleId: "user-123" };
     try {
       const userId = req.user.googleId; 
       const items = await this.model.getFrequencyPerCategory(userId);
@@ -82,6 +81,17 @@ class WardrobeController {
     } catch (error) {
       console.error("Error fetching item frequency per category:", error);
       res.status(500).json({ error: "Failed to fetch item frequency per category." });
+    }
+  }
+
+  async getItemPerCategory(req, res) {
+    try {
+      const userId = req.user.googleId; 
+      const items = await this.model.getItemPerCategory(userId);
+      res.json({items});
+    } catch (error) {
+      console.error("Error fetching number of item per category:", error);
+      res.status(500).json({ error: "Failed to fetch number of item per category." });
     }
   }
 

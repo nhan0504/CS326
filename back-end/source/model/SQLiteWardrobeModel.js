@@ -148,6 +148,20 @@ class _SQLiteWardrobeModel {
     }
   }
 
+  // Get item count per category
+  async getItemPerCategory(userId) {
+    try {
+      const categoryCounts = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: ["category", [Sequelize.fn("COUNT", Sequelize.col("item_id")), "item_count"]],
+        group: ["category"],
+      });
+      return categoryCounts;
+    } catch (error) {
+      console.error("Error fetching number of items per category:", error);
+    }
+  }
+
   async update(item) {
     const existingItem = await WardrobeItem.findByPk(item.item_id);
     if (!existingItem) {
