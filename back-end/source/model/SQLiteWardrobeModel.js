@@ -117,11 +117,18 @@ class _SQLiteWardrobeModel {
     }
   }
 
-  async read(id = null) {
-    if (id) {
-      return await WardrobeItem.findByPk(id);
+  async read(itemId = null) {
+    if (itemId) {
+      return await WardrobeItem.findByPk(itemId);
     }
     return await WardrobeItem.findAll();
+  }
+
+  //Filter item by userId
+  async read(filters = {}) {
+    return await WardrobeItem.findAll({
+      where: filters,
+    });
   }
 
   async update(item) {

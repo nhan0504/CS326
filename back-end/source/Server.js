@@ -4,6 +4,7 @@ import cors from "cors";
 import passport from "./auth/passport.js";
 import OutfitRoutes from "./routes/OutfitRoutes.js";
 import ItemRoutes from "./routes/ItemRoutes.js";
+import StatRoutes from "./routes/StatRoutes.js";
 import AuthRoutes from "./routes/AuthRoutes.js";
 
 class Server {
@@ -52,6 +53,7 @@ class Server {
     // Mount routes for Outfit, WardrobeItem, and Google APIs
     this.app.use("/v1/outfits", OutfitRoutes);
     this.app.use("/v1/items", ItemRoutes);
+    this.app.use("/v1/stats", StatRoutes);
     this.app.use("/", AuthRoutes);
   }
 
