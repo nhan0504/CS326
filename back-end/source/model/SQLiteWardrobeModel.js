@@ -117,11 +117,49 @@ class _SQLiteWardrobeModel {
     }
   }
 
-  async read(id = null) {
-    if (id) {
-      return await WardrobeItem.findByPk(id);
+  async read(itemId = null) {
+    if (itemId) {
+      return await WardrobeItem.findByPk(itemId);
     }
     return await WardrobeItem.findAll();
+  }
+
+  //Filter item 
+  async read(filters = {}) {
+    return await WardrobeItem.findAll({
+      where: filters,
+    });
+  }
+
+  // Get item frequency by category
+  async getFrequencyPerCategory(userId) {
+    try {
+      const categories = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: [
+          "category",
+          [Sequelize.fn("SUM", Sequelize.col("times_worn")), "total_wear"]
+        ],
+        group: ["category"],
+      });
+      return categories;
+    } catch (error) {
+      console.error("Error fetching frequency per category:", error);
+    }
+  }
+
+  // Get item count per category
+  async getItemPerCategory(userId) {
+    try {
+      const categoryCounts = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: ["category", [Sequelize.fn("COUNT", Sequelize.col("item_id")), "item_count"]],
+        group: ["category"],
+      });
+      return categoryCounts;
+    } catch (error) {
+      console.error("Error fetching number of items per category:", error);
+    }
   }
 
   async update(item) {
