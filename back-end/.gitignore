@@ -1,0 +1,5 @@
+node_modules
+authentication.sqlite
+database.sqlite
+
+.env

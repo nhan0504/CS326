@@ -2,13 +2,20 @@ import ModelFactory from "../model/ModelFactory.js";
 
 class WardrobeController {
   constructor() {
-    ModelFactory.getModel().then((model) => {
-      this.model = model;
-    });
+    this.model = null;
+  }
+  // constructor() {
+  //   ModelFactory.getModel().then((model) => {
+  //     this.model = model;
+  //   });
+  // }
+
+  async init() {
+    this.model = await ModelFactory.getModel("sqlite-fresh", "wardrobe");
   }
 
   // Get all wardrobe items
-  async getAllWardrobeItems(req, res) {
+  async getAllItems(req, res) {
     const items = await this.model.read();
     res.json({ items });
   }
@@ -17,8 +24,8 @@ class WardrobeController {
   async addWardrobeItem(req, res) {
     try {
       // Check if 'item' is provided in the request body
-      if (!req.body || !req.body.item) {
-        return res.status(400).json({ error: "Item description is required." });
+      if (!req.body) {
+        return res.status(400).json({ error: "Item detail is required." });
       }
 
       // Create the new item object with a unique ID
@@ -48,4 +55,9 @@ class WardrobeController {
   }
 }
 
-export default new WardrobeController();
+//export default new WardrobeController();
+
+const wardrobeController = new WardrobeController();
+await wardrobeController.init(); // Initialize the model
+
+export default wardrobeController;
