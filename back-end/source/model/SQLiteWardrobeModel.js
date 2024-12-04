@@ -124,11 +124,28 @@ class _SQLiteWardrobeModel {
     return await WardrobeItem.findAll();
   }
 
-  //Filter item by userId
+  //Filter item 
   async read(filters = {}) {
     return await WardrobeItem.findAll({
       where: filters,
     });
+  }
+
+  // Get item frequency by category
+  async getFrequencyPerCategory(userId) {
+    try {
+      const categories = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: [
+          "category",
+          [Sequelize.fn("SUM", Sequelize.col("times_worn")), "total_wear"]
+        ],
+        group: ["category"],
+      });
+      return categories;
+    } catch (error) {
+      console.error("Error fetching frequency per category:", error);
+    }
   }
 
   async update(item) {

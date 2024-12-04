@@ -40,7 +40,18 @@ class StatRoutes {
               res.status(500).json({ error: "Failed to calculate cost per wear." });
             }
         });
+
         // Wear frequency of items in each category
+        this.router.get("/category-frequency", async (req, res) => {
+            try {
+              const categories = await WardrobeController.getFrequencyPerCategory(req, res);
+              res.json(categories);
+            } catch (error) {
+              console.error("Error fetching category frequency:", error);
+              res.status(500).json({ error: "Failed to fetch category frequency." });
+            }
+        });
+
         // Number of items in each category
 
     }

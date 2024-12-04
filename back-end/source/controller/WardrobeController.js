@@ -68,8 +68,20 @@ class WardrobeController {
       }));
       res.json({items: costPerWear});
     } catch (error) {
-      console.error("Error fetching least worn items:", error);
-      res.status(500).json({ error: "Failed to fetch least worn items." });
+      console.error("Error fetching cost per item:", error);
+      res.status(500).json({ error: "Failed to fetch cost per items." });
+    }
+  }
+
+  async getFrequencyPerCategory(req, res) {
+    req.user = { googleId: "user-123" };
+    try {
+      const userId = req.user.googleId; 
+      const items = await this.model.getFrequencyPerCategory(userId);
+      res.json({items});
+    } catch (error) {
+      console.error("Error fetching item frequency per category:", error);
+      res.status(500).json({ error: "Failed to fetch item frequency per category." });
     }
   }
 
