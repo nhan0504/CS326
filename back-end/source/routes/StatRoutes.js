@@ -31,6 +31,15 @@ class StatRoutes {
         });
 
         // Cost per wear for each item
+        this.router.get("/cost-per-wear", async (req, res) => {
+            try {
+              const costPerWear = await WardrobeController.getCostPerWear(req, res);
+              res.json(costPerWear);
+            } catch (error) {
+              console.error("Error calculating cost per wear:", error);
+              res.status(500).json({ error: "Failed to calculate cost per wear." });
+            }
+        });
         // Wear frequency of items in each category
         // Number of items in each category
 

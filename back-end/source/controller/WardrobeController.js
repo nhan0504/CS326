@@ -55,6 +55,24 @@ class WardrobeController {
     }
   }
 
+  async getCostPerWear(req, res) {
+    try {
+      const userId = req.user.googleId; 
+      const items = await this.model.read({
+        user_id: userId,
+      });
+      const costPerWear = items.map((item) => ({
+        item_id: item.item_id,
+        name: item.name,
+        cost_per_wear: item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : null,
+      }));
+      res.json({items: costPerWear});
+    } catch (error) {
+      console.error("Error fetching least worn items:", error);
+      res.status(500).json({ error: "Failed to fetch least worn items." });
+    }
+  }
+
   // Add a new wardrobe item
   async addWardrobeItem(req, res) {
     try {
