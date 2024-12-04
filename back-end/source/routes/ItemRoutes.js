@@ -8,15 +8,15 @@ class ItemRoutes {
   }
 
   initializeRoutes() {
-    this.router.get("/items", async (req, res) => {
+    this.router.get("/", async (req, res) => {
       await WardrobeController.getAllItems(req, res);
     });
 
-    this.router.post("/item", async (req, res) => {
+    this.router.post("/", async (req, res) => {
       await WardrobeController.addWardrobeItem(req, res);
     });
 
-    this.router.delete("/items", async (req, res) => {
+    this.router.delete("/", async (req, res) => {
       await WardrobeController.clearItems(req, res);
     });
   }
