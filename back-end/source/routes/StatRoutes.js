@@ -1,9 +1,3 @@
-
-// List of items worn less than 2 times
-// Cost per wear for each item
-// Wear frequency of items in each category
-// Number of items in each category
-
 import express from "express";
 import WardrobeController from "../controller/WardrobeController.js";
 
@@ -17,8 +11,6 @@ class StatRoutes {
         // Top 5 most worn items
         this.router.get("/most-worn", async (req, res) => {
             try {
-              const userId = req.user.googleId;
-
               const items = await WardrobeController.getMostWornItems(req, res);
               res.json(items);
             } catch (error) {
@@ -26,7 +18,21 @@ class StatRoutes {
               res.status(500).json({ error: "Failed to fetch most worn items." });
             }
         });
+        
+        // List of items worn less than 2 times
+        this.router.get("/least-worn", async (req, res) => {
+            try {
+              const items = await WardrobeController.getLeastWornItems(req, res);
+              res.json(items);
+            } catch (error) {
+              console.error("Error fetching least worn items:", error);
+              res.status(500).json({ error: "Failed to fetch least worn items." });
+            }
+        });
 
+        // Cost per wear for each item
+        // Wear frequency of items in each category
+        // Number of items in each category
 
     }
 

@@ -1,4 +1,5 @@
 import ModelFactory from "../model/ModelFactory.js";
+import { Sequelize } from "sequelize";
 
 class WardrobeController {
   constructor() {
@@ -32,10 +33,25 @@ class WardrobeController {
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
   
-      res.json({ items: topItems });
+      res.json({topItems});
     } catch (error) {
       console.error("Error fetching most worn items:", error);
       res.status(500).json({ error: "Failed to fetch most worn items." });
+    }
+  }
+
+  //Get items worn less than 2 times
+  async getLeastWornItems(req, res) {
+    try {
+      const userId = req.user.googleId; 
+      const items = await this.model.read({
+        user_id: userId,
+        times_worn: { [Sequelize.Op.lt]: 2 }
+      });
+      res.json({items});
+    } catch (error) {
+      console.error("Error fetching least worn items:", error);
+      res.status(500).json({ error: "Failed to fetch least worn items." });
     }
   }
 
