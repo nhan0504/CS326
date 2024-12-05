@@ -15,7 +15,8 @@ export class WardrobeViewComponent extends BaseComponent {
     this.WardrobeViewData = WardrobeViewData;
     this.loadCSS("WardrobeViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
-    this.loadWardrobeItems();
+    //this.loadWardrobeItems();
+    this.loadSQLiteWardrobeItems();
     this.subscribeToWardrobeEvents();
 
     // uncomment to load in test wardrobe items to indexdb
@@ -33,9 +34,17 @@ export class WardrobeViewComponent extends BaseComponent {
     }
   }
 
+  // load wardrobe items from SQLite using the endpoint
+  async loadSQLiteWardrobeItems() {
+    this.#wardrobeItems =
+      await this.#wardrobeService.loadWardrobeItemsFromSQLite();
+    this.applyFilters(this.#wardrobeItems);
+  }
+
   subscribeToWardrobeEvents() {
     document.addEventListener(Events.StoreWardrobeItemSuccess, () => {
-      this.loadWardrobeItems();
+      //this.loadWardrobeItems();
+      this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.StoreWardrobeItemFailure, () => {
@@ -44,7 +53,8 @@ export class WardrobeViewComponent extends BaseComponent {
 
     document.addEventListener(Events.UnStoreWardrobeItemSuccess, () => {
       console.log("Cleared wardrobe item.");
-      this.loadWardrobeItems();
+      //this.loadWardrobeItems();
+      this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.UnStoreWardrobeItemFailure, () => {

@@ -14,10 +14,21 @@ class WardrobeController {
     this.model = await ModelFactory.getModel("sqlite-fresh", "wardrobe");
   }
 
-  // Get all wardrobe items
+  // Get all of the user's wardrobe items
   async getAllItems(req, res) {
-    const items = await this.model.read();
-    res.json({ items });
+    try {
+      // get the user's id
+      const userId = req.user.googleId;
+
+      // get all of the wardrobe items that have the user_id of the user
+      const usersItems = await this.model.read(userId);
+
+      res.json({ usersItems });
+    } catch (error) {
+      // log any errors and send a server error response
+      console.error("Error fetching items: ", error);
+      return res.status(500).json({ error: "Error fetching items." });
+    }
   }
 
   // Add a new wardrobe item

@@ -8,14 +8,14 @@ const sequelize = new Sequelize({
 
 // Define the WardrobeItem model
 const WardrobeItem = sequelize.define("WardrobeItem", {
-  item_id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
   user_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    primaryKey: true,
+  },
+  item_id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
   },
   image: {
     type: DataTypes.STRING, // URL or file path
