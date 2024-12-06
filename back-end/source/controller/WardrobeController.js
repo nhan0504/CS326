@@ -24,16 +24,16 @@ class WardrobeController {
   //Get top 5 most worn item
   async getMostWornItems(req, res) {
     try {
-      const userId = req.user.googleId; 
+      const userId = req.user.googleId;
       const items = await this.model.read({
         user_id: userId,
       });
-  
+
       const topItems = items
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
-  
-      res.json({topItems});
+
+      res.json({ topItems });
     } catch (error) {
       console.error("Error fetching most worn items:", error);
       res.status(500).json({ error: "Failed to fetch most worn items." });
@@ -43,12 +43,12 @@ class WardrobeController {
   //Get items worn less than 2 times
   async getLeastWornItems(req, res) {
     try {
-      const userId = req.user.googleId; 
+      const userId = req.user.googleId;
       const items = await this.model.read({
         user_id: userId,
-        times_worn: { [Sequelize.Op.lt]: 2 }
+        times_worn: { [Sequelize.Op.lt]: 2 },
       });
-      res.json({items});
+      res.json({ items });
     } catch (error) {
       console.error("Error fetching least worn items:", error);
       res.status(500).json({ error: "Failed to fetch least worn items." });
@@ -57,16 +57,17 @@ class WardrobeController {
 
   async getCostPerWear(req, res) {
     try {
-      const userId = req.user.googleId; 
+      const userId = req.user.googleId;
       const items = await this.model.read({
         user_id: userId,
       });
       const costPerWear = items.map((item) => ({
         item_id: item.item_id,
         name: item.name,
-        cost_per_wear: item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : null,
+        cost_per_wear:
+          item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : null,
       }));
-      res.json({items: costPerWear});
+      res.json({ items: costPerWear });
     } catch (error) {
       console.error("Error fetching cost per item:", error);
       res.status(500).json({ error: "Failed to fetch cost per items." });
@@ -75,23 +76,27 @@ class WardrobeController {
 
   async getFrequencyPerCategory(req, res) {
     try {
-      const userId = req.user.googleId; 
+      const userId = req.user.googleId;
       const items = await this.model.getFrequencyPerCategory(userId);
-      res.json({items});
+      res.json({ items });
     } catch (error) {
       console.error("Error fetching item frequency per category:", error);
-      res.status(500).json({ error: "Failed to fetch item frequency per category." });
+      res
+        .status(500)
+        .json({ error: "Failed to fetch item frequency per category." });
     }
   }
 
   async getItemPerCategory(req, res) {
     try {
-      const userId = req.user.googleId; 
+      const userId = req.user.googleId;
       const items = await this.model.getItemPerCategory(userId);
-      res.json({items});
+      res.json({ items });
     } catch (error) {
       console.error("Error fetching number of item per category:", error);
-      res.status(500).json({ error: "Failed to fetch number of item per category." });
+      res
+        .status(500)
+        .json({ error: "Failed to fetch number of item per category." });
     }
   }
 
@@ -127,6 +132,11 @@ class WardrobeController {
   async clearItems(req, res) {
     await this.model.delete();
     res.json(await this.model.read());
+  }
+
+  // create suggested outfits based on the wardrobe items
+  async getSuggestedOutfits(req, res) {
+    res.json({ outfit: "test outfit" });
   }
 }
 

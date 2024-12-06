@@ -6,6 +6,7 @@ import OutfitRoutes from "./routes/OutfitRoutes.js";
 import ItemRoutes from "./routes/ItemRoutes.js";
 import StatRoutes from "./routes/StatRoutes.js";
 import AuthRoutes from "./routes/AuthRoutes.js";
+import SuggestionsRoutes from "./routes/SuggestionsRoutes.js";
 
 class Server {
   constructor() {
@@ -22,13 +23,15 @@ class Server {
     // Parse JSON bodies, limited to 10mb
     this.app.use(express.json({ limit: "10mb" }));
 
-    this.app.use(cors({
-      origin: 'http://127.0.0.1:3000', // Frontend origin
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true,
-    }));
-    
+    this.app.use(
+      cors({
+        origin: "http://127.0.0.1:3000", // Frontend origin
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        credentials: true,
+      })
+    );
+
     // Configure session management.
     // This is required to persist the login session across requests.
     // The session data is stored in memory by default, but you can also
@@ -50,10 +53,11 @@ class Server {
 
   // Setup routes by using imported routes
   setupRoutes() {
-    // Mount routes for Outfit, WardrobeItem, and Google APIs
+    // Mount routes for Outfit, WardrobeItem, Google APIs, Stats, and Suggestions
     this.app.use("/v1/outfits", OutfitRoutes);
     this.app.use("/v1/items", ItemRoutes);
     this.app.use("/v1/stats", StatRoutes);
+    this.app.use("/v1/suggestions", SuggestionsRoutes);
     this.app.use("/", AuthRoutes);
   }
 
