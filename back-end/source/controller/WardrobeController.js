@@ -138,6 +138,18 @@ class WardrobeController {
   async getSuggestedOutfits(req, res) {
     res.json({ outfit: "test outfit" });
   }
+
+  async deleteWardrobeItem(req, res) {
+    const { item_id } = req.body; 
+    try {
+        await this.model.delete({ item_id }); 
+        res.status(200).json({ message: 'Item deleted successfully.' });
+    } catch (error) {
+        console.error('Error deleting item:', error);
+        res.status(500).json({ error: 'Failed to delete item.' });
+    }
+  }
+
 }
 
 //export default new WardrobeController();
