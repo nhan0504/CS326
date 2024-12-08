@@ -45,3 +45,18 @@
 - **Task**: Create sequence diagram for feature
 - **Details**: Create a sequence diagram and description for the implemented feature Clothing Worn statistic
 - **Link to Commit**: [Create a sequence diagram for clothing worn statistic feature](https://github.com/nhan0504/CS326/pull/28/commits/7442b25873c846c31bf89fd6859be0836c9c9ffe)
+
+### December 4th, 2024
+- **Task**: Endpoint for adding items to the wardrobe
+- **Details**: Create and tested the POST endpoint for adding items to the wardrobe
+- **Link to Commit**: [Add wardrobe item endpoint](https://github.com/nhan0504/CS326/pull/97)
+
+### December 4th, 2024
+- **Task**: Endpoints for Statistic page
+- **Details**: Create 5 endpoints to aggregate data from backend for the Statistic page
+- **Link to Commit**: [Stat data aggregation endpoints](https://github.com/nhan0504/CS326/pull/99)
+  
+### December _th, 2024
+- **Task**: 
+- **Details**: 
+- **Link to Commit**: []()

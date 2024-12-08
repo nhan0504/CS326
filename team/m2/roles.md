@@ -22,6 +22,9 @@
   4. [Commit 4](https://github.com/nhan0504/CS326/pull/14/commits/67a7d2bcc722866c948cc7114b152a30625bc1f4): Calculate and generate chart to show statistic on clothing worn in the wardrobe
   5. [Commit 5](https://github.com/nhan0504/CS326/pull/24/commits/dcc1ef0836c982c30debd28b0a958d54844a8101): Created a download button for user to download the statistic to share with others
   6. [Commit 6](https://github.com/nhan0504/CS326/pull/26/commits/dd49ea176808bb86fefe7b8a59309d46e113232a): Hook up the statistic page with the indexedDB instead of using test data
+  7. [Commit 7](https://github.com/nhan0504/CS326/pull/99): Create 5 endpoints for data aggregation to display on the Statistic page
+  8. [Commit 8](https://github.com/nhan0504/CS326/pull/97): Create endpoint to add data to the wardrobe database
+  9. [Commit 9](): 
 
 ## Hung Nguyen - Note-Taker
 
