@@ -136,7 +136,14 @@ class WardrobeController {
 
   // create suggested outfits based on the wardrobe items
   async getSuggestedOutfits(req, res) {
-    res.json({ outfit: "test outfit" });
+    try {
+      const userId = req.user.googleId;
+      const outfits = await this.model.generateSuggestedOutfits(userId);
+      res.json({ outfits });
+    } catch (error) {
+      console.error("Error generating outfit suggestions:", error);
+      res.status(500).json({ error: "Failed to generate outfit suggestions." });
+    }
   }
 
   async deleteWardrobeItem(req, res) {
