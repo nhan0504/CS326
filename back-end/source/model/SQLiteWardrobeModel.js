@@ -117,11 +117,49 @@ class _SQLiteWardrobeModel {
     }
   }
 
-  async read(id = null) {
-    if (id) {
-      return await WardrobeItem.findByPk(id);
+  async read(itemId = null) {
+    if (itemId) {
+      return await WardrobeItem.findByPk(itemId);
     }
     return await WardrobeItem.findAll();
+  }
+
+  //Filter item 
+  async read(filters = {}) {
+    return await WardrobeItem.findAll({
+      where: filters,
+    });
+  }
+
+  // Get item frequency by category
+  async getFrequencyPerCategory(userId) {
+    try {
+      const categories = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: [
+          "category",
+          [Sequelize.fn("SUM", Sequelize.col("times_worn")), "total_wear"]
+        ],
+        group: ["category"],
+      });
+      return categories;
+    } catch (error) {
+      console.error("Error fetching frequency per category:", error);
+    }
+  }
+
+  // Get item count per category
+  async getItemPerCategory(userId) {
+    try {
+      const categoryCounts = await WardrobeItem.findAll({
+        where: { user_id: userId },
+        attributes: ["category", [Sequelize.fn("COUNT", Sequelize.col("item_id")), "item_count"]],
+        group: ["category"],
+      });
+      return categoryCounts;
+    } catch (error) {
+      console.error("Error fetching number of items per category:", error);
+    }
   }
 
   async update(item) {
@@ -158,6 +196,106 @@ class _SQLiteWardrobeModel {
 
     await WardrobeItem.destroy({ where: { item_id: item.item_id } });
     return item;
+  }
+
+  async generateSuggestedOutfits(userId, maxNumSuggestions = 10) {
+    const wardrobeItems = await this.read({ user_id: userId });
+
+    const categories = {
+      top: [],
+      bottoms: [],
+      dress: [],
+      shoes: [],
+      jacket: [],
+      accessory: [],
+      bag: [],
+    };
+
+    // Categorize wardrobe items
+    wardrobeItems.forEach((item) => {
+      if (categories[item.category]) {
+        categories[item.category].push(item);
+      }
+    });
+
+    const outfits = [];
+    for (let i = 0; i < maxNumSuggestions; i++) {
+      const outfit = [];
+      const hasTopsAndBottoms =
+        categories.top.length > 0 && categories.bottoms.length > 0;
+      const hasDresses = categories.dress.length > 0;
+      const useDress =
+        hasDresses && (Math.random() < 0.2 || !hasTopsAndBottoms);
+
+      // Select top and bottom or dress
+      if (useDress) {
+        outfit.push(
+          categories.dress[Math.floor(Math.random() * categories.dress.length)]
+        );
+      } else {
+        if (hasTopsAndBottoms) {
+          outfit.push(
+            categories.top[Math.floor(Math.random() * categories.top.length)]
+          );
+          outfit.push(
+            categories.bottoms[
+              Math.floor(Math.random() * categories.bottoms.length)
+            ]
+          );
+        } else {
+          continue; // Skip this iteration if no valid outfit can be made
+        }
+      }
+
+      // Add shoes if available
+      if (categories.shoes.length > 0) {
+        outfit.push(
+          categories.shoes[Math.floor(Math.random() * categories.shoes.length)]
+        );
+      }
+
+      // Add optional items (jackets, bags, accessories)
+      if (Math.random() < 0.5 && categories.jacket.length > 0) {
+        outfit.push(
+          categories.jacket[
+            Math.floor(Math.random() * categories.jacket.length)
+          ]
+        );
+      }
+      if (Math.random() < 0.5 && categories.accessory.length > 0) {
+        outfit.push(
+          categories.accessory[
+            Math.floor(Math.random() * categories.accessory.length)
+          ]
+        );
+      }
+      if (Math.random() < 0.5 && categories.bag.length > 0) {
+        outfit.push(
+          categories.bag[Math.floor(Math.random() * categories.bag.length)]
+        );
+      }
+
+      // Ensure uniqueness
+      if (
+        !outfits.some((existingOutfit) =>
+          this.isSameOutfit(existingOutfit, outfit)
+        )
+      ) {
+        outfits.push(outfit);
+      }
+    }
+
+    return outfits;
+  }
+
+  // Helper function to check if two outfits are the same
+  isSameOutfit(outfit1, outfit2) {
+    if (outfit1.length !== outfit2.length) return false;
+
+    const ids1 = outfit1.map((item) => item.item_id).sort();
+    const ids2 = outfit2.map((item) => item.item_id).sort();
+
+    return ids1.every((id, index) => id === ids2[index]);
   }
 }
 
