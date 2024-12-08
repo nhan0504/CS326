@@ -16,13 +16,12 @@ class WardrobeController {
   }
 
   // Get all of the user's wardrobe items
-  async getAllItems(req, res) {
+  async getAllItems(user_id, req, res) {
     try {
-      // get the user's id
-      const userId = req.user.googleId;
-
       // get all of the wardrobe items that have the user_id of the user
-      const usersItems = await this.model.read(userId);
+      const usersItems = await this.model.read({
+        user_id,
+      });
 
       res.json({ usersItems });
     } catch (error) {

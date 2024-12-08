@@ -1,4 +1,5 @@
 import { Events } from "../../eventhub/Events.js";
+import { getId } from "../../models/User.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
@@ -36,8 +37,12 @@ export class WardrobeViewComponent extends BaseComponent {
 
   // load wardrobe items from SQLite using the endpoint
   async loadSQLiteWardrobeItems() {
-    this.#wardrobeItems =
-      await this.#wardrobeService.loadWardrobeItemsFromSQLite();
+    const user_id = getId();
+    await this.#wardrobeService
+      .loadWardrobeItemsFromSQLite(user_id)
+      .then((items) => {
+        this.#wardrobeItems = items.usersItems;
+      });
     this.applyFilters(this.#wardrobeItems);
   }
 
@@ -60,6 +65,12 @@ export class WardrobeViewComponent extends BaseComponent {
     document.addEventListener(Events.UnStoreWardrobeItemFailure, () => {
       console.error("Failed to clear wardrobe item.");
       alert("Failed to clear wardrobe item. Please try again.");
+    });
+
+    // rerender when the userid updates
+    document.addEventListener(Events.UpdateUserId, () => {
+      console.log("User id updated");
+      this.loadSQLiteWardrobeItems();
     });
   }
 

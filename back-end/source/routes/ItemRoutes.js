@@ -8,8 +8,9 @@ class ItemRoutes {
   }
 
   initializeRoutes() {
-    this.router.get("/", async (req, res) => {
-      await WardrobeController.getAllItems(req, res);
+    this.router.get("/:id", async (req, res) => {
+      const user_id = req.params.id;
+      await WardrobeController.getAllItems(user_id, req, res);
     });
 
     this.router.post("/", async (req, res) => {

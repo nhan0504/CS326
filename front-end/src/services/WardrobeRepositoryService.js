@@ -98,10 +98,13 @@ export class WardrobeRepositoryService extends Service {
   }
 
   // load wardrobe items from the SQLite database using the backend route
-  async loadWardrobeItemsFromSQLite() {
+  async loadWardrobeItemsFromSQLite(user_id) {
     try {
-      // fetch from the endpoint for wardrobe items, including credentials so it can access userid
-      const response = await fetch("http://localhost:4000/v1/items", {
+      // make the url include user_id so we know which user to get the wardrobe items for
+      const url = "http://localhost:4000/v1/items/" + user_id;
+
+      // fetch from the endpoint for wardrobe items
+      const response = await fetch(url, {
         method: "GET",
         credentials: "include",
       });

@@ -11,11 +11,11 @@ const WardrobeItem = sequelize.define("WardrobeItem", {
   user_id: {
     type: DataTypes.UUID,
     allowNull: false,
-    primaryKey: true,
   },
   item_id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   },
   image: {
     type: DataTypes.STRING, // URL or file path
@@ -124,7 +124,7 @@ class _SQLiteWardrobeModel {
     return await WardrobeItem.findAll();
   }
 
-  //Filter item 
+  //Filter item
   async read(filters = {}) {
     return await WardrobeItem.findAll({
       where: filters,
@@ -138,7 +138,7 @@ class _SQLiteWardrobeModel {
         where: { user_id: userId },
         attributes: [
           "category",
-          [Sequelize.fn("SUM", Sequelize.col("times_worn")), "total_wear"]
+          [Sequelize.fn("SUM", Sequelize.col("times_worn")), "total_wear"],
         ],
         group: ["category"],
       });
@@ -153,7 +153,10 @@ class _SQLiteWardrobeModel {
     try {
       const categoryCounts = await WardrobeItem.findAll({
         where: { user_id: userId },
-        attributes: ["category", [Sequelize.fn("COUNT", Sequelize.col("item_id")), "item_count"]],
+        attributes: [
+          "category",
+          [Sequelize.fn("COUNT", Sequelize.col("item_id")), "item_count"],
+        ],
         group: ["category"],
       });
       return categoryCounts;
