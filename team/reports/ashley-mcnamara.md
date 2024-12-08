@@ -75,3 +75,19 @@
 - **Details**: Refactored the wardrobe a little bit so that it responds to events. Made suggestions page respond to the event published when a wardrobe item is favorited.
 - **Link to Commit**: [Wardrobe Events](https://github.com/nhan0504/CS326/commit/4127ec8f79d77802a4b5a69b2067fbf785af427d)
 
+### December 4, 2024
+- **Task**: Fetch Wardrobe Items Backend
+- **Details**: Updated the fetch wardrobe items endpoint and created the backend function to get the items
+- **Link to Commit**: [Fetch Wardrobe Items Backend](https://github.com/nhan0504/CS326/pull/103/commits/4506a64ec813b3542f6cf07b1b29e26381d8910b)
+
+### December 5, 2024
+- **Task**: Suggestions Page Route
+- **Details**: Created a new route and controller for the suggestions data.
+- **Link to Commit**: [Suggestions Route](https://github.com/nhan0504/CS326/pull/100/commits/6c2b50e04c8e5a6d1789ef0ad1ee052c64e5dfc9)
+
+### December 8, 2024
+- **Task**: Fetch Wardrobe Items Frontend Connection
+- **Details**: Updated the fetch wardrobe items endpoint to look for a userid and properly fetch the items on the backend, rerendering if a new user is signed in.
+- **Link to Commit**: [Fetch Wardrobe Items](https://github.com/nhan0504/CS326/pull/103/commits/2121a179bdee4163e5e421173cf4f799d83e04aa)
+
+
