@@ -19,6 +19,10 @@ class ItemRoutes {
     this.router.delete("/", async (req, res) => {
       await WardrobeController.clearItems(req, res);
     });
+
+    this.router.delete("/", async (req, res) => {
+      await WardrobeController.deleteWardrobeItem(req, res);
+    });
   }
 
   getRouter() {
