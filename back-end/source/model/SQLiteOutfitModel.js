@@ -52,11 +52,27 @@ class _SQLiteOutfitModel {
 
     if (fresh) {
       await this.delete();
+      //Example
+      await this.create({
+        outfit_id: "1234",
+        user_id: "user-7749",
+        wardrobe_item_ids: ["Blue T-shirt", "Blue Pants"],
+        note: "First outfit!",
+        occasion: "Casual",
+        created_at: "2023-12-25",
+        updated_at: "2023-12-25"
+    })
     }
   }
 
   async create(entry) {
-    return await OutfitEntry.create(entry);
+    //return await OutfitEntry.create(entry);
+    try {
+      return await OutfitEntry.create(entry);
+    } catch (error) {
+      console.error("Error creating OutfitItem:", error);
+      throw error;
+    }
   }
 
   async read(id = null) {
