@@ -2,11 +2,12 @@ let id = null;
 let username = null;
 
 export const setId = (newId) => {
-    id = newId;
+  id = newId;
+  document.dispatchEvent(new Event("UpdateUserID"));
 };
 
 export const setUsername = (newUsername) => {
-    username = newUsername;
+  username = newUsername;
 };
 
 export const getId = () => id;
