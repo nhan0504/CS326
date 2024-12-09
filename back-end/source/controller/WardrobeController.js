@@ -22,11 +22,10 @@ class WardrobeController {
   }
 
   //Get top 5 most worn item
-  async getMostWornItems(req, res) {
+  async getMostWornItems(user_id, req, res) {
     try {
-      const userId = req.user.googleId; 
       const items = await this.model.read({
-        user_id: userId,
+        user_id: user_id,
       });
   
       const topItems = items
@@ -41,11 +40,10 @@ class WardrobeController {
   }
 
   //Get items worn less than 2 times
-  async getLeastWornItems(req, res) {
+  async getLeastWornItems(user_id, req, res) {
     try {
-      const userId = req.user.googleId; 
       const items = await this.model.read({
-        user_id: userId,
+        user_id: user_id,
         times_worn: { [Sequelize.Op.lt]: 2 }
       });
       res.json({items});
@@ -55,11 +53,10 @@ class WardrobeController {
     }
   }
 
-  async getCostPerWear(req, res) {
-    try {
-      const userId = req.user.googleId; 
+  async getCostPerWear(user_id, req, res) {
+    try { 
       const items = await this.model.read({
-        user_id: userId,
+        user_id: user_id,
       });
       const costPerWear = items.map((item) => ({
         item_id: item.item_id,
@@ -73,10 +70,9 @@ class WardrobeController {
     }
   }
 
-  async getFrequencyPerCategory(req, res) {
+  async getFrequencyPerCategory(user_id, req, res) {
     try {
-      const userId = req.user.googleId; 
-      const items = await this.model.getFrequencyPerCategory(userId);
+      const items = await this.model.getFrequencyPerCategory(user_id);
       res.json({items});
     } catch (error) {
       console.error("Error fetching item frequency per category:", error);
@@ -84,10 +80,9 @@ class WardrobeController {
     }
   }
 
-  async getItemPerCategory(req, res) {
+  async getItemPerCategory(user_id, req, res) {
     try {
-      const userId = req.user.googleId; 
-      const items = await this.model.getItemPerCategory(userId);
+      const items = await this.model.getItemPerCategory(user_id);
       res.json({items});
     } catch (error) {
       console.error("Error fetching number of item per category:", error);
