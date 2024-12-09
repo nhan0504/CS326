@@ -32,7 +32,7 @@ class WardrobeController {
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
   
-      res.json({topItems});
+      res.json({items: topItems});
     } catch (error) {
       console.error("Error fetching most worn items:", error);
       res.status(500).json({ error: "Failed to fetch most worn items." });
