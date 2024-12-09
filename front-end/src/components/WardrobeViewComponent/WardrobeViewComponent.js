@@ -1,4 +1,5 @@
 import { Events } from "../../eventhub/Events.js";
+import { getId } from "../../models/User.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
@@ -17,7 +18,8 @@ export class WardrobeViewComponent extends BaseComponent {
     this.WardrobeViewData = WardrobeViewData;
     this.loadCSS("WardrobeViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
-    this.loadWardrobeItems();
+    //this.loadWardrobeItems();
+    this.loadSQLiteWardrobeItems();
     this.subscribeToWardrobeEvents();
 
     // uncomment to load in test wardrobe items to indexdb
@@ -53,9 +55,21 @@ export class WardrobeViewComponent extends BaseComponent {
     }
   }
 
+  // load wardrobe items from SQLite using the endpoint
+  async loadSQLiteWardrobeItems() {
+    const user_id = getId();
+    await this.#wardrobeService
+      .loadWardrobeItemsFromSQLite(user_id)
+      .then((items) => {
+        this.#wardrobeItems = items.usersItems;
+      });
+    this.applyFilters(this.#wardrobeItems);
+  }
+
   subscribeToWardrobeEvents() {
     document.addEventListener(Events.StoreWardrobeItemSuccess, () => {
-      this.loadWardrobeItems();
+      //this.loadWardrobeItems();
+      this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.StoreWardrobeItemFailure, () => {
@@ -64,12 +78,19 @@ export class WardrobeViewComponent extends BaseComponent {
 
     document.addEventListener(Events.UnStoreWardrobeItemSuccess, () => {
       console.log("Cleared wardrobe item.");
-      this.loadWardrobeItems();
+      //this.loadWardrobeItems();
+      this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.UnStoreWardrobeItemFailure, () => {
       console.error("Failed to clear wardrobe item.");
       alert("Failed to clear wardrobe item. Please try again.");
+    });
+
+    // rerender when the userid updates
+    document.addEventListener(Events.UpdateUserId, () => {
+      console.log("User id updated");
+      this.loadSQLiteWardrobeItems();
     });
   }
 

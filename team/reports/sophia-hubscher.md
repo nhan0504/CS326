@@ -80,3 +80,17 @@
 - **Details**: Updated the UI diagrams page to reflect the changes from milestone 3
 - **Links to Commit**: [Update ui-diagrams.md](https://github.com/nhan0504/CS326/commit/94d3c712b565b23b04d5c126006e4702e5c21747)
 
+### November 30, 2024
+- **Task**: Updated outdated tests
+- **Details**: Updated old tests that were no longer in line with our data models
+- **Links to Commit**: [Update tests (#88)](https://github.com/nhan0504/CS326/commit/6a57f38330622925894fa098bd02d5a2f9871599)
+
+### December 3, 2024
+- **Task**: Added Google Authentication
+- **Details**: Added Google Authentication to allow users to log in to their own account on our web application
+- **Links to Commit**: [Add Google auth to allow users to store data across accounts (#95)](https://github.com/nhan0504/CS326/commit/dc0ca7343cd955c3bc4b6e0bb0c53cac816ebda3)
+
+### December 7, 2024
+- **Task**: Added suggestions page data aggregation on back-end
+- **Details**: Created a WardrobeController function that generates suggested outfits on the back-end
+- **Links to Commit**: [Suggestions page data aggregation #89: Create WardrobeController function that generates suggested outfits](https://github.com/nhan0504/CS326/commit/80fe88a77f46ea8d057690d5c9e0dee03d27fc2d)

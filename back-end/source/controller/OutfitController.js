@@ -1,12 +1,14 @@
 import ModelFactory from "../model/ModelFactory.js";
 
 class OutfitController {
-  constructor() {
-    ModelFactory.getModel().then((model) => {
-      this.model = model;
-    });
+  // constructor() {
+  //   ModelFactory.getModel().then((model) => {
+  //     this.model = model;
+  //   });
+  // }
+  async init() {
+    this.model = await ModelFactory.getModel("sqlite-fresh", "outfit");
   }
-
   // Get all outfits
   async getAllOutfits(req, res) {
     const outfits = await this.model.read();
@@ -17,7 +19,7 @@ class OutfitController {
   async addOutfit(req, res) {
     try {
       // Check if 'outfit' is provided in the request body
-      if (!req.body || !req.body.outfit) {
+      if (!req.body) {
         return res.status(400).json({ error: "Outfit description is required." });
       }
 
@@ -48,4 +50,7 @@ class OutfitController {
   }
 }
 
-export default new OutfitController();
+const outfitController = new OutfitController();
+await outfitController.init(); // Initialize the model
+
+export default outfitController;
