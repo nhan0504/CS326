@@ -2,35 +2,37 @@
  * An object containing various message types for Outfit and WardrobeItem management.
  */
 export const Events = {
-  NewOutfit: 'NewOutfit',
+  NewOutfit: "NewOutfit",
 
-  LoadOutfit: 'LoadOutfit',
-  LoadOutfitSuccess: 'LoadOutfitSuccess',
-  LoadOutfitFailure: 'LoadOutfitFailure',
+  LoadOutfit: "LoadOutfit",
+  LoadOutfitSuccess: "LoadOutfitSuccess",
+  LoadOutfitFailure: "LoadOutfitFailure",
 
-  StoreOutfit: 'StoreOutfit',
-  StoreOutfitSuccess: 'StoreOutfitSuccess',
-  StoreOutfitFailure: 'StoreOutfitFailure',
+  StoreOutfit: "StoreOutfit",
+  StoreOutfitSuccess: "StoreOutfitSuccess",
+  StoreOutfitFailure: "StoreOutfitFailure",
 
-  UnStoreOutfit: 'UnStoreOutfit',
-  UnStoreOutfitSuccess: 'UnStoreOutfitSuccess',
-  UnStoreOutfitFailure: 'UnStoreOutfitFailure',
+  UnStoreOutfit: "UnStoreOutfit",
+  UnStoreOutfitSuccess: "UnStoreOutfitSuccess",
+  UnStoreOutfitFailure: "UnStoreOutfitFailure",
 
-  NewWardrobeItem: 'NewWardrobeItem',
+  NewWardrobeItem: "NewWardrobeItem",
 
-  LoadWardrobeItem: 'LoadWardrobeItem',
-  LoadWardrobeItemSuccess: 'LoadWardrobeItemSuccess',
-  LoadWardrobeItemFailure: 'LoadWardrobeItemFailure',
+  LoadWardrobeItem: "LoadWardrobeItem",
+  LoadWardrobeItemSuccess: "LoadWardrobeItemSuccess",
+  LoadWardrobeItemFailure: "LoadWardrobeItemFailure",
 
-  StoreWardrobeItem: 'StoreWardrobeItem',
-  StoreWardrobeItemSuccess: 'StoreWardrobeItemSuccess',
-  StoreWardrobeItemFailure: 'StoreWardrobeItemFailure',
+  StoreWardrobeItem: "StoreWardrobeItem",
+  StoreWardrobeItemSuccess: "StoreWardrobeItemSuccess",
+  StoreWardrobeItemFailure: "StoreWardrobeItemFailure",
 
-  UnStoreWardrobeItem: 'UnStoreWardrobeItem',
-  UnStoreWardrobeItemSuccess: 'UnStoreWardrobeItemSuccess',
-  UnStoreWardrobeItemFailure: 'UnStoreWardrobeItemFailure',
+  UnStoreWardrobeItem: "UnStoreWardrobeItem",
+  UnStoreWardrobeItemSuccess: "UnStoreWardrobeItemSuccess",
+  UnStoreWardrobeItemFailure: "UnStoreWardrobeItemFailure",
 
-  UpdateWardrobeItem: 'UpdateWardrobeItem',
-  UpdateWardrobeItemSuccess: 'UpdateWardrobeItemSuccess',
-  UpdateWardrobeItemFailure: 'UpdateWardrobeItemFailure',
-}
+  UpdateWardrobeItem: "UpdateWardrobeItem",
+  UpdateWardrobeItemSuccess: "UpdateWardrobeItemSuccess",
+  UpdateWardrobeItemFailure: "UpdateWardrobeItemFailure",
+
+  UpdateUserId: "UpdateUserID",
+};
