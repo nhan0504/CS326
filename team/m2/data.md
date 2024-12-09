@@ -52,9 +52,10 @@
 * **Attributes:**
   * `user_id` (string): A unique identifier for each user.
   * `most_worn` (string): The user's most worn item.
-  * `least_worn` (string): The user's least worn item.
+  * `least_worn` (string): The user's item that is worn less than 2 times.
   * `cost_per_wear` (JSON): The price divided by the number of times an item has been worn for each of the user's items.
   * `wear_frequency` (JSON): The user's wear frequency by category (e.g. tops, bottoms, shoes)
+  * `items_category` (JSON): Number of items per category (e.g. tops, bottoms, shoes)
 * **Data source:** System-generated based on wardrobe contents and logged outfits overtime.
 
 ### 5. Outfit Planning Entry
