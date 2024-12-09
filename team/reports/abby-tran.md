@@ -56,7 +56,7 @@
 - **Details**: Create 5 endpoints to aggregate data from backend for the Statistic page
 - **Link to Commit**: [Stat data aggregation endpoints](https://github.com/nhan0504/CS326/pull/99)
   
-### December _th, 2024
-- **Task**: 
-- **Details**: 
-- **Link to Commit**: []()
+### December 8th, 2024
+- **Task**: Connect frontend with backend for Statistic page
+- **Details**: Update the service in frontend to call the endpoint from backend to get the statistic to create chart for the Statistics page
+- **Link to Commit**: [Connect stats endpoint to frontend](https://github.com/nhan0504/CS326/pull/106)

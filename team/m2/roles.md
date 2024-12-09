@@ -24,7 +24,7 @@
   6. [Commit 6](https://github.com/nhan0504/CS326/pull/26/commits/dd49ea176808bb86fefe7b8a59309d46e113232a): Hook up the statistic page with the indexedDB instead of using test data
   7. [Commit 7](https://github.com/nhan0504/CS326/pull/99): Create 5 endpoints for data aggregation to display on the Statistic page
   8. [Commit 8](https://github.com/nhan0504/CS326/pull/97): Create endpoint to add data to the wardrobe database
-  9. [Commit 9](): 
+  9. [Commit 9](https://github.com/nhan0504/CS326/pull/106): Connect stats endpoint to frontend
 
 ## Hung Nguyen - Note-Taker
 
