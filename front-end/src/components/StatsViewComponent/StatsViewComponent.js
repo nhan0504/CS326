@@ -1,9 +1,16 @@
+import { Events } from '../../eventhub/Events.js';
+import { getId } from "../../models/User.js";
 import { BaseComponent } from '../BaseComponent/BaseComponent.js';
 import { getTestWardrobeItems } from "../../testing/TestData.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 
 export class StatsViewComponent extends BaseComponent {
   #container = null;
+  #mostWornItems = [];
+  #leastWornItems = [];
+  #costPerWear = [];
+  #frequencyCategory = [];
+  #itemCategory = [];
 
   constructor(StatsViewData = {}) {
     super();
@@ -37,10 +44,26 @@ export class StatsViewComponent extends BaseComponent {
       console.error('Error loading outfits:', error);
     }
   }
+
+  async loadStatData() {
+    const user_id = getId();
+    console.log(user_id)
+    const results = await Promise.all([
+      this.wardrobeService.getMostWornItems(user_id),
+      this.wardrobeService.getLeastWornItems(user_id),
+      this.wardrobeService.getCostPerWear(user_id),
+      this.wardrobeService.getFrequencyPerCategory(user_id),
+      this.wardrobeService.getItemsPerCategory(user_id),
+    ]);
+
+    // Destructure the results into corresponding variables
+    [this.#mostWornItems, this.#leastWornItems, this.#costPerWear, this.#frequencyCategory, this.#itemCategory] = results;
+  }
   
   subscribeToWardrobeEvents() {
     document.addEventListener('StoreWardrobeItemSuccess', (event) => {
       this.loadWardrobeItems();
+      this.loadStatData();
     });
   
     document.addEventListener('StoreWardrobeItemFailure', (event) => {
@@ -49,24 +72,19 @@ export class StatsViewComponent extends BaseComponent {
 
     document.addEventListener('UnStoreWardrobeItemSuccess', async () => {
       console.log('All wardrobe items cleared');
-  
       this.loadWardrobeItems();
+      this.loadStatData();
     });
   
     document.addEventListener('UnStoreWardrobeItemFailure', (event) => {
       console.error('Failed to clear wardrobe items:');
       alert('Failed to clear wardrobe items. Please try again.');
     });
-  }
 
-
-  // Get 5 most worn items
-  getMostWornItems(wardrobeItems) {
-    return wardrobeItems.sort((a, b) => b.times_worn - a.times_worn).slice(0, 5); 
-  }
-
-  getLeastWornItems(wardrobeItems) {
-    return wardrobeItems.filter(item => item.times_worn === 0 || item.times_worn <= 2); 
+    document.addEventListener(Events.UpdateUserId, () => {
+      console.log("User id updated");
+      this.loadStatData();
+    });
   }
 
   getCostPerWear(item) {
@@ -264,13 +282,12 @@ export class StatsViewComponent extends BaseComponent {
 
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
-    const mostWornItems = this.getMostWornItems(this.wardrobeItems);
 
-    const mostWornLabels = mostWornItems.map(item => item.name);
-    const mostWornData = mostWornItems.map(item => item.times_worn);
+    const mostWornLabels = this.#mostWornItems.map(item => item.name);
+    const mostWornData = this.#mostWornItems.map(item => item.times_worn);
 
     const mostWornList = document.createElement('ul');
-    mostWornItems.forEach(item => {
+    this.#mostWornItems.forEach(item => {
       const listItem = document.createElement('li');
       listItem.textContent = `${item.name} (Worn ${item.times_worn} times)`;
       mostWornList.appendChild(listItem);
@@ -283,13 +300,13 @@ export class StatsViewComponent extends BaseComponent {
 
     const leastWornCanvas = document.createElement('canvas');
     leastWornCanvas.id = 'leastWornChart';
-    const leastWornItems = this.getLeastWornItems(this.wardrobeItems);
 
-    const leastWornLabels = leastWornItems.map(item => item.name);
-    const leastWornData = leastWornItems.map(item => item.times_worn);
+    const leastWornLabels = this.#leastWornItems.map(item => item.name);
+    const leastWornData = this.#leastWornItems.map(item => item.times_worn);
+
 
     const leastWornList = document.createElement('ul');
-    leastWornItems.forEach(item => {
+    this.#leastWornItems.forEach(item => {
       const listItem = document.createElement('li');
       listItem.textContent = `${item.name} (Worn ${item.times_worn} times) - Suggest to wear`;
       leastWornList.appendChild(listItem);
@@ -301,9 +318,9 @@ export class StatsViewComponent extends BaseComponent {
     costPerWearTitle.classList.add('chart-title');
 
     const costPerWearList = document.createElement('ul');
-    this.wardrobeItems.forEach(item => {
+    this.#costPerWear.forEach(item => {
       const listItem = document.createElement('li');
-      listItem.textContent = `${item.name}: $${this.getCostPerWear(item)} per wear`;
+      listItem.textContent = `${item.name}: $${item.cost_per_wear} per wear`;
       costPerWearList.appendChild(listItem);
     });
 
@@ -314,17 +331,16 @@ export class StatsViewComponent extends BaseComponent {
 
     const wearFrequencyCanvas = document.createElement('canvas');
     wearFrequencyCanvas.id = 'wearByCategoryChart';  
-    const wearFrequency = this.getWearFrequencyByCategory(this.wardrobeItems);
-    const categoryLabels = Object.keys(wearFrequency);
-    const categoryValues = Object.values(wearFrequency);
+
+    const categoryLabels = this.#frequencyCategory.map((item) => item.category);
+    const categoryValues = this.#frequencyCategory.map((item) => item.total_wear);
 
     const wearFrequencyList = document.createElement('ul');
-    
-    for (const category in wearFrequency) {
+    this.#frequencyCategory.forEach((item) => {
       const listItem = document.createElement('li');
-      listItem.textContent = `${category}: Worn ${wearFrequency[category]} times in total`;
+      listItem.textContent = `${item.category}: Worn ${item.total_wear} times in total`;
       wearFrequencyList.appendChild(listItem);
-    }
+    })
 
     // Items per category 
     const itemsPerCategoryTitle = document.createElement('h2');
@@ -334,9 +350,8 @@ export class StatsViewComponent extends BaseComponent {
     const itemsPerCategoryCanvas = document.createElement('canvas');
     itemsPerCategoryCanvas.id = 'itemsPerCategoryChart';
 
-    const categoryCount = this.getItemCountByCategory(this.wardrobeItems);
-    const itemCategoryLabels = Object.keys(categoryCount);
-    const itemCategoryValues = Object.values(categoryCount);
+    const itemCategoryLabels = this.#itemCategory.map((item) => item.category);
+    const itemCategoryValues = this.#itemCategory.map((item) => item.item_count);
 
     leftColumn.appendChild(mostWornTitle);
     leftColumn.appendChild(mostWornList);
