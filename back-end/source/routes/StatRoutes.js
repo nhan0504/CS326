@@ -9,9 +9,10 @@ class StatRoutes {
 
     initializeRoutes() {
         // Top 5 most worn items
-        this.router.get("/most-worn", async (req, res) => {
+        this.router.get("/:user_id/most-worn", async (req, res) => {
+            const user_id = req.params.user_id;
             try {
-              const items = await WardrobeController.getMostWornItems(req, res);
+              const items = await WardrobeController.getMostWornItems(user_id, req, res);
               res.json(items);
             } catch (error) {
               console.error("Error fetching most worn items:", error);
@@ -20,9 +21,10 @@ class StatRoutes {
         });
         
         // List of items worn less than 2 times
-        this.router.get("/least-worn", async (req, res) => {
+        this.router.get("/:user_id/least-worn", async (req, res) => {
+            const user_id = req.params.user_id;
             try {
-              const items = await WardrobeController.getLeastWornItems(req, res);
+              const items = await WardrobeController.getLeastWornItems(user_id, req, res);
               res.json(items);
             } catch (error) {
               console.error("Error fetching least worn items:", error);
@@ -31,9 +33,10 @@ class StatRoutes {
         });
 
         // Cost per wear for each item
-        this.router.get("/cost-per-wear", async (req, res) => {
+        this.router.get("/:user_id/cost-per-wear", async (req, res) => {
+            const user_id = req.params.user_id;
             try {
-              const costPerWear = await WardrobeController.getCostPerWear(req, res);
+              const costPerWear = await WardrobeController.getCostPerWear(user_id, req, res);
               res.json(costPerWear);
             } catch (error) {
               console.error("Error calculating cost per wear:", error);
@@ -42,9 +45,10 @@ class StatRoutes {
         });
 
         // Wear frequency of items in each category
-        this.router.get("/category-frequency", async (req, res) => {
+        this.router.get("/:user_id/category-frequency", async (req, res) => {
+            const user_id = req.params.user_id;
             try {
-              const categories = await WardrobeController.getFrequencyPerCategory(req, res);
+              const categories = await WardrobeController.getFrequencyPerCategory(user_id, req, res);
               res.json(categories);
             } catch (error) {
               console.error("Error fetching category frequency:", error);
@@ -53,15 +57,16 @@ class StatRoutes {
         });
 
         // Number of items in each category
-        this.router.get("/items-per-category", async (req, res) => {
-            try {;
-              const categoryCounts = await WardrobeController.getItemPerCategory(req, res);
+        this.router.get("/:user_id/items-per-category", async (req, res) => {
+            const user_id = req.params.user_id;
+            try {
+              const categoryCounts = await WardrobeController.getItemPerCategory(user_id, req, res);
               res.json(categoryCounts);
             } catch (error) {
               console.error("Error fetching items per category:", error);
               res.status(500).json({ error: "Failed to fetch items per category." });
             }
-          });
+        });
     }
 
     getRouter() {
