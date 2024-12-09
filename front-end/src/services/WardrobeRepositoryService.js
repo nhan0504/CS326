@@ -1,6 +1,8 @@
 import { Events } from "../eventhub/Events.js";
 import Service from "./Service.js";
 
+const base_url = "http://localhost:4000/v1/"
+
 export class WardrobeRepositoryService extends Service {
   constructor() {
     super();
@@ -147,6 +149,131 @@ export class WardrobeRepositoryService extends Service {
         reject("Error retrieving wardrobe item");
       };
     });
+  }
+
+  async getMostWornItems(user_id) {
+    try {
+      const url = `${base_url}stats/${user_id}/most-worn`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the items as JSON
+      const data = await response.json();
+      const items = data.items;
+
+      return items;
+    } catch (e) {
+      console.error(e);
+      throw new Error("Error fetching wardrobe items.");
+    }
+  }
+
+  async getLeastWornItems(user_id) {
+    try {
+      const url = `${base_url}stats/${user_id}/least-worn`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the items as JSON
+      const data = await response.json();
+      const items = data.items;
+
+      return items;
+    } catch (e) {
+      console.error(e);
+      throw new Error("Error fetching wardrobe items.");
+    }
+  }
+
+  async getCostPerWear(user_id) {
+    try {
+      const url = `${base_url}stats/${user_id}/cost-per-wear`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the items as JSON
+      const data = await response.json();
+      const items = data.items;
+
+      return items;
+    } catch (e) {
+      console.error(e);
+      throw new Error("Error fetching wardrobe items.");
+    }
+  }
+
+  async getFrequencyPerCategory(user_id) {
+    try {
+      const url = `${base_url}stats/${user_id}/category-frequency`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the items as JSON
+      const data = await response.json();
+      const items = data.items;
+
+      return items;
+    } catch (e) {
+      console.error(e);
+      throw new Error("Error fetching wardrobe items.");
+    }
+  }
+
+  async getItemsPerCategory(user_id) {
+    try {
+      const url = `${base_url}stats/${user_id}/items-per-category`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the items as JSON
+      const data = await response.json();
+      const items = data.items;
+
+      return items;
+    } catch (e) {
+      console.error(e);
+      throw new Error("Error fetching wardrobe items.");
+    }
   }
 
   addSubscriptions() {
