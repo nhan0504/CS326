@@ -77,3 +77,95 @@ Users can also set personal goals, such as reducing the cost-per-wear of certain
 
 **Team Member:** Sophia Hubscher
   
+# Milestone 4
+## Feature Name: Stats page data aggregation 
+**Description:** This feature will implement endpoint that fetch data from the database and perform some data aggregation and calculation so that the stats page can display it
+
+**Point Value:** 6
+
+**Team Member:** Abby Tran
+
+## Feature Name: Suggestions page data aggregation
+**Description:** This feature will take the wardrobe items used in suggestions and create suggested outfits with them. Users can indicate if they would like to prioritize underutilized pieces and using that information, this back-end method will return a list of suggested outfits.
+
+**Point Value:** 5
+
+**Team Member:** Sophia Hubscher
+
+## Feature Name: Store Outfit
+**Description:** This feature will implement a POST request to the database to store a new outfit item. This includes storing multiple images for multiple wardrobe items. This will connect to the add outfit form and then will publish an event that is listened for by every other page.
+
+**Point Value:** 5
+
+**Team Member:** Hung Nguyen
+
+## Feature Name: Add Wardrobe Items
+**Description:** This feature will implement a POST request to the database to store a new wardrobe item. This includes storing an image. This will connect to the add wardrobe item form and then will publish an event that is listened for by every other page.
+
+**Point Value:** 5
+
+**Team Member:** Abby Tran
+
+
+## Feature Name: Fetch Wardrobe Items
+**Description:** This feature will implement a GET request for wardrobe items from the database and display the items in the wardrobe page as well as the log page add item form. This will involve fetching images.
+
+**Point Value:** 5
+
+**Team Member:** Ashley McNamara
+
+## Feature Name: User Authentication with Google Auth
+**Description:** This feature will implement secure user authentication using Google authentication. When users are logged in, the login button at the top of the screen will update, and they will be able to view their own wardrobe items, outfits, statistics, and suggestions. When users are not logged in, they will not be able to use wardrobe or outfit functionality and will be prompted to log in.
+
+**Point Value:** 5
+
+**Team Member:** Sophia Hubscher
+
+## Feature Name: Implement SQLite
+**Description:** Set up SQLite for the web application
+
+**Point Value:** 6
+
+**Team Member:** Anisha Prathi
+
+## Feature Name: Log Page Filter Bar
+**Description:** The user will be able to filter the outfits on the Log page using different properties of the outfit, such as the occasion of the outfit. This will allow the user to organize and select their outfits using different properties of the outfit. This feature will be integrated in the Log page view component, while connected to IndexedDB and SQLite. It must be able to get the filtered data from the database along with updating the UI components.
+
+**Point Value:** 5
+
+**Team Member:** Liam Gates
+
+## Feature Name: Suggestions page filter bar
+**Description:** This feature will implement suggestions page filter bar and the wardrobe at the backend to fetch the data. This will then connect to the front-end of the suggestions page to display the new results that are constructed.
+
+**Point Value:** 5
+
+**Team Member:** Hung Nguyen
+
+## Feature Name: Suggestions Page Routes and Endpoints
+**Description:** This feature will implement the routes and endpoints for the suggestions page to fetch the data. This will then connect to the front-end of the suggestions page to properly display the new results that are now being constructed on the backend.
+
+**Point Value:** 5
+
+**Team Member:** Ashley McNamara
+
+## Feature Name: Update Wardrobe Item
+**Description:** The user will be able to update the settings of their wardrobe item, such as the favorite setting of the item. This will allow the user to keep their digital wardrobe up to date with respect to their physical wardrobe. This feature will be integrated in the wardrobe view component, while connected to IndexedDB and SQLite. It must be able to update the database with the updated item along with updating the UI.
+
+**Point Value:** 5
+
+**Team Member:** Liam Gates
+
+## Feature Name: Delete wardrobe items
+**Description:** When users click the delete button on an individual wardrobe item, that wardrobe item currently stored in SQLite will be removed from the database and this deletion will be reflected in the front-end.
+
+**Point Value:** 5
+
+**Team Member:** Bruce Le
+
+## Feature Name: Fetch Outfits
+**Description:** Fetch outfits currently stored in SQLite and display in log page
+
+**Point Value:** 5
+
+**Team Member:** Anisha Prathi
