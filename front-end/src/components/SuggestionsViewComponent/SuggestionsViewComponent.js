@@ -3,10 +3,12 @@ import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
 import { Events } from "../../eventhub/Events.js";
+import { getId } from "../../models/User.js";
 
 export class SuggestionsViewComponent extends BaseComponent {
   #container = null;
   #wardrobeItems = [];
+  #outfits = [];
 
   constructor(SuggestionsViewData = {}) {
     super();
@@ -17,14 +19,16 @@ export class SuggestionsViewComponent extends BaseComponent {
     // loadTestWardrobeItems();
 
     this.wardrobeService = new WardrobeRepositoryService();
-    this.loadWardrobe();
+    //this.loadWardrobe();
+    this.loadSQLiteSuggestedOutfits();
 
     this.subscribeToWardrobeEvents();
   }
 
   subscribeToWardrobeEvents() {
     document.addEventListener("StoreWardrobeItemSuccess", (event) => {
-      this.loadWardrobe();
+      //this.loadWardrobe();
+      this.loadSQLiteSuggestedOutfits();
     });
 
     document.addEventListener("StoreWardrobeItemFailure", (event) => {
@@ -34,7 +38,8 @@ export class SuggestionsViewComponent extends BaseComponent {
     document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
       console.log("All wardrobe items cleared");
 
-      this.loadWardrobe();
+      //this.loadWardrobe();
+      this.loadSQLiteSuggestedOutfits();
     });
 
     document.addEventListener("UnStoreWardrobeItemFailure", (event) => {
@@ -43,8 +48,34 @@ export class SuggestionsViewComponent extends BaseComponent {
     });
 
     document.addEventListener(Events.UpdateWardrobeItemSuccess, () => {
-      this.loadWardrobe();
+      //this.loadWardrobe();
+      this.loadSQLiteSuggestedOutfits();
     });
+
+    document.addEventListener(Events.UpdateUserId, () => {
+      this.loadSQLiteSuggestedOutfits();
+    });
+  }
+
+  // load the suggested outfits by fetching from the suggestions backend endpoint
+  async loadSQLiteSuggestedOutfits() {
+    try {
+      // get the user id
+      const user_id = getId();
+
+      // fetch the outfits
+      await this.wardrobeService
+        .getSuggestedOutfits(user_id)
+        .then((response) => {
+          this.#outfits = response.outfits;
+        });
+
+      // render the outfits
+      this.renderSuggestedOutfits(this.#outfits);
+    } catch (error) {
+      // log an error if the fetch fails
+      console.error("Error:", error);
+    }
   }
 
   async loadWardrobe() {
