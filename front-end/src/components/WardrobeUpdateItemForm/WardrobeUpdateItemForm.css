@@ -1,0 +1,86 @@
+.update-item-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.background-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  padding: 20px;
+  border-radius: 8px;
+  position: absolute;
+  width: 80%;
+  max-width: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  overflow-y: auto;
+  max-height: 95%;
+}
+
+.close-update-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.update-item-form {
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.update-item-title {
+  text-align: center;
+}
+
+.update-item-form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #555;
+}
+
+.update-item-form-input,
+.update-item-form select,
+.update-item-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.wardrobe-update-seasons {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 10px;
+  padding-right: 2px;
+  font-size: 16px;
+}
+
+.update-item-form input:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+.update-wardrobe-item-submit {
+  background-color: #0066cc;
+  color: white;
+}
+
+.error-message {
+  color: red;
+  padding: 0px;
+}
