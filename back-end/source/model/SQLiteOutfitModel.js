@@ -8,14 +8,14 @@ const sequelize = new Sequelize({
 
 // Define the OutfitEntry model
 const OutfitEntry = sequelize.define("OutfitEntry", {
+  user_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
   outfit_id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-  },
-  user_id: {
-    type: DataTypes.UUID,
-    allowNull: false,
   },
   wardrobe_item_ids: {
     type: DataTypes.JSON, // Store array of item IDs as JSON
@@ -75,11 +75,10 @@ class _SQLiteOutfitModel {
     }
   }
 
-  async read(id = null) {
-    if (id) {
-      return await OutfitEntry.findByPk(id);
-    }
-    return await OutfitEntry.findAll();
+  async read(filters = {}) {
+    return await OutfitEntry.findAll({
+      where: filters,
+    });
   }
 
   async update(entry) {

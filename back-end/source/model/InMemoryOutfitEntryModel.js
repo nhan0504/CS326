@@ -15,7 +15,7 @@ class _InMemoryOutfitModel {
 
   async read(id = null) {
     if (id) {
-      return this.outfits.find((outfit) => outfit.outfit_id === id);
+      return this.outfits.filter((outfit) => outfit.user_id === id);
     }
 
     return this.outfits;
