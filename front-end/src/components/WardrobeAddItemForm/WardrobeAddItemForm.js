@@ -165,7 +165,6 @@ export class WardrobeAddItemForm extends BaseComponent {
     submitButton.classList.add("add-wardrobe-item-submit");
     submitButton.addEventListener("click", (event) => {
       event.preventDefault();
-
       // collect the data from the form
       const formData = this.collectFormData();
 

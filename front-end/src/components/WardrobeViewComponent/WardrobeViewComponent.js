@@ -4,12 +4,14 @@ import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryServ
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { WardrobeAddItemForm } from "../WardrobeAddItemForm/WardrobeAddItemForm.js";
+import { WardrobeDeleteItemForm } from "../WardrobeDeleteItemForm/WardrobeDeleteItemForm.js";
 
 export class WardrobeViewComponent extends BaseComponent {
   #container = null;
   #addForm = null;
   #wardrobeItems = [];
   #wardrobeService = null;
+  #loadingIndicator = null; // Loading indicator
 
   constructor(WardrobeViewData = {}) {
     super();
@@ -24,14 +26,32 @@ export class WardrobeViewComponent extends BaseComponent {
     // loadTestWardrobeItems();
   }
 
+  // Added loading indicator methods
+  showLoadingIndicator() {
+    this.#loadingIndicator = document.createElement("div");
+    this.#loadingIndicator.classList.add("loading-indicator");
+    this.#loadingIndicator.textContent = "Loading...";
+    this.#container.appendChild(this.#loadingIndicator);
+  }
+
+  hideLoadingIndicator() {
+    if (this.#loadingIndicator) {
+      this.#loadingIndicator.remove();
+      this.#loadingIndicator = null;
+    }
+  }
+  // Updated loadWardrobeItems method
   async loadWardrobeItems() {
+    this.showLoadingIndicator(); // Show loading indicator
     try {
       await this.#wardrobeService.initDB();
-      this.#wardrobeItems =
-        await this.#wardrobeService.loadWardrobeItemsFromDB();
+      this.#wardrobeItems = await this.#wardrobeService.loadWardrobeItemsFromDB();
       this.applyFilters(this.#wardrobeItems);
     } catch (e) {
       console.error("Error:", e);
+      alert("Failed to load wardrobe items. Please try again."); // User feedback
+    } finally {
+      this.hideLoadingIndicator(); // Hide loading indicator
     }
   }
 
