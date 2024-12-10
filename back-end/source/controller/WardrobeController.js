@@ -133,6 +133,34 @@ class WardrobeController {
     }
   }
 
+  // Update wardrobe item
+  async updateWardrobeItem(req, res) {
+    try {
+      // Check if 'item' is provided in the request body
+      if (!req.body) {
+        return res.status(400).json({ error: "Item detail is required." });
+      }
+
+      // Update the item object with a unique ID
+      const item = await this.model.update(req.body);
+
+      // Log the full item for debugging
+      const file = req.body.file
+        ? `with file: ${req.body.filename}`
+        : "without file";
+      console.log(`Updated Item: ${item.id} - ${file}`);
+
+      // Send back the updated item as the response
+      return res.status(200).json({ message: 'Item updated successfully.' });
+    } catch (error) {
+      // Log any unexpected errors and send a server error response
+      console.error("Error updating item:", error);
+      return res
+        .status(500)
+        .json({ error: "Failed to update item. Please try again." });
+    }
+  }
+
   // Clear all items
   async clearItems(req, res) {
     await this.model.delete();

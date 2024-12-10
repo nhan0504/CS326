@@ -127,6 +127,38 @@ export class WardrobeRepositoryService extends Service {
     }
   }
 
+  async updateWardrobeItem(itemId, wardrobeItemData) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction([this.storeName], "readwrite");
+      const store = transaction.objectStore(this.storeName);
+      const request = store.get(itemId);
+
+      request.onsuccess = (event) => {
+        const item = event.target.result;
+
+        if (item) {
+          const updateRequest = store.put(wardrobeItemData);
+
+          updateRequest.onsuccess = () => {
+            document.dispatchEvent(new Event(Events.UpdateWardrobeItemSuccess));
+            resolve("Wardrobe item updated successfully");
+          };
+
+          updateRequest.onerror = () => {
+            this.publish(Events.UpdateWardrobeItemFailure, item);
+            reject("Error updating wardrobe item");
+          };
+        } else {
+          reject("Wardrobe item not found");
+        }
+      };
+
+      request.onerror = () => {
+        reject("Error retrieving wardrobe item");
+      };
+    });
+  }
+
   async clearWardrobeItems() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], "readwrite");
