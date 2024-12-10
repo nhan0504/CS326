@@ -1,5 +1,14 @@
 ## Contribution Log for Anisha Prathi
 
+### December 9, 2024
+- **Task**: Fetch Outfits
+- **Details**: Set up routes so that it takes user_id and fetches the outfits for that user
+- **Link to Commit**: [Fetch Outfits](https://github.com/nhan0504/CS326/issues/79)
+
+### November 30, 2024
+- **Task**: Set up SQLite
+- **Details**: Set up SQLite for the project
+- **Link to Commit**: [Set up SQLite](https://github.com/nhan0504/CS326/issues/78#event-15386490234)
 
 ### November 17, 2024
 
