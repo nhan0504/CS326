@@ -17,6 +17,10 @@ class ItemRoutes {
       await WardrobeController.addWardrobeItem(req, res);
     });
 
+    this.router.put("/", async (req, res) => {
+      await WardrobeController.updateWardrobeItem(req, res);
+    });
+
     this.router.delete("/", async (req, res) => {
       await WardrobeController.clearItems(req, res);
     });

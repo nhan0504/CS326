@@ -4,10 +4,12 @@ import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryServ
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { WardrobeAddItemForm } from "../WardrobeAddItemForm/WardrobeAddItemForm.js";
+import { WardrobeUpdateItemForm } from "../WardrobeUpdateItemForm/WardrobeUpdateItemForm.js";
 
 export class WardrobeViewComponent extends BaseComponent {
   #container = null;
   #addForm = null;
+  #updateForm = null;
   #wardrobeItems = [];
   #wardrobeService = null;
 
@@ -305,6 +307,22 @@ export class WardrobeViewComponent extends BaseComponent {
           heartIcon.classList.add("favorite-icon");
           heartIcon.classList.remove("non-favorite-icon");
         }
+      };
+
+      // Add update button
+      const updateIcon = document.createElement("span");
+
+      updateIcon.classList.add("wardrobe-update-item-btn");
+      updateIcon.innerHTML = '<i class="fa-solid fa-pen-to-square"></i>';
+      wardrobeItem.appendChild(updateIcon);
+      // Render the update item form when the button is clicked
+      updateIcon.onclick = () => {
+        if (!this.#updateForm) {
+          this.#updateForm = new WardrobeUpdateItemForm();
+          const element = this.#updateForm.render(item.item_id);
+          document.body.appendChild(element);
+        }
+        this.#updateForm.show();
       };
 
       // Add trash can delete button
