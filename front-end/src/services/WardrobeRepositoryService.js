@@ -60,6 +60,37 @@ export class WardrobeRepositoryService extends Service {
     });
   }
 
+  // Add wardrobe item from the SQLite database using the backend route
+  async storeWardrobeItemsToSQLite(wardrobeItemData) {
+    try {
+      // Construct the url to to store the wardrobe item f
+      const url = "http://localhost:4000/v1/items/";
+      const data = JSON.stringify(wardrobeItemData);
+
+      // Fetch from the endpoint for wardrobe items
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: data,
+        credentials: "include",
+      });
+
+      // Check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+    } catch (e) {
+      // throw an error
+      console.error(e);
+      throw new Error("Error storing wardrobe items.");
+    }
+  }
+ 
+
   async clearWardrobeItem(wardrobeItemId) {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], "readwrite");
@@ -157,6 +188,36 @@ export class WardrobeRepositoryService extends Service {
         reject("Error retrieving wardrobe item");
       };
     });
+  }
+
+  // Update wardrobe items from the SQLite database using the backend route
+  async updateWardrobeItemsFromSQLite(wardrobeItemData) {
+    try {
+      // Construct the url to to store the wardrobe item
+      const url = "http://localhost:4000/v1/items/";
+      const data = JSON.stringify(wardrobeItemData);
+
+      // Fetch from the endpoint for wardrobe items
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: data,
+        credentials: "include",
+      });
+
+      // Check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+    } catch (e) {
+      // throw an error
+      console.error(e);
+      throw new Error("Error updating wardrobe items.");
+    }
   }
 
   async clearWardrobeItems() {

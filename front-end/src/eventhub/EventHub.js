@@ -3,17 +3,6 @@ export class EventHub {
     this.events = {};
   }
 
-  // Singleton instance
-  static instance = null;
-
-  // Method to get the singleton instance
-  static getInstance() {
-    if (!EventHub.instance) {
-      EventHub.instance = new EventHub();
-    }
-    return EventHub.instance;
-  }
-  
   // Subscribe to an event
   subscribe(event, listener) {
     if (!this.events[event]) {
@@ -28,6 +17,7 @@ export class EventHub {
   // Publish an event
   publish(event, data) {
     if (!this.events[event]) return;
+    console.log(this.events[event].length);
     this.events[event].forEach(listener => listener(data));
   }
 

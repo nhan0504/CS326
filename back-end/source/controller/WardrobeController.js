@@ -115,12 +115,12 @@ class WardrobeController {
 
       // Create the new item object with a unique ID
       const item = await this.model.create(req.body);
-
+      console.log(`item = ${item}`);
       // Log the full item for debugging
-      const file = req.body.file
-        ? `with file: ${req.body.filename}`
+      const file = req.body.image
+        ? `with image file`
         : "without file";
-      console.log(`New Item: ${item.id} - ${file}`);
+      console.log(`New Item: ${item.item_id} - ${file}`);
 
       // Send back the created item as the response
       return res.status(201).json(item);
@@ -140,15 +140,16 @@ class WardrobeController {
       if (!req.body) {
         return res.status(400).json({ error: "Item detail is required." });
       }
-
+      console.log(req.body);
       // Update the item object with a unique ID
       const item = await this.model.update(req.body);
-
+      console.log("Update Checkpoint");
+      console.log(item);
       // Log the full item for debugging
-      const file = req.body.file
-        ? `with file: ${req.body.filename}`
+      const file = req.body.image
+        ? `with image file`
         : "without file";
-      console.log(`Updated Item: ${item.id} - ${file}`);
+      console.log(`Updated Item: ${item.item_id} - ${file}`);
 
       // Send back the updated item as the response
       return res.status(200).json({ message: 'Item updated successfully.' });

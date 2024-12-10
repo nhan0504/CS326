@@ -1,4 +1,5 @@
 import { Events } from "../../eventhub/Events.js";
+import { EventHub } from "../../eventhub/EventHub.js";
 import { getId } from "../../models/User.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
@@ -12,11 +13,13 @@ export class WardrobeViewComponent extends BaseComponent {
   #updateForm = null;
   #wardrobeItems = [];
   #wardrobeService = null;
+  #eventHub = null;
 
   constructor(WardrobeViewData = {}) {
     super();
     this.WardrobeViewData = WardrobeViewData;
     this.loadCSS("WardrobeViewComponent");
+    this.#eventHub = EventHub.getInstance();
     this.#wardrobeService = new WardrobeRepositoryService();
     //this.loadWardrobeItems();
     this.loadSQLiteWardrobeItems();
@@ -46,11 +49,14 @@ export class WardrobeViewComponent extends BaseComponent {
         this.#wardrobeItems = items.usersItems;
       });
     this.applyFilters(this.#wardrobeItems);
+    console.log("Call Reload");
+    this.renderWardrobeItems(this.#wardrobeItems);
   }
 
   subscribeToWardrobeEvents() {
     document.addEventListener(Events.StoreWardrobeItemSuccess, () => {
       //this.loadWardrobeItems();
+      print("Loading Wardrobe Items");
       this.loadSQLiteWardrobeItems();
     });
 
@@ -297,8 +303,8 @@ export class WardrobeViewComponent extends BaseComponent {
       wardrobeItem.appendChild(heartIcon);
       // Make the favorite button red and update the item when clicked
       heartIcon.onclick = () => {
-        this.#wardrobeService.toggleFavorite(item.item_id);
         item.is_favorite = !item.is_favorite;
+        this.#wardrobeService.updateWardrobeItemsFromSQLite(item, getId());
 
         if (heartIcon.classList.contains("favorite-icon")) {
           heartIcon.classList.add("non-favorite-icon");
@@ -318,8 +324,8 @@ export class WardrobeViewComponent extends BaseComponent {
       // Render the update item form when the button is clicked
       updateIcon.onclick = () => {
         if (!this.#updateForm) {
-          this.#updateForm = new WardrobeUpdateItemForm();
-          const element = this.#updateForm.render(item.item_id);
+          this.#updateForm = new WardrobeUpdateItemForm(item.item_id);
+          const element = this.#updateForm.render(this.#wardrobeItems);
           document.body.appendChild(element);
         }
         this.#updateForm.show();
