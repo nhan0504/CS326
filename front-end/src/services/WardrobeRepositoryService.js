@@ -1,7 +1,7 @@
 import { Events } from "../eventhub/Events.js";
 import Service from "./Service.js";
 
-const base_url = "http://localhost:4000/v1/"
+const base_url = "http://localhost:4000/v1/";
 
 export class WardrobeRepositoryService extends Service {
   constructor() {
@@ -301,6 +301,33 @@ export class WardrobeRepositoryService extends Service {
     } catch (e) {
       console.error(e);
       throw new Error("Error fetching wardrobe items.");
+    }
+  }
+
+  // fetch suggested outfits from the backend
+  async getSuggestedOutfits(user_id) {
+    try {
+      const url = `${base_url}suggestions/${user_id}`;
+
+      // fetch from the endpoint for suggested outfits
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the suggestions as JSON
+      const suggestions = await response.json();
+
+      return suggestions;
+    } catch (e) {
+      // if there is an error fetching throw an error
+      console.error(e);
+      throw new Error("Error fetching suggested outfits.");
     }
   }
 
