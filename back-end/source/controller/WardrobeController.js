@@ -41,8 +41,8 @@ class WardrobeController {
       const topItems = items
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
-  
-      res.json({items: topItems});
+
+      res.json({ items: topItems });
     } catch (error) {
       console.error("Error fetching most worn items:", error);
       res.status(500).json({ error: "Failed to fetch most worn items." });
@@ -54,7 +54,7 @@ class WardrobeController {
     try {
       const items = await this.model.read({
         user_id: user_id,
-        times_worn: { [Sequelize.Op.lt]: 2 }
+        times_worn: { [Sequelize.Op.lt]: 2 },
       });
       res.json({ items });
     } catch (error) {
@@ -64,7 +64,7 @@ class WardrobeController {
   }
 
   async getCostPerWear(user_id, req, res) {
-    try { 
+    try {
       const items = await this.model.read({
         user_id: user_id,
       });
@@ -84,7 +84,7 @@ class WardrobeController {
   async getFrequencyPerCategory(user_id, req, res) {
     try {
       const items = await this.model.getFrequencyPerCategory(user_id);
-      res.json({items});
+      res.json({ items });
     } catch (error) {
       console.error("Error fetching item frequency per category:", error);
       res
@@ -96,7 +96,7 @@ class WardrobeController {
   async getItemPerCategory(user_id, req, res) {
     try {
       const items = await this.model.getItemPerCategory(user_id);
-      res.json({items});
+      res.json({ items });
     } catch (error) {
       console.error("Error fetching number of item per category:", error);
       res
@@ -140,9 +140,8 @@ class WardrobeController {
   }
 
   // create suggested outfits based on the wardrobe items
-  async getSuggestedOutfits(req, res) {
+  async getSuggestedOutfits(userId, req, res) {
     try {
-      const userId = req.user.googleId;
       const outfits = await this.model.generateSuggestedOutfits(userId);
       res.json({ outfits });
     } catch (error) {

@@ -9,8 +9,13 @@ class SuggestionsRoutes {
 
   initializeRoutes() {
     // fetch the suggested outfits on a GET request to http://localhost:4000/v1/suggestions
-    this.router.get("/", async (req, res) => {
-      const outfits = await WardrobeController.getSuggestedOutfits(req, res);
+    this.router.get("/:id", async (req, res) => {
+      const user_id = req.params.id;
+      const outfits = await WardrobeController.getSuggestedOutfits(
+        user_id,
+        req,
+        res
+      );
       res.json(outfits);
     });
   }
