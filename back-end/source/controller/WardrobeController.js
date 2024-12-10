@@ -32,18 +32,17 @@ class WardrobeController {
   }
 
   //Get top 5 most worn item
-  async getMostWornItems(req, res) {
+  async getMostWornItems(user_id, req, res) {
     try {
-      const userId = req.user.googleId;
       const items = await this.model.read({
-        user_id: userId,
+        user_id: user_id,
       });
 
       const topItems = items
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
-
-      res.json({ topItems });
+  
+      res.json({items: topItems});
     } catch (error) {
       console.error("Error fetching most worn items:", error);
       res.status(500).json({ error: "Failed to fetch most worn items." });
@@ -51,12 +50,11 @@ class WardrobeController {
   }
 
   //Get items worn less than 2 times
-  async getLeastWornItems(req, res) {
+  async getLeastWornItems(user_id, req, res) {
     try {
-      const userId = req.user.googleId;
       const items = await this.model.read({
-        user_id: userId,
-        times_worn: { [Sequelize.Op.lt]: 2 },
+        user_id: user_id,
+        times_worn: { [Sequelize.Op.lt]: 2 }
       });
       res.json({ items });
     } catch (error) {
@@ -65,11 +63,10 @@ class WardrobeController {
     }
   }
 
-  async getCostPerWear(req, res) {
-    try {
-      const userId = req.user.googleId;
+  async getCostPerWear(user_id, req, res) {
+    try { 
       const items = await this.model.read({
-        user_id: userId,
+        user_id: user_id,
       });
       const costPerWear = items.map((item) => ({
         item_id: item.item_id,
@@ -84,11 +81,10 @@ class WardrobeController {
     }
   }
 
-  async getFrequencyPerCategory(req, res) {
+  async getFrequencyPerCategory(user_id, req, res) {
     try {
-      const userId = req.user.googleId;
-      const items = await this.model.getFrequencyPerCategory(userId);
-      res.json({ items });
+      const items = await this.model.getFrequencyPerCategory(user_id);
+      res.json({items});
     } catch (error) {
       console.error("Error fetching item frequency per category:", error);
       res
@@ -97,11 +93,10 @@ class WardrobeController {
     }
   }
 
-  async getItemPerCategory(req, res) {
+  async getItemPerCategory(user_id, req, res) {
     try {
-      const userId = req.user.googleId;
-      const items = await this.model.getItemPerCategory(userId);
-      res.json({ items });
+      const items = await this.model.getItemPerCategory(user_id);
+      res.json({items});
     } catch (error) {
       console.error("Error fetching number of item per category:", error);
       res
