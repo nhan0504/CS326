@@ -78,6 +78,33 @@ export class OutfitRepositoryService extends Service {
     });
   }
 
+  async loadOutfitsFromSQLite(user_id) {
+    try {
+      // make the url include user_id so we know which user to get the outfits for
+      const url = "http://localhost:4000/v1/outfits/" + user_id;
+
+      // fetch from the endpoint for outfits
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+
+      // check if the response is ok
+      if (!response.ok) {
+        throw new Error("Bad network response.");
+      }
+
+      // Parse the outfits as JSON
+      const outfits = await response.json();
+
+      return outfits;
+    } catch (e) {
+      // throw an error
+      console.error(e);
+      throw new Error("Error fetching outfits.");
+    }
+  }
+
   async clearOutfit() {
     return new Promise((resolve, reject) => {
       const transaction = this.db.transaction([this.storeName], 'readwrite');

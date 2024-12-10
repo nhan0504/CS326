@@ -10,9 +10,19 @@ class OutfitController {
     this.model = await ModelFactory.getModel("sqlite-fresh", "outfit");
   }
   // Get all outfits
-  async getAllOutfits(req, res) {
-    const outfits = await this.model.read();
-    res.json({ outfits });
+  async getAllOutfits(user_id, req, res) {
+    try {
+      // get all of the outfits that have the user_id of the user
+      const usersOutfits = await this.model.read({
+        user_id,
+      });
+
+      res.json({ usersOutfits });
+    } catch (error) {
+      // log any errors and send a server error response
+      console.error("Error fetching outfits: ", error);
+      return res.status(500).json({ error: "Error fetching outfits." });
+    }
   }
 
   // Add a new outfit

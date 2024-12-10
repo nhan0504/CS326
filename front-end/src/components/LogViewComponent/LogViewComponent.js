@@ -3,9 +3,11 @@ import {
   loadTestWardrobeItems,
 } from "../../testing/TestData.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
+import { getId } from "../../models/User.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { OutfitRepositoryService } from "../../services/OutfitRepositoryService.js";
 import { LogAddItem } from "../LogAddItem/LogAddItem.js"; // Import LogAddItem component
+import { Events } from "../../eventhub/Events.js";
 
 export class LogViewComponent extends BaseComponent {
   #container = null;
@@ -20,14 +22,25 @@ export class LogViewComponent extends BaseComponent {
     this.loadCSS("LogViewComponent");
     this.#wardrobeService = new WardrobeRepositoryService();
     this.#outfitService = new OutfitRepositoryService();
-    this.loadAllOutfitItems();
     this.subscribeToWardrobeEvents();
+    this.loadSQLiteOutfits();
 
     // Uncomment to load test outfits
     // (only works in combination with the test wardrobe which can be loaded in in the wardrobeViewComponent in the same way)
     // Must refresh after
     // loadOutfitItems();
   }
+
+    // load outfits from SQLite using the endpoint
+    async loadSQLiteOutfits() {
+      const user_id = getId();
+      await this.#outfitService
+        .loadOutfitsFromSQLite(user_id)
+        .then((outfits) => {
+          this.#outfitItems = outfits.usersOutfits;
+        });
+      this.applyFilters(this.#outfitItems);
+    }
 
   async loadAllOutfitItems() {
     try {
@@ -85,7 +98,7 @@ export class LogViewComponent extends BaseComponent {
 
   subscribeToWardrobeEvents() {
     document.addEventListener("StoreWardrobeItemSuccess", (event) => {
-      this.loadAllOutfitItems();
+      this.loadSQLiteOutfits();
     });
 
     document.addEventListener("StoreWardrobeItemFailure", (event) => {
@@ -94,12 +107,18 @@ export class LogViewComponent extends BaseComponent {
 
     document.addEventListener("UnStoreWardrobeItemSuccess", async () => {
       console.log("All wardrobe items cleared");
-      this.loadAllOutfitItems();
+      this.loadSQLiteOutfits();
     });
 
     document.addEventListener("UnStoreWardrobeItemFailure", (event) => {
       console.error("Failed to clear wardrobe items:");
       alert("Failed to clear wardrobe items. Please try again.");
+    });
+
+    // rerender when the userid updates
+    document.addEventListener(Events.UpdateUserId, () => {
+      console.log("User id updated");
+      this.loadSQLiteOutfits();
     });
   }
 

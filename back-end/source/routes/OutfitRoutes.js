@@ -8,8 +8,9 @@ class OutfitRoutes {
   }
 
   initializeRoutes() {
-    this.router.get("/", async (req, res) => {
-      await OutfitController.getAllOutfits(req, res);
+    this.router.get("/:id", async (req, res) => {
+    const user_id = req.params.id;
+    await OutfitController.getAllOutfits(user_id, req, res);
     });
 
     this.router.post("/", async (req, res) => {
