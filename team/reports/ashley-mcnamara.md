@@ -90,4 +90,7 @@
 - **Details**: Updated the fetch wardrobe items endpoint to look for a userid and properly fetch the items on the backend, rerendering if a new user is signed in.
 - **Link to Commit**: [Fetch Wardrobe Items](https://github.com/nhan0504/CS326/pull/103/commits/2121a179bdee4163e5e421173cf4f799d83e04aa)
 
-
+### December 9, 2024
+- **Task**: Connect Suggestions to Frontend
+- **Details**: Updated the suggestions endpoint to look for a userid and make a call on the frontend to properly fetch the items from the backend, rerendering if a new user is signed in or if the wardrobe is updated.
+- **Link to Commit**: [Suggestions Page Frontend Connection](https://github.com/nhan0504/CS326/pull/113/commits/dfbaf3b4ba2fc9ae16e5e8acb5c2a0c5b3da12cd)
