@@ -334,18 +334,18 @@ export class WardrobeViewComponent extends BaseComponent {
       trashIcon.classList.add("wardrobe-delete-btn");
       wardrobeItem.appendChild(trashIcon);
       // Delete the item when clicked
-      // trashIcon.onclick = () => {
-      //   this.#wardrobeService.clearWardrobeItem(item.item_id);
-      // };
-
       trashIcon.onclick = () => {
-        if (!this.#deleteForm) {
-          this.#deleteForm = new WardrobeDeleteItemForm(item.item_id);
-          const element = this.#deleteForm.render();
-          document.body.appendChild(element);
-        }
-        this.#deleteForm.show();
+        this.#wardrobeService.clearWardrobeItem(item.item_id);
       };
+
+      // trashIcon.onclick = () => {
+      //   if (!this.#deleteForm) {
+      //     this.#deleteForm = new WardrobeDeleteItemForm(item.item_id);
+      //     const element = this.#deleteForm.render();
+      //     document.body.appendChild(element);
+      //   }
+      //   this.#deleteForm.show();
+      // };
       
       // Add item image
       const image = document.createElement("img");

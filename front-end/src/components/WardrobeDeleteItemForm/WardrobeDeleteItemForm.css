@@ -1,5 +1,5 @@
 .delete-item-button {
-    background-color: #dc3545; /* Bootstrap danger color */
+    background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
@@ -7,10 +7,42 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-  }
-  
-  .delete-item-button:hover {
-    background-color: #c82333; /* Darker shade for hover effect */
-  }
+    }
 
-  
+.delete-item-button:hover {
+    background-color: #c82333; /* Darker shade for hover effect */
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+
+.close-delete-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+
