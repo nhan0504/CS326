@@ -5,7 +5,6 @@ import { Events } from '../../eventhub/Events.js';
 export class WardrobeDeleteItemForm extends BaseComponent {
   constructor(itemId) {
     super();
-    this.itemId = itemId; // The ID of the item to be deleted
     this.itemId = itemId; //The ID of the item to be deleted
     this.wardrobeService = new WardrobeRepositoryService();
     this.loadCSS('WardrobeDeleteItemForm');
@@ -29,9 +28,17 @@ export class WardrobeDeleteItemForm extends BaseComponent {
 
   async deleteItem() {
     try {
-      await this.wardrobeService.deleteWardrobeItem(this.itemId); 
-      this.publish(Events.UnStoreWardrobeItemSuccess, this.itemId); // Notify other components to refresh
-      this.publish(Events.UnStoreWardrobeItemSuccess, this.itemId); //Notify other components to refresh
+      const response = await fetch('http://localhost:4000/v1/items/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item_id: this.itemId }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete item');
+      }
+
+      this.publish(Events.UnStoreWardrobeItemSuccess, this.itemId);
       alert('Item deleted successfully.');
     } catch (error) {
       console.error('Error deleting item:', error);

@@ -220,6 +220,11 @@ export class LogViewComponent extends BaseComponent {
   }
 
   applyFilters(outfits) {
+    if (!outfits || !Array.isArray(outfits)) {
+      console.error("Outfits data is not an array or is undefined.");
+      return [];
+    }
+
     const selectedSeasons = Array.from(
       document.querySelectorAll("input[name='log-seasons']:checked")
     ).map((cb) => cb.value);
@@ -239,7 +244,7 @@ export class LogViewComponent extends BaseComponent {
 
     // Filter by season
     filteredItems = filteredItems.filter((item) =>
-      item.seasons.some((season) =>
+      item.seasons && item.seasons.some((season) =>
         selectedSeasons
           .map((s) => s.toLowerCase())
           .includes(season.toLowerCase())
@@ -269,10 +274,10 @@ export class LogViewComponent extends BaseComponent {
       filteredItems = filteredItems.filter(
         (item) =>
           item.outfit_id.toString().includes(searchTerm) ||
-          item.wardrobe_item_ids.some((id) =>
+          (item.wardrobe_item_ids && item.wardrobe_item_ids.some((id) =>
             id.toString().includes(searchTerm)
-          ) ||
-          item.note.toLowerCase().includes(searchTerm)
+          )) ||
+          (item.note && item.note.toLowerCase().includes(searchTerm))
       );
     }
     const outfitListDiv = document.getElementById("outfitList");

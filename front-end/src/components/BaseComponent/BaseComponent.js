@@ -3,6 +3,7 @@ import { EventHub } from '../../eventhub/EventHub.js';
 export class BaseComponent {
   constructor() {
     this.cssLoaded = false;
+    this.eventHub = EventHub.getInstance();
   }
 
   /**
