@@ -1,5 +1,4 @@
 import { Events } from "../../eventhub/Events.js";
-import { EventHub } from "../../eventhub/EventHub.js";
 import { getId } from "../../models/User.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { loadTestWardrobeItems } from "../../testing/TestData.js";
@@ -13,13 +12,11 @@ export class WardrobeViewComponent extends BaseComponent {
   #updateForm = null;
   #wardrobeItems = [];
   #wardrobeService = null;
-  #eventHub = null;
 
   constructor(WardrobeViewData = {}) {
     super();
     this.WardrobeViewData = WardrobeViewData;
     this.loadCSS("WardrobeViewComponent");
-    this.#eventHub = EventHub.getInstance();
     this.#wardrobeService = new WardrobeRepositoryService();
     //this.loadWardrobeItems();
     this.loadSQLiteWardrobeItems();
@@ -49,19 +46,28 @@ export class WardrobeViewComponent extends BaseComponent {
         this.#wardrobeItems = items.usersItems;
       });
     this.applyFilters(this.#wardrobeItems);
-    console.log("Call Reload");
     this.renderWardrobeItems(this.#wardrobeItems);
   }
 
   subscribeToWardrobeEvents() {
     document.addEventListener(Events.StoreWardrobeItemSuccess, () => {
       //this.loadWardrobeItems();
-      print("Loading Wardrobe Items");
+      console.log("Loading Wardrobe Items");
       this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.StoreWardrobeItemFailure, () => {
-      console.error("Failed to delete wardrobe item:");
+      console.error("Failed to add wardrobe item:");
+    });
+
+    document.addEventListener(Events.UpdateWardrobeItemSuccess, () => {
+      //this.loadWardrobeItems();
+      console.log("Loading Wardrobe Items");
+      this.loadSQLiteWardrobeItems();
+    });
+
+    document.addEventListener(Events.UpdateWardrobeItemFailure, () => {
+      console.error("Failed to update wardrobe item:");
     });
 
     document.addEventListener(Events.UnStoreWardrobeItemSuccess, () => {

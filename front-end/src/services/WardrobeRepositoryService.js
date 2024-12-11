@@ -83,6 +83,7 @@ export class WardrobeRepositoryService extends Service {
         throw new Error("Bad network response.");
       }
 
+      document.dispatchEvent(new Event(Events.StoreWardrobeItemSuccess));
     } catch (e) {
       // throw an error
       console.error(e);
@@ -213,6 +214,8 @@ export class WardrobeRepositoryService extends Service {
         throw new Error("Bad network response.");
       }
 
+
+      document.dispatchEvent(new Event(Events.UpdateWardrobeItemSuccess));
     } catch (e) {
       // throw an error
       console.error(e);

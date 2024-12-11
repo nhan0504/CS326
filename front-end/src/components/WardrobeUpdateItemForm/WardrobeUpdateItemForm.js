@@ -1,21 +1,17 @@
 import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
-import { Events } from "../../eventhub/Events.js";
-import { EventHub } from "../../eventhub/EventHub.js";
 import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
 
 export class WardrobeUpdateItemForm extends BaseComponent {
   #container = null;
   #wardrobeService = null;
   #itemId = null;
-  #eventHub = null;
 
   constructor(itemId) {
     super();
     this.loadCSS("WardrobeUpdateItemForm");
     this.#itemId = itemId;
-    this.#eventHub = EventHub.getInstance();
     this.#wardrobeService = new WardrobeRepositoryService();
   }
 
@@ -267,17 +263,9 @@ export class WardrobeUpdateItemForm extends BaseComponent {
       const wardrobeItemJSON = wardrobeItem.toJSON();
       await this.#wardrobeService.initDB();
       await this.#wardrobeService.updateWardrobeItemsFromSQLite(wardrobeItemJSON);
-      this.updateWardrobeView()
     } catch (e) {
       console.error("Error:", e);
     }
-  }
-
-  updateWardrobeView() {
-    // Publish an event or directly update the WardrobeViewComponent
-    // Assuming we have access to WardrobeViewComponent instance or use events
-    console.log(this.#eventHub.publish);
-    this.#eventHub.publish(Events.StoreOutfitSuccess, "Updated Item");
   }
 
   checkValid(formData, itemIds) {
