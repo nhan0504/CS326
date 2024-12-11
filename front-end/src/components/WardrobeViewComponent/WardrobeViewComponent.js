@@ -46,16 +46,28 @@ export class WardrobeViewComponent extends BaseComponent {
         this.#wardrobeItems = items.usersItems;
       });
     this.applyFilters(this.#wardrobeItems);
+    this.renderWardrobeItems(this.#wardrobeItems);
   }
 
   subscribeToWardrobeEvents() {
     document.addEventListener(Events.StoreWardrobeItemSuccess, () => {
       //this.loadWardrobeItems();
+      console.log("Loading Wardrobe Items");
       this.loadSQLiteWardrobeItems();
     });
 
     document.addEventListener(Events.StoreWardrobeItemFailure, () => {
-      console.error("Failed to delete wardrobe item:");
+      console.error("Failed to add wardrobe item:");
+    });
+
+    document.addEventListener(Events.UpdateWardrobeItemSuccess, () => {
+      //this.loadWardrobeItems();
+      console.log("Loading Wardrobe Items");
+      this.loadSQLiteWardrobeItems();
+    });
+
+    document.addEventListener(Events.UpdateWardrobeItemFailure, () => {
+      console.error("Failed to update wardrobe item:");
     });
 
     document.addEventListener(Events.UnStoreWardrobeItemSuccess, () => {
@@ -297,8 +309,8 @@ export class WardrobeViewComponent extends BaseComponent {
       wardrobeItem.appendChild(heartIcon);
       // Make the favorite button red and update the item when clicked
       heartIcon.onclick = () => {
-        this.#wardrobeService.toggleFavorite(item.item_id);
         item.is_favorite = !item.is_favorite;
+        this.#wardrobeService.updateWardrobeItemsFromSQLite(item, getId());
 
         if (heartIcon.classList.contains("favorite-icon")) {
           heartIcon.classList.add("non-favorite-icon");
@@ -318,8 +330,8 @@ export class WardrobeViewComponent extends BaseComponent {
       // Render the update item form when the button is clicked
       updateIcon.onclick = () => {
         if (!this.#updateForm) {
-          this.#updateForm = new WardrobeUpdateItemForm();
-          const element = this.#updateForm.render(item.item_id);
+          this.#updateForm = new WardrobeUpdateItemForm(item.item_id);
+          const element = this.#updateForm.render(this.#wardrobeItems);
           document.body.appendChild(element);
         }
         this.#updateForm.show();

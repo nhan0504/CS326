@@ -2,6 +2,7 @@ import { WardrobeItem } from "../../models/WardrobeItem.js";
 import { WardrobeRepositoryService } from "../../services/WardrobeRepositoryService.js";
 import { BaseComponent } from "../BaseComponent/BaseComponent.js";
 import { CATEGORIES, OCCASIONS, SEASONS } from "../constants.js";
+import { getId } from "../../models/User.js";
 
 export class WardrobeAddItemForm extends BaseComponent {
   #container = null;
@@ -10,7 +11,6 @@ export class WardrobeAddItemForm extends BaseComponent {
   constructor() {
     super();
     this.loadCSS("WardrobeAddItemForm");
-
     this.#wardrobeService = new WardrobeRepositoryService();
   }
 
@@ -161,6 +161,7 @@ export class WardrobeAddItemForm extends BaseComponent {
     // Submit button
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
+    submitButton.id = "add-wardrobe-item-submit";
     submitButton.textContent = "Add Item";
     submitButton.classList.add("add-wardrobe-item-submit");
     submitButton.addEventListener("click", (event) => {
@@ -218,6 +219,9 @@ export class WardrobeAddItemForm extends BaseComponent {
       const base64Image = event.target.result;
       params["image"] = base64Image;
 
+      // Add user ID to the params
+      params["user_id"] = getId();
+
       // Construct the WardrobeItem object
       const wardrobeItem = new WardrobeItem(params);
 
@@ -261,7 +265,7 @@ export class WardrobeAddItemForm extends BaseComponent {
     try {
       const wardrobeItemJSON = wardrobeItem.toJSON();
       await this.#wardrobeService.initDB();
-      await this.#wardrobeService.storeWardrobeItem(wardrobeItemJSON);
+      await this.#wardrobeService.storeWardrobeItemsToSQLite(wardrobeItemJSON);
     } catch (e) {
       console.error("Error:", e);
     }

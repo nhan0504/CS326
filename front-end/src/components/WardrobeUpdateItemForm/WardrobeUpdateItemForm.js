@@ -223,7 +223,7 @@ export class WardrobeUpdateItemForm extends BaseComponent {
       const wardrobeItem = new WardrobeItem(params);
 
       // Update the item in indexdb
-      this.updateWardrobeItem(this.#itemId, wardrobeItem);
+      this.updateWardrobeItem(wardrobeItem);
     };
 
     reader.readAsDataURL(image);
@@ -247,7 +247,7 @@ export class WardrobeUpdateItemForm extends BaseComponent {
     });
 
     // Get the item_id
-    params["item_id"] = params.name;
+    params["item_id"] = this.#itemId;
 
     // Get the seasons
     const selectedSeasons = Array.from(
@@ -258,11 +258,11 @@ export class WardrobeUpdateItemForm extends BaseComponent {
     return params;
   }
 
-  async updateWardrobeItem(itemId, wardrobeItem) {
+  async updateWardrobeItem(wardrobeItem) {
     try {
       const wardrobeItemJSON = wardrobeItem.toJSON();
       await this.#wardrobeService.initDB();
-      await this.#wardrobeService.updateWardrobeItem(itemId, wardrobeItemJSON);
+      await this.#wardrobeService.updateWardrobeItemsFromSQLite(wardrobeItemJSON);
     } catch (e) {
       console.error("Error:", e);
     }
@@ -284,9 +284,6 @@ export class WardrobeUpdateItemForm extends BaseComponent {
       errorMessageElement.textContent = "Please enter the brand.";
     } else if (seasons.length === 0) {
       errorMessageElement.textContent = "Please select at least one season.";
-    } else if (itemIds.includes(item_id)) {
-      errorMessageElement.textContent =
-        "This title is already in use. Please enter a new title.";
     } else {
       return true;
     }
