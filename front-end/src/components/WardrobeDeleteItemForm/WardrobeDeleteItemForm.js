@@ -6,6 +6,7 @@ export class WardrobeDeleteItemForm extends BaseComponent {
   constructor(itemId) {
     super();
     this.itemId = itemId; // The ID of the item to be deleted
+    this.itemId = itemId; //The ID of the item to be deleted
     this.wardrobeService = new WardrobeRepositoryService();
     this.loadCSS('WardrobeDeleteItemForm');
   }
@@ -30,6 +31,7 @@ export class WardrobeDeleteItemForm extends BaseComponent {
     try {
       await this.wardrobeService.deleteWardrobeItem(this.itemId); 
       this.publish(Events.UnStoreWardrobeItemSuccess, this.itemId); // Notify other components to refresh
+      this.publish(Events.UnStoreWardrobeItemSuccess, this.itemId); //Notify other components to refresh
       alert('Item deleted successfully.');
     } catch (error) {
       console.error('Error deleting item:', error);
