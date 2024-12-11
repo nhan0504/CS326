@@ -10,8 +10,19 @@ export class WardrobeDeleteItemForm extends BaseComponent {
     this.loadCSS('WardrobeDeleteItemForm');
   }
 
-  async render() {
-    const container = document.createElement('div');
+  render() {
+    this.container = document.createElement('div');
+    this.container.style.display = 'none'; //initially hide the form
+    
+    // Optionally, add a background overlay and modal styling similar to WardrobeAddItemForm
+    const background = document.createElement("div");
+    background.classList.add("background-overlay");
+    this.container.appendChild(background);
+
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+    this.container.appendChild(modal);
+
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete Item';
     deleteButton.classList.add('delete-item-button');
@@ -19,11 +30,29 @@ export class WardrobeDeleteItemForm extends BaseComponent {
     deleteButton.addEventListener('click', async () => {
       if (confirm('Are you sure you want to delete this item?')) {
         await this.deleteItem();
+        this.hide(); // hide after deleting
       }
     });
 
-    container.appendChild(deleteButton);
-    return container;
+    // Optional close button if we want to allow cancelling
+    const closeButton = document.createElement("span");
+    closeButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+    closeButton.classList.add("close-delete-modal-btn");
+    closeButton.addEventListener("click", () => {
+      this.hide();
+    });
+    modal.appendChild(closeButton);
+
+    modal.appendChild(deleteButton);
+    return this.container;
+  }
+
+  show() {
+    this.container.style.display = 'block';
+  }
+
+  hide() {
+    this.container.style.display = 'none';
   }
 
   async deleteItem() {

@@ -11,7 +11,8 @@ export class WardrobeViewComponent extends BaseComponent {
   #addForm = null;
   #wardrobeItems = [];
   #wardrobeService = null;
-  #loadingIndicator = null; // Loading indicator
+  #loadingIndicator = null; 
+  #deleteForm = null;
 
   constructor(WardrobeViewData = {}) {
     super();
@@ -338,9 +339,12 @@ export class WardrobeViewComponent extends BaseComponent {
       // };
 
       trashIcon.onclick = () => {
-        const deleteForm = new WardrobeDeleteItemForm(item.item_id);
-        document.body.appendChild(deleteForm.render());
-        //The user will see the delete form and confirm before actual deletion occurs
+        if (!this.#deleteForm) {
+          this.#deleteForm = new WardrobeDeleteItemForm(item.item_id);
+          const element = this.#deleteForm.render();
+          document.body.appendChild(element);
+        }
+        this.#deleteForm.show();
       };
       
       // Add item image
