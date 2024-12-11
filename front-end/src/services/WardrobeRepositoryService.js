@@ -275,6 +275,7 @@ export class WardrobeRepositoryService extends Service {
     });
   }
 
+  // Get the 5 most worn item by calling the backend endpoint
   async getMostWornItems(user_id) {
     try {
       const url = `${base_url}stats/${user_id}/most-worn`;
@@ -300,6 +301,7 @@ export class WardrobeRepositoryService extends Service {
     }
   }
 
+  // Get item that is worn less than twice by calling the backend endpoint
   async getLeastWornItems(user_id) {
     try {
       const url = `${base_url}stats/${user_id}/least-worn`;
@@ -325,6 +327,7 @@ export class WardrobeRepositoryService extends Service {
     }
   }
 
+  // Get the cost per wear for each item by calling the backend endpoint
   async getCostPerWear(user_id) {
     try {
       const url = `${base_url}stats/${user_id}/cost-per-wear`;
@@ -350,6 +353,7 @@ export class WardrobeRepositoryService extends Service {
     }
   }
 
+  // Get the wear frequency by category by calling the backend endpoint
   async getFrequencyPerCategory(user_id) {
     try {
       const url = `${base_url}stats/${user_id}/category-frequency`;
@@ -375,6 +379,7 @@ export class WardrobeRepositoryService extends Service {
     }
   }
 
+  // Get number of item by category by calling the backend endpoint
   async getItemsPerCategory(user_id) {
     try {
       const url = `${base_url}stats/${user_id}/items-per-category`;

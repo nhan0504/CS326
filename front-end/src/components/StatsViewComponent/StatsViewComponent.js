@@ -45,9 +45,11 @@ export class StatsViewComponent extends BaseComponent {
     }
   }
 
+  // Call the service to get all the statistic data on the wardrobe be displaying chart
   async loadStatData() {
     const user_id = getId();
     console.log(user_id)
+    // Wait untill all promist resolve to display all chart
     const results = await Promise.all([
       this.wardrobeService.getMostWornItems(user_id),
       this.wardrobeService.getLeastWornItems(user_id),
@@ -87,32 +89,13 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
-  getCostPerWear(item) {
-    return item.times_worn > 0 ? (item.cost / item.times_worn).toFixed(2) : item.cost; 
-  }
-
-  getWearFrequencyByCategory(outfits) {
-    const categoryMap = {};
-    outfits.forEach(item => {
-      if (!categoryMap[item.category]) {
-        categoryMap[item.category] = 0;
-      }
-      categoryMap[item.category] += item.times_worn;
-    });
-    return categoryMap;
-  }
-
-  getItemCountByCategory(wardrobeItems) {
-    const categoryCount = {};
-    wardrobeItems.forEach(item => {
-      if (!categoryCount[item.category]) {
-        categoryCount[item.category] = 0;
-      }
-      categoryCount[item.category] += 1;
-    });
-    return categoryCount;
-  }
-
+  /* Function to render bar chart
+   * Param: 
+   *   containerId: The id of the container that will contain the chart
+   *   labels: The label of each column
+   *   data: The value of each column
+   *   label: The chart label
+   */
   renderChart(containerId, labels, data, label) {
     const ctx = document.getElementById(containerId);
     if (this[containerId]) {
@@ -143,6 +126,12 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
+  /* Function to render doughnut chart
+   * Param: 
+   *   containerId: The id of the container that will contain the chart
+   *   labels: The label of each part in the chart
+   *   data: The value of each part in the chart
+   */
   renderDoughnutChart(containerId, labels, data) {
     const ctx = document.getElementById(containerId);
     if (this[containerId]) {
@@ -186,6 +175,12 @@ export class StatsViewComponent extends BaseComponent {
     });
   }
 
+  /* Function to render pie chart
+   * Param: 
+   *   containerId: The id of the container that will contain the chart
+   *   labels: The label of each piece in the chart
+   *   data: The value of each piece in the chart
+   */
   renderPieChart(containerId, labels, data) {
     const ctx = document.getElementById(containerId);
     if (this[containerId]) {
@@ -257,21 +252,28 @@ export class StatsViewComponent extends BaseComponent {
     title.classList.add('stats-title');
     title.textContent = 'Stats';
 
+    // Divide the whole page into 2 columns
+    // Create the container for the left column
     const leftColumn = document.createElement('div');
     leftColumn.classList.add('column', 'left-column');
 
+    // Create the container for most worn chart
     const mostWornContainer = document.createElement('div');
     mostWornContainer.classList.add('chart-container');
 
+    // Create the container for least worn chart
     const leastWornContainer = document.createElement('div');
     leastWornContainer.classList.add('chart-container');
 
+    // Create the container for the left column
     const rightColumn = document.createElement('div');
     rightColumn.classList.add('column', 'right-column');
 
+    // Create the container for wearing frequency for each category doughnut chart
     const wearFrequencyContainer = document.createElement('div');
     wearFrequencyContainer.classList.add('chart-container');
 
+    // Create the container for number of item per category pie chart
     const itemsPerCategoryContainer = document.createElement('div');
     itemsPerCategoryContainer.classList.add('chart-container');
 
@@ -280,12 +282,15 @@ export class StatsViewComponent extends BaseComponent {
     mostWornTitle.classList.add('chart-title');
     mostWornTitle.textContent = 'Top 5 most-worn Items';
 
+    // Canvas to draw the most worn bar chart
     const mostWornCanvas = document.createElement('canvas');
     mostWornCanvas.id = 'mostWornChart';
 
+    // Generate label and data for the most worn chart
     const mostWornLabels = this.#mostWornItems.map(item => item.name);
     const mostWornData = this.#mostWornItems.map(item => item.times_worn);
 
+    // Create the list of most worn items
     const mostWornList = document.createElement('ul');
     this.#mostWornItems.forEach(item => {
       const listItem = document.createElement('li');
@@ -298,13 +303,15 @@ export class StatsViewComponent extends BaseComponent {
     leastWornTitle.classList.add('chart-title');
     leastWornTitle.textContent = 'Least-worn or Never-worn Items';
 
+    // Canvas to draw the least worn bar chart
     const leastWornCanvas = document.createElement('canvas');
     leastWornCanvas.id = 'leastWornChart';
 
+    // Generate label and data for the least worn chart
     const leastWornLabels = this.#leastWornItems.map(item => item.name);
     const leastWornData = this.#leastWornItems.map(item => item.times_worn);
 
-
+    // Create the list of least worn items
     const leastWornList = document.createElement('ul');
     this.#leastWornItems.forEach(item => {
       const listItem = document.createElement('li');
@@ -317,6 +324,7 @@ export class StatsViewComponent extends BaseComponent {
     costPerWearTitle.textContent = 'Cost-per-wear for Each Item';
     costPerWearTitle.classList.add('chart-title');
 
+    // List out the cost per wear for each item
     const costPerWearList = document.createElement('ul');
     this.#costPerWear.forEach(item => {
       const listItem = document.createElement('li');
@@ -329,12 +337,15 @@ export class StatsViewComponent extends BaseComponent {
     wearFrequencyTitle.textContent = 'Wear Frequency by Category';
     wearFrequencyTitle.classList.add('chart-title');
 
+    // Canvas to draw the wearing frequency by category doughnut chart
     const wearFrequencyCanvas = document.createElement('canvas');
     wearFrequencyCanvas.id = 'wearByCategoryChart';  
 
+    // Generate label and data for the doughnut chart
     const categoryLabels = this.#frequencyCategory.map((item) => item.category);
     const categoryValues = this.#frequencyCategory.map((item) => item.total_wear);
 
+    // Create the list wearing frequency for each category
     const wearFrequencyList = document.createElement('ul');
     this.#frequencyCategory.forEach((item) => {
       const listItem = document.createElement('li');
@@ -347,12 +358,15 @@ export class StatsViewComponent extends BaseComponent {
     itemsPerCategoryTitle.textContent = 'Items per Category';
     itemsPerCategoryTitle.classList.add('chart-title');
 
+    // Canvas to draw the number of item per category pie chart
     const itemsPerCategoryCanvas = document.createElement('canvas');
     itemsPerCategoryCanvas.id = 'itemsPerCategoryChart';
 
+    // Generate label and data for the pie chart
     const itemCategoryLabels = this.#itemCategory.map((item) => item.category);
     const itemCategoryValues = this.#itemCategory.map((item) => item.item_count);
 
+    // Left side will have most worn and least worn bar chart
     leftColumn.appendChild(mostWornTitle);
     leftColumn.appendChild(mostWornList);
     mostWornContainer.appendChild(mostWornCanvas);
@@ -362,6 +376,7 @@ export class StatsViewComponent extends BaseComponent {
     leastWornContainer.appendChild(leastWornCanvas);
     leftColumn.appendChild(leastWornContainer);
 
+    // Right side have the list of cost per wear, doughnut chart for wear frequency and pie chart for num items per category
     rightColumn.appendChild(costPerWearTitle);
     rightColumn.appendChild(costPerWearList);
     rightColumn.appendChild(wearFrequencyTitle);
@@ -372,20 +387,24 @@ export class StatsViewComponent extends BaseComponent {
     itemsPerCategoryContainer.appendChild(itemsPerCategoryCanvas);
     rightColumn.appendChild(itemsPerCategoryContainer);
 
+    // Columns container to hold left and right column
     const columnsContainer = document.createElement('div');
     columnsContainer.id = 'stats-container';
     columnsContainer.classList.add('columns-container');
     columnsContainer.appendChild(leftColumn);
     columnsContainer.appendChild(rightColumn);
 
+    // Add the columns container to the main container
     this.#container.appendChild(title);
     this.#container.appendChild(columnsContainer);
 
+    // Create a download button
     const downloadButton = document.createElement('button');
     downloadButton.textContent = 'Download charts';
     downloadButton.id = 'downloadButton';
     this.#container.appendChild(downloadButton);
 
+    // Render the chart
     requestAnimationFrame(() => {
       this.renderChart('mostWornChart', mostWornLabels, mostWornData, 'Times Worn');
       this.renderChart('leastWornChart', leastWornLabels, leastWornData, 'Times Worn');
@@ -393,6 +412,7 @@ export class StatsViewComponent extends BaseComponent {
       this.renderPieChart('itemsPerCategoryChart', itemCategoryLabels, itemCategoryValues);
     });
 
+    // Function to handle click to download charts
     downloadButton.addEventListener('click', () => {
       this.downloadAllChartImage('stats-container');
     });

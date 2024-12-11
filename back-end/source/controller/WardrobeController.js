@@ -38,6 +38,7 @@ class WardrobeController {
         user_id: user_id,
       });
 
+      // Sort the user item to get the 5 most worn items
       const topItems = items
         .sort((a, b) => b.times_worn - a.times_worn)
         .slice(0, 5);
@@ -52,6 +53,7 @@ class WardrobeController {
   //Get items worn less than 2 times
   async getLeastWornItems(user_id, req, res) {
     try {
+      // Get items in the wardrobe filter by the user_id and the number of time worn
       const items = await this.model.read({
         user_id: user_id,
         times_worn: { [Sequelize.Op.lt]: 2 },
@@ -63,11 +65,14 @@ class WardrobeController {
     }
   }
 
+  // Get cost per wear for each item
   async getCostPerWear(user_id, req, res) {
     try {
+      // Get all item in the wardrobe for user with user_id
       const items = await this.model.read({
         user_id: user_id,
       });
+      // Calculate the cost per wear for each item
       const costPerWear = items.map((item) => ({
         item_id: item.item_id,
         name: item.name,
@@ -81,6 +86,7 @@ class WardrobeController {
     }
   }
 
+  // Get wear frequency by category
   async getFrequencyPerCategory(user_id, req, res) {
     try {
       const items = await this.model.getFrequencyPerCategory(user_id);
@@ -93,6 +99,7 @@ class WardrobeController {
     }
   }
 
+  // Get number of item per category
   async getItemPerCategory(user_id, req, res) {
     try {
       const items = await this.model.getItemPerCategory(user_id);

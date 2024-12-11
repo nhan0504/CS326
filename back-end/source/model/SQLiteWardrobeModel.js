@@ -134,6 +134,7 @@ class _SQLiteWardrobeModel {
   // Get item frequency by category
   async getFrequencyPerCategory(userId) {
     try {
+      // Sum of the number of times_worn for item group by category
       const categories = await WardrobeItem.findAll({
         where: { user_id: userId },
         attributes: [
@@ -151,6 +152,7 @@ class _SQLiteWardrobeModel {
   // Get item count per category
   async getItemPerCategory(userId) {
     try {
+      // Aggregate the data to count the item group by category
       const categoryCounts = await WardrobeItem.findAll({
         where: { user_id: userId },
         attributes: [
