@@ -314,14 +314,14 @@ export class WardrobeRepositoryService extends Service {
     });
   }
 
-  async deleteWardrobeItem(itemId) {
-    try {
-      await this.model.delete({ item_id: itemId }); //Adjust according to WardrobeItem's delete method
-      this.publish(Events.UnStoreWardrobeItemSuccess, itemId); //Notify that the item has been deleted
-    } catch (error) {
-      console.error('Error deleting wardrobe item:', error);
-      throw error; 
-    }
-  }
+  // async deleteWardrobeItem(itemId) {
+  //   try {
+  //     await this.model.delete({ item_id: itemId }); //Adjust according to WardrobeItem's delete method
+  //     this.publish(Events.UnStoreWardrobeItemSuccess, itemId); //Notify that the item has been deleted
+  //   } catch (error) {
+  //     console.error('Error deleting wardrobe item:', error);
+  //     throw error; 
+  //   }
+  // }
 
 }
