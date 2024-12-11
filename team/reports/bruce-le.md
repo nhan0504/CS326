@@ -49,3 +49,29 @@
 - **Task**: Wrote pull request with detailed explanations
 - **Details**: Created a pull request for the new features, including explanations and guidance to ensure smooth integration
 - **Link to PR**: [Pull Request for LogAddItem and LogDeleteItem](https://github.com/nhan0504/CS326/pull/42)
+
+### December 6, 2024
+- **Task**: Implemented WardrobeDeleteItemForm component
+- **Details**: Developed `WardrobeDeleteItemForm.js` to allow users to delete items from their wardrobe
+- **Link to Commit**: [Implement WardrobeDeleteItemForm.js](https://github.com/nhan0504/CS326/pull/101)
+
+### December 7, 2024
+- **Task**: Styled WardrobeDeleteItemForm component
+- **Details**: Created `WardrobeDeleteItemForm.css` to style the delete item form for a consistent user interface
+- **Link to Commit**: [Add WardrobeDeleteItemForm.css](https://github.com/nhan0504/CS326/pull/101)
+
+### December 8, 2024
+- **Task**: Integrated WardrobeDeleteItemForm into WardrobeViewComponent
+- **Details**: Updated `WardrobeViewComponent.js` to incorporate `WardrobeDeleteItemForm`, handling event communication and state updates
+- **Link to Commit**: [Integrate WardrobeDeleteItemForm](https://github.com/nhan0504/CS326/pull/101)
+
+### December 9, 2024
+- **Task**: Added confirmation dialog to WardrobeDeleteItemForm
+- **Details**: Implemented a confirmation dialog in `WardrobeDeleteItemForm.js` to ensure users confirm before deleting an item
+- **Link to Commit**: [Add confirmation dialog](https://github.com/nhan0504/CS326/pull/101)
+
+### December 10, 2024
+- **Task**: Wrote pull request with detailed explanations for delete-wardrobe-items branch
+- **Details**: Created a pull request for the new delete-wardrobe-items features, including explanations and guidance to ensure smooth integration
+- **Link to PR**: [Pull Request for delete-wardrobe-items](https://github.com/nhan0504/CS326/pull/101)
+
